@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import coreCapabilitiesBg from "@/assets/core-capabilities.png";
+import coreCapabilitiesBg from "@/assets/Elementa-chain.png";
 import { walletAssets } from "../../data/walletAssets";
 import { coreCapabilities } from "../../data/walletPage";
 import type { CoreCapabilityItem } from "../../data/walletPage";

@@ -5,7 +5,7 @@ import logoMark from '@/assets/logo.png'
 import walletHeroLeft from '@/assets/wallet-hero-left.png'
 /** Hero right: wallet onboarding screen (paired with dashboard on the left). */
 import walletHeroRight from '@/assets/right-phone-hero.png'
-import joinWalletPhone from '@/assets/joinwallet-section.png'
+import joinWalletPhone from '@/assets/right-phone-hero.png'
 import walletFlowBg from '@/assets/Elementa-walletcard-bottom-background.png'
 import blockchains from '@/assets/evm-cardlogo-wallet.svg'
 import multiChainIcon from '@/assets/evm-cardlogo-wallet.svg'

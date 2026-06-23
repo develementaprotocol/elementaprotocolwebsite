@@ -25,7 +25,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import type { NavigationContent } from "@/data/homepage";
 import { footer } from "@/data/homepage";
-import logoSrc from "@/assets/logo.svg";
+import logoSrc from "@/assets/logo.png";
 import twitterIcon from "@/assets/twitter.svg";
 import telegramLogoAsset from "@/assets/telegram-logo.svg";
 

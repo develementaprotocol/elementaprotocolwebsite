@@ -4,7 +4,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import phoneL from "@/assets/wallet-hero-left.png";
-import phoneR from "@/assets/joinwallet-section.png";
+import phoneR from "@/assets/right-phone-hero.png";
 import walletFlowBg from "@/assets/Elementa-walletcard-bottom-background.png";
 import chainLock from "@/assets/lock.svg";
 import ElementaChainBg from "@/assets/Elementa-chain.png";
