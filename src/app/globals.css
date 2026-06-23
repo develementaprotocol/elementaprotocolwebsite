@@ -1,0 +1,485 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  /** Alias for body copy — use `font-body` in components; matches Inter. */
+  --font-body: var(--font-inter), sans-serif;
+  
+  /* Core brand + text */
+  --color-Elementa-primary: #ffffff;
+  --color-Elementa-accent: #24bace;
+  --color-Elementa-bg: #15202f;
+  --color-Elementa-surface: #1b3144;
+  --color-Elementa-muted: #c7d6e0;
+  --color-Elementa-purple: #24bace;
+  --color-Elementa-cyan: #24bace;
+  --color-Elementa-footer: #081421;
+  --color-Elementa-stats: #1d304a;
+  --color-Elementa-card-teal: #18474d;
+  --color-Elementa-success: #10b981;
+  --color-Elementa-warning: #f59e0b;
+  --color-Elementa-error: #ef4444;
+  --color-Elementa-info: #24bace;
+
+  /* Surfaces + atmosphere */
+  --color-atmosphere-tint: #24bace;
+  --atmosphere-top-strength: 20%;
+  --atmosphere-bottom-strength: 8%;
+  --color-hero-subtle: #b9cbd6;
+
+  /* Links */
+  --color-link: #24bace;
+  --color-link-hover: #1ca6b8;
+  --color-link-visited: #1ca6b8;
+
+  /* Primary / secondary buttons — used by .btn-primary / .btn-secondary */
+  --btn-primary-gradient: linear-gradient(109.42deg, #24bace 5.51%, #0a6a7e 118.72%);
+  --btn-primary-bg: #24bace;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover-bg: #1ca6b8;
+  --btn-primary-ring: color-mix(in srgb, var(--btn-primary-bg) 45%, white);
+  --btn-primary-shadow: 0 8px 28px -6px color-mix(in srgb, var(--btn-primary-bg) 35%, transparent);
+  --btn-primary-shadow-hover: 0 12px 40px -4px color-mix(in srgb, var(--btn-primary-bg) 50%, transparent);
+
+  --btn-secondary-bg: #364252;
+  --btn-secondary-bg-hover: #3f4d5e;
+  --btn-secondary-border: rgba(36, 186, 206, 0.1);
+  --btn-secondary-border-hover: color-mix(in srgb, var(--btn-primary-bg) 58%, white);
+  --btn-secondary-text: #f4fbff;
+  --btn-secondary-shadow-hover: 0 10px 36px -8px color-mix(in srgb, var(--btn-primary-bg) 30%, transparent);
+
+  /* UI glows derived from primary button color */
+  --color-brand-glow-soft: color-mix(in srgb, var(--btn-primary-bg) 16%, transparent);
+  --color-brand-glow-mid: color-mix(in srgb, var(--btn-primary-bg) 26%, transparent);
+  --card-surface-gradient: linear-gradient(135deg, rgba(21, 111, 122, 0.6) 0%, rgba(13, 30, 48, 0.92) 48%, rgba(20, 75, 88, 0.62) 100%);
+}
+
+@layer base {
+  :root {
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+  }
+
+  body {
+    text-align: left;
+    background-color: var(--color-Elementa-bg);
+    color: white;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hide scrollbar for all browsers */
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
+  }
+
+  /* Fix Chrome Autofill UI override */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px rgba(255,255,255,0.05);
+  }
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(48px, 6vw, 80px); /* Dynamic size capping at 80px */
+    line-height: clamp(48px, 6vw, 80px);
+    letter-spacing: -4.8px;
+    color: white;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 48px); /* Dynamic size capping at 48px */
+    line-height: clamp(32px, 5vw, 48px);
+    letter-spacing: -2.4px;
+    color: white;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(16px, 2vw, 20px); /* Dynamic size capping at 20px */
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: white;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px); /* Capping at 40px */
+    line-height: 150%;
+    letter-spacing: 0%;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+  }
+  /* Pointer cursor for interactive controls (incl. Framer `motion.button` → <button>) */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  input[type="submit"]:not(:disabled),
+  input[type="button"]:not(:disabled),
+  input[type="reset"]:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  a[href]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  /* Mobile: center marketing copy site-wide; desktop keeps body default (left) */
+  @media (max-width: 767px) {
+    main {
+      text-align: center;
+    }
+    main section.site-section {
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+    }
+    main .article-content {
+      text-align: left;
+    }
+    main input:not([type="checkbox"]):not([type="radio"]),
+    main textarea {
+      text-align: left;
+    }
+  }
+
+  /* Phones / narrow mobile: primary CTAs span full content width (navbar/footer excluded) */
+  @media (max-width: 639px) {
+    main a.btn-primary,
+    main a.btn-secondary,
+    main button.btn-primary,
+    main button.btn-secondary {
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Browser Compatibility for Backdrop Blur */
+  .backdrop-blur-3xl {
+    -webkit-backdrop-filter: blur(64px);
+    backdrop-filter: blur(64px);
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-card {
+    @apply rounded-[16px] border border-white/10 backdrop-blur-3xl;
+    background: var(--color-Elementa-card-teal);
+  }
+
+  /** Marketing cards / elevated surfaces — 16px radius site-wide */
+  .rounded-card-surface {
+    border-radius: 16px;
+  }
+
+  /* Button Utility Classes */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full font-bold duration-300;
+    transform: none;
+    background: var(--btn-primary-gradient);
+    color: var(--btn-primary-text);
+    border: 1px solid color-mix(in srgb, var(--btn-primary-bg) 65%, white);
+    box-shadow: var(--btn-primary-shadow);
+    transition: box-shadow 300ms ease, border-color 300ms ease;
+  }
+  .btn-primary:hover {
+    background: var(--btn-primary-gradient);
+    box-shadow: var(--btn-primary-shadow-hover), 0 0 0 1px var(--btn-primary-ring);
+    transform: none;
+  }
+  .btn-primary:active {
+    opacity: 0.92;
+    transform: none;
+  }
+  .btn-primary:disabled {
+    opacity: 0.55;
+    filter: none;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full font-bold backdrop-blur-md transition-[background-color,border-color,color,box-shadow,opacity] duration-300;
+    transform: none;
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: 1px solid var(--btn-secondary-border);
+    box-shadow: none;
+  }
+  .btn-secondary:hover {
+    background-color: var(--btn-secondary-bg-hover);
+    border-color: var(--btn-secondary-border-hover);
+    box-shadow: var(--btn-secondary-shadow-hover);
+    transform: none;
+  }
+  .btn-secondary:active {
+    opacity: 0.9;
+    transform: none;
+  }
+}
+
+@layer utilities {
+  /* Atmospheric blobs — tint from --color-atmosphere-tint */
+  .atmosphere-blob-tl {
+    background: radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--color-atmosphere-tint) var(--atmosphere-top-strength), transparent) 0%,
+      transparent 60%
+    );
+  }
+  .atmosphere-blob-br {
+    background: radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--color-atmosphere-tint) var(--atmosphere-bottom-strength), transparent) 0%,
+      transparent 70%
+    );
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.pause-on-hover:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Premium Article Typography */
+.article-content h1, 
+.article-content h2, 
+.article-content h3, 
+.article-content h4 {
+  @apply font-display font-bold text-white tracking-tight;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+@media (min-width: 768px) {
+  .article-content h1, 
+  .article-content h2, 
+  .article-content h3, 
+  .article-content h4 {
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+  }
+}
+
+.article-content h2 { @apply text-2xl md:text-4xl; }
+.article-content h3 { @apply text-xl md:text-3xl; }
+
+.article-content p {
+  @apply text-Elementa-muted text-base md:text-xl leading-relaxed mb-6 md:mb-8;
+}
+
+.article-content blockquote {
+  @apply relative border-l-4 border-Elementa-primary bg-gradient-to-r from-white/10 to-transparent p-6 sm:p-10 md:p-14 rounded-r-[16px] italic my-8 md:my-12;
+}
+
+.article-content blockquote p {
+  @apply text-lg md:text-2xl text-white font-medium mb-0;
+}
+
+.article-content ul, .article-content ol {
+  @apply space-y-4 my-6 md:my-8 pl-6;
+}
+
+.article-content li {
+  @apply text-Elementa-muted text-base md:text-xl leading-relaxed;
+}
+
+.article-content b, .article-content strong {
+  @apply text-white font-bold;
+}
+
+.article-content a {
+  @apply text-Elementa-accent underline underline-offset-4 hover:text-Elementa-muted transition-colors;
+}
+
+/* Celestial Spacing System */
+@layer utilities {
+  .space-bg-system {
+    background:
+    radial-gradient(circle at 82% 8%, rgba(36, 186, 206, 0.28) 0%, rgba(36, 186, 206, 0.08) 24%, transparent 42%),
+    radial-gradient(circle at 12% 44%, rgba(27, 49, 68, 0.18) 0%, transparent 36%),
+    linear-gradient(180deg, #15202f 0%, #1b3144 48%, #081421 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stars-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1.5px 1.5px at 80px 120px, rgba(255,255,255,0.5), rgba(0,0,0,0)),
+      radial-gradient(1.5px 1.5px at 110px 40px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 150px 150px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.2;
+    animation: celestial-drift 120s linear infinite;
+  }
+
+  .stars-layer-slow {
+    background-size: 300px 300px;
+    opacity: 0.1;
+    animation: celestial-drift 200s linear infinite;
+  }
+
+  @keyframes celestial-drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50%, -50%); }
+  }
+
+  .hero-gradient-overlay {
+    background: linear-gradient(to bottom,
+      rgba(2, 1, 8, 0) 0%,
+      rgba(2, 1, 8, 0.24) 40%,
+      rgba(2, 1, 8, 0.6) 100%
+    );
+  }
+
+  /* Layout: section → 1440px container → inner (design). Vertical rhythm 40px / heading gap 64px */
+  .site-section {
+    @apply py-[40px];
+  }
+
+  .container-standard {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-6 md:px-8 lg:px-12;
+  }
+
+  .section-inner {
+    @apply min-w-0;
+  }
+
+  /** Space below section titles (responsive; caps at 64px on md+) */
+  .section-heading-gap {
+    @apply mb-10 sm:mb-12 md:mb-[64px];
+  }
+
+  .section-heading-gap h2 {
+    color: var(--color-Elementa-primary);
+    background: none;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+  }
+
+  /**
+   * Docs + Terms + Privacy reader typography — Inter body, Space Grotesk headings,
+   * comfortable size/line-height for long-form reading (overrides base `p` weight:300).
+   */
+  .prose-docs {
+    @apply font-body text-[14px] font-normal leading-snug text-white;
+  }
+  .prose-docs > * + * {
+    margin-top: 1.75rem;
+  }
+  .prose-docs p {
+    @apply text-[14px] font-normal leading-snug transition-colors text-white;
+  }
+  .prose-docs h3 {
+    @apply mt-8 font-display text-lg font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-xl;
+  }
+  .prose-docs h3:first-child {
+    margin-top: 0;
+  }
+  .prose-docs h4 {
+    @apply font-display text-base font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-lg;
+  }
+  .prose-docs ul {
+    @apply flex list-disc flex-col gap-4 pl-6 text-left font-normal text-white;
+  }
+  .prose-docs ol {
+    @apply flex list-decimal flex-col gap-4 pl-6 text-left font-normal text-white;
+  }
+  .prose-docs li {
+    @apply pl-0.5 text-left font-normal text-white;
+  }
+  .prose-docs ul li::marker,
+  .prose-docs ol li::marker {
+    color: var(--btn-primary-bg);
+  }
+  .prose-docs a {
+    @apply text-Elementa-accent underline-offset-2 transition-colors hover:text-Elementa-muted hover:underline;
+  }
+  .prose-docs strong {
+    @apply font-semibold text-white/95;
+  }
+
+}
+
+/* App Router template — lightweight route enter (replaces framer-motion on every navigation). */
+@keyframes pageRouteEnter {
+  from {
+    opacity: 0.92;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-route-enter {
+  animation: pageRouteEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/** Wallet route — clean hero layering (see WalletBodyClass). */
+body.wallet-landing {
+  background-color: var(--color-Elementa-bg);
+}
+
+body.wallet-landing .wallet-page .wallet-hero-section {
+  isolation: isolate;
+}
