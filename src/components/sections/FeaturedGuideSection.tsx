@@ -16,7 +16,7 @@ export function FeaturedGuideSection({ guide }: { guide: FeaturedGuide }) {
       <div className="container-standard">
         <div className="section-inner">
           <motion.div
-            className="relative grid grid-cols-1 items-center overflow-hidden rounded-[16px] border border-white/5 p-8 sm:p-12 xl:grid-cols-2 xl:gap-16 xl:p-20"
+            className="relative grid grid-cols-1 items-center overflow-hidden rounded-[16px] border border-white/5 p-8 sm:p-12 xl:grid-cols-2 xl:gap-16 xl:p-12"
             style={{ background: "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)" }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}

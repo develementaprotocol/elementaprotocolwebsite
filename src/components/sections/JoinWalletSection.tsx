@@ -44,7 +44,7 @@ export function JoinWalletSection() {
           </motion.div>
 
           {/* Right Side: Text Content */}
-          <div className="w-full md:w-[50%] flex flex-col gap-6 text-left mb-16 md:mb-0">
+          <div className="w-full md:w-[50%] flex flex-col gap-6 text-left mb-16 md:mb-0 px-10">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

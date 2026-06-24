@@ -10,20 +10,20 @@ const AboutNextGen = () => {
     <section id="about-next-gen" className="relative site-section overflow-hidden">
       <div className="container-standard relative z-10">
         <div className="section-inner">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center px-2">
             {/* Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="order-2 flex flex-col lg:order-1"
+              className="order-2 flex flex-col lg:order-1 px-10"
             >
               <h2 className="mb-8 text-[#24bace] md:text-left">
                 Built for the Next Generation of Web3
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-6 ">
                 <p className="text-[#ffffff] text-lg md:text-xl leading-relaxed">
                   We are a team of engineers, designers, and blockchain innovators focused on removing friction from decentralized finance.
                 </p>

@@ -196,7 +196,7 @@ export function SocialProofSection({ socialProof }) {
                   width={128}
                   className="h-6 w-auto object-contain opacity-80 sm:h-8"
                 />
-                <span className="font-display text-sm font-bold uppercase tracking-widest text-white sm:text-base">
+                <span className="font-display text-sm font-bold uppercase tracking-widest text-black sm:text-base">
                   {p.name}
                 </span>
               </div>

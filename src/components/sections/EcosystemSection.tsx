@@ -156,7 +156,7 @@ export function EcosystemSection({
               className="flex min-h-[480px] flex-col-reverse overflow-hidden rounded-[16px] border border-[rgba(65,71,91,0.15)] shadow-none backdrop-blur-[24px] xl:col-span-8 xl:flex-col xl:min-h-0 xl:h-[518px]"
               style={{ background: "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)" }}
             >
-              <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-8 py-10 text-center xl:items-start xl:text-left">
+              <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-12 py-8 text-center xl:items-start xl:text-left">
                 <h3 className="font-display text-[30px] font-bold leading-[36px] text-white">
                   {ecosystem.wallet.title}
                 </h3>

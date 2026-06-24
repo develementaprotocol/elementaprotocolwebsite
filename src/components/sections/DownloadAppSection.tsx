@@ -41,9 +41,9 @@ export function DownloadAppSection() {
     <section className="site-section relative w-full overflow-hidden">
       <div className="container-standard relative z-10">
         <div className="section-inner">
-        <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-16 lg:flex-row lg:items-center px-10">
           {/* Left Content Side */}
-          <div className="relative z-10 flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
+          <div className="relative z-10 flex flex-1 flex-col items-center text-center lg:items-start lg:text-left px-2">
             <motion.h2
               {...fadeUp(0)}
               className="font-display text-[clamp(2.5rem,5vw,4.25rem)] font-bold leading-[1.1] tracking-[-0.04em] text-white"
