@@ -42,7 +42,6 @@ export function RootChrome({ children }: { children: ReactNode }) {
 
   const footerSuppressed = useFooterSuppressed();
   const hideFooter = footerSuppressed || pathHidesFooter(pathname);
-  const isBlogDetail = pathname?.startsWith("/blog/") && pathname !== "/blog";
   const isHome = pathname === "/";
   /** Routes that mount `ScrollRevealSection` → GSAP ScrollTrigger must refresh on nav. */
   const needsScrollTrigger =
@@ -54,25 +53,23 @@ export function RootChrome({ children }: { children: ReactNode }) {
     <>
       {mounted && <SpaceBackground />}
       
-      {/* Top Reflect Background - Global except blog detail */}
-      {!isBlogDetail && (
-        <div className="pointer-events-none absolute top-0 left-0 right-0 h-screen z-0 overflow-hidden" 
-          style={{ 
-            maskImage: "linear-gradient(to bottom, black 0%, black 20%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 20%, transparent 100%)"
-          }}
-        >
-          <div className="absolute inset-0">
-            <Image
-              src={topReflect}
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover opacity-90"
-            />
-          </div>
+      {/* Top Reflect Background */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-screen z-0 overflow-hidden" 
+        style={{ 
+          maskImage: "linear-gradient(to bottom, black 0%, black 20%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 20%, transparent 100%)"
+        }}
+      >
+        <div className="absolute inset-0">
+          <Image
+            src={topReflect}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-90"
+          />
         </div>
-      )}
+      </div>
 
       <div className="relative z-10" id="root-chrome-content">
         {isHome ? <Preloader /> : null}

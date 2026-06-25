@@ -34,7 +34,6 @@ export const navigation = {
     },
     { id: 'about', label: 'About', href: '/about' },
     { id: 'docs', label: 'Docs', href: '/docs' },
-    // { id: 'blog', label: 'Blog', href: '/blog' },
     { id: 'contact', label: 'Contact Us', href: '/contact' },
   ],
   iconActions: [] as Array<{ id: string; label: string; href: string; asset: string }>,
@@ -292,7 +291,6 @@ export const footer = {
   brand: 'Elementa',
   copyrightLine: '© 2026 Elementa GLOBAL INC. ALL RIGHTS RESERVED.',
   links: [
-    // { label: 'BLOGS', href: '#' },
     { label: 'TERMS & CONDITION', href: '/terms' },
     { label: 'PRIVACY POLICY', href: '/privacy' },
     { label: 'SUPPORT', href: '/contact' },
