@@ -1,7 +1,7 @@
 /**
  * Wallet marketing visuals — point entries at files in `src/assets/` as you add art.
  */
-import logoMark from '@/assets/logo.png'
+import logoMark from '@/assets/logo.svg'
 import walletHeroLeft from '@/assets/wallet-hero-left.png'
 /** Hero right: wallet onboarding screen (paired with dashboard on the left). */
 import walletHeroRight from '@/assets/right-phone-hero.png'

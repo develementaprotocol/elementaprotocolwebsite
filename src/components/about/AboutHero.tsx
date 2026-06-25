@@ -2,13 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import topReflect from "@/assets/top-reflect.png";
 
 const AboutHero = () => {
   return (
-    <section id="about-hero" className="relative h-screen flex items-center justify-center overflow-hidden site-section">
+    <section id="about-hero" className="relative flex h-screen flex-col overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={topReflect}
@@ -26,7 +25,7 @@ const AboutHero = () => {
         
       </div>
 
-      <div className="container-standard relative z-10">
+      <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-2 pt-20 pb-10 sm:px-0 sm:pt-24 md:pt-28">
         <div className="section-inner mx-auto flex max-w-4xl flex-col items-center gap-5 text-center sm:gap-6 md:gap-7">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -40,14 +39,14 @@ const AboutHero = () => {
             </span>
           </motion.h1>
 
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="font-display text-[clamp(1.05rem,2.6vw,1.65rem)] font-bold leading-snug tracking-normal text-balance text-[var(--btn-primary-bg)] sm:text-2xl md:text-[1.75rem]"
           >
             Powering the Future of Multi-Chain Finance
-          </motion.h2>
+          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,30 +59,6 @@ const AboutHero = () => {
             simplify Web3 while maintaining the highest standards of security, speed, and user
             control.
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex w-full flex-col items-stretch justify-center gap-4 px-2 sm:flex-row sm:items-center sm:px-4"
-          >
-            <Link
-              href="/wallet"
-              className="btn-primary w-full px-10 py-5 sm:w-auto [box-shadow:var(--btn-primary-shadow),0_0_36px_color-mix(in_srgb,var(--btn-primary-bg)_42%,transparent)] hover:[box-shadow:var(--btn-primary-shadow-hover),0_0_44px_color-mix(in_srgb,var(--btn-primary-bg)_48%,transparent)]"
-            >
-              <span className="font-body text-base font-bold leading-tight sm:text-lg">
-                Install Wallet
-              </span>
-            </Link>
-            <Link
-              href="/wallet"
-              className="btn-secondary w-full px-10 py-5 sm:w-auto"
-            >
-              <span className="font-body text-base font-bold leading-tight sm:text-lg">
-                Explore Wallet
-              </span>
-            </Link>
-          </motion.div>
         </div>
       </div>
     </section>

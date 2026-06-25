@@ -33,7 +33,7 @@ const AboutMoreThanWallet = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -46,7 +46,7 @@ const AboutMoreThanWallet = () => {
                 <div className="w-10 h-10 rounded-[16px] bg-[#24bace]/10 flex items-center justify-center shrink-0 transition-transform">
                   {feature.icon}
                 </div>
-                <span className="text-white font-medium whitespace-nowrap">
+                <span className="font-medium text-white">
                   {feature.title}
                 </span>
               </motion.div>

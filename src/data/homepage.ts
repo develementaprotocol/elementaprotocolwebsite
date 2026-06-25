@@ -49,7 +49,7 @@ export const hero = {
   ],
   subheadline:
     'Experience seamless asset transfers, deep cross-chain liquidity, and institutional-grade security. Elementa Protocol empowers the next generation of DeFi builders and users.',
-  primaryCta: { label: 'Download wallet', href: '/wallet' },
+  primaryCta: { label: 'Launch Wallet', href: '/wallet' },
   secondaryCta: { label: 'Read Documentation', href: '/docs' },
 }
 

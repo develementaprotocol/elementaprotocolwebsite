@@ -16,7 +16,7 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <AboutHero />
       <AboutNextGen />
       <AboutWhatDrivesUs />
@@ -26,7 +26,7 @@ const AboutPage = () => {
       {/* <AboutTeam /> */}
       
       <CommunitySection community={community} />
-    </main>
+    </div>
   );
 };
 
