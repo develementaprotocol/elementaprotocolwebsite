@@ -31,9 +31,16 @@ export async function POST(request: Request) {
 
     const smtp = getSmtpConfig();
     if (!smtp.ok) {
-      console.error("Contact SMTP config error:", smtp.error);
+      console.error(
+        "Contact SMTP config error:",
+        smtp.error,
+        "(set these in Vercel → Settings → Environment Variables → Production)",
+      );
       return NextResponse.json(
-        { error: "Email service is not configured correctly" },
+        {
+          error:
+            "Email service is not configured on the server. Add EMAIL_HOST, EMAIL_USER, EMAIL_PASS, and EMAIL_TO in Vercel environment variables, then redeploy.",
+        },
         { status: 500 },
       );
     }

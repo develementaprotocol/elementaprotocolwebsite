@@ -10,26 +10,39 @@ export type SmtpConfig = {
   fromEmail: string;
 };
 
+/** Env keys required at runtime (API routes on Vercel — .env is not deployed). */
+export const SMTP_REQUIRED_ENV_KEYS = [
+  "EMAIL_HOST",
+  "EMAIL_USER",
+  "EMAIL_PASS",
+  "EMAIL_TO",
+] as const;
+
+export function getMissingSmtpEnvKeys(): string[] {
+  const missing: string[] = [];
+  if (!process.env.EMAIL_HOST?.trim()) missing.push("EMAIL_HOST");
+  if (!process.env.EMAIL_USER?.trim()) missing.push("EMAIL_USER");
+  if (!process.env.EMAIL_PASS) missing.push("EMAIL_PASS");
+  if (!process.env.EMAIL_TO?.trim()) missing.push("EMAIL_TO");
+  return missing;
+}
+
 export function getSmtpConfig():
   | { ok: true; config: SmtpConfig }
-  | { ok: false; error: string } {
-  const host = process.env.EMAIL_HOST?.trim();
-  const user = process.env.EMAIL_USER?.trim();
-  const pass = process.env.EMAIL_PASS;
-  const to = process.env.EMAIL_TO?.trim();
+  | { ok: false; error: string; missing: string[] } {
+  const missing = getMissingSmtpEnvKeys();
+  if (missing.length > 0) {
+    return {
+      ok: false,
+      error: `Missing: ${missing.join(", ")}`,
+      missing,
+    };
+  }
 
-  if (!host) {
-    return { ok: false, error: "EMAIL_HOST is not set" };
-  }
-  if (!user) {
-    return { ok: false, error: "EMAIL_USER is not set" };
-  }
-  if (!pass) {
-    return { ok: false, error: "EMAIL_PASS is not set" };
-  }
-  if (!to) {
-    return { ok: false, error: "EMAIL_TO is not set" };
-  }
+  const host = process.env.EMAIL_HOST!.trim();
+  const user = process.env.EMAIL_USER!.trim();
+  const pass = process.env.EMAIL_PASS!;
+  const to = process.env.EMAIL_TO!.trim();
 
   const port = Number(process.env.EMAIL_PORT ?? "465");
   const fromEmail = process.env.EMAIL_FROM?.trim() || user;
