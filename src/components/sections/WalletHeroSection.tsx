@@ -49,7 +49,7 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
 
   return (
     <div className="relative">
-      <section className="relative wallet-hero-section flex min-h-screen w-full flex-col overflow-hidden bg-transparent pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:h-screen xl:pt-0 lg:justify-start">
+      <section className="relative wallet-hero-section flex min-h-screen w-full flex-col overflow-hidden bg-transparent pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32 lg:pt-36 xl:h-screen xl:pb-0 xl:pt-0 lg:justify-start">
         {/* Background Layer (Managed globally by RootChrome) */}
         <div className="absolute inset-0 z-[-1]" />
         
@@ -120,34 +120,32 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
             </div>
           </div>
 
-          {/* Phones for Mobile/Tablet — Refined for better tablet sizing and overlap */}
-          <div className="relative flex w-full flex-row items-center justify-center overflow-visible px-4 sm:mt-16 sm:px-6 md:mt-20 lg:mt-24 xl:hidden">
-            <motion.div 
-              initial={{ opacity: 0, x: -30, rotate: -5 }}
-              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          {/* Phones for mobile / tablet — stacked on small screens, side-by-side on md+ */}
+          <div className="mt-10 flex w-full max-w-md flex-col items-center justify-center gap-8 px-4 sm:mt-14 sm:max-w-2xl md:mt-16 md:max-w-3xl md:flex-row md:items-end md:justify-center md:gap-10 lg:mt-20 lg:gap-12 xl:hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative z-20 w-[80%] max-w-[230px] -mr-[22%] sm:w-[50%] sm:max-w-[240px] md:w-[45%] md:max-w-[300px] lg:w-[40%] lg:max-w-[340px]"
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="relative z-10 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[300px]"
             >
-              <div className="absolute inset-0 bg-[#24bace]/10 rounded-full scale-90" />
               <img
                 src={getSrc(walletAssets.walletHeroLeft)}
-                className="w-full h-auto object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] relative z-10"
+                className="relative z-10 h-auto w-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.55)]"
                 alt="Elementa Dashboard"
               />
             </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, x: 30, rotate: 15 }}
-              whileInView={{ opacity: 1, x: 0, rotate: 11 }}
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-              className="relative z-10 mt-10 w-[55%] max-w-[200px] origin-center sm:w-[50%] sm:max-w-[240px] md:w-[45%] md:max-w-[300px] lg:w-[40%] lg:max-w-[340px]"
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.08 }}
+              className="relative z-10 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[300px]"
             >
-              <div className="absolute inset-0 bg-[#24bace]/10 rounded-full scale-90" />
               <img
                 src={getSrc(walletAssets.walletHeroRight)}
-                className="w-full h-auto object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] relative z-10"
+                className="relative z-10 h-auto w-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.55)]"
                 alt="Elementa Wallet onboarding"
               />
             </motion.div>

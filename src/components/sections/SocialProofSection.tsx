@@ -54,13 +54,13 @@ export function SocialProofSection({ socialProof }) {
   const [viewportW, setViewportW] = useState(0);
   const [index, setIndex] = useState(socialProof.testimonials.length);
   const [isPaused, setIsPaused] = useState(false);
-  const isResetting = useRef(false);
+  const [isJumping, setIsJumping] = useState(false);
 
-  useEffect(() => {
-    if (isResetting.current) {
-      isResetting.current = false;
-    }
-  });
+  useLayoutEffect(() => {
+    if (!isJumping) return;
+    const id = requestAnimationFrame(() => setIsJumping(false));
+    return () => cancelAnimationFrame(id);
+  }, [isJumping, index]);
 
   // Local Avatars mapping
   const localAvatars = [person1, person2, person3];
@@ -122,30 +122,38 @@ export function SocialProofSection({ socialProof }) {
       : 0;
   const step = cardW + GAP_PX;
 
+  const wrapIndex = useCallback(
+    (next: number) => {
+      if (next > maxIndex) {
+        setIsJumping(true);
+        return count + (next - maxIndex - 1);
+      }
+      if (next < 0) {
+        setIsJumping(true);
+        return count + next;
+      }
+      return next;
+    },
+    [count, maxIndex],
+  );
+
   const goPrev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
-  }, []);
+    setIndex((i) => wrapIndex(i - 1));
+  }, [wrapIndex]);
 
   const goNext = useCallback(() => {
-    setIndex((i) => Math.min(i + 1, maxIndex));
-  }, [maxIndex]);
+    setIndex((i) => wrapIndex(i + 1));
+  }, [wrapIndex]);
 
   useEffect(() => {
     if (isPaused) return undefined;
-    const timer = setInterval(goNext, 5000);
+    const timer = setInterval(goNext, 4500);
     return () => clearInterval(timer);
   }, [goNext, isPaused]);
 
-  const handleAnimationComplete = () => {
-    const middle = maxIndex / 2;
-    if (index > middle + count / 2) {
-      isResetting.current = true;
-      setIndex(index - count);
-    } else if (index < middle - count / 2) {
-      isResetting.current = true;
-      setIndex(index + count);
-    }
-  };
+  const slideTransition = isJumping || reduced
+    ? { duration: 0 }
+    : { duration: 0.38, ease: [0.25, 0.1, 0.25, 1] as const };
 
   const x = viewportW > 0 ? contentPadding - index * step : 0;
 
@@ -225,25 +233,16 @@ export function SocialProofSection({ socialProof }) {
                 onDragEnd={(e, { offset }) => {
                   const swipe = offset.x;
                   const swipedSteps = Math.round(-swipe / step);
-                  
+
                   if (Math.abs(swipedSteps) > 0) {
-                    setIndex((i) => Math.max(0, Math.min(i + swipedSteps, maxIndex)));
-                  } else {
-                    if (swipe < -50) goNext();
-                    else if (swipe > 50) goPrev();
+                    setIndex((i) => wrapIndex(i + swipedSteps));
+                  } else if (swipe < -50) {
+                    goNext();
+                  } else if (swipe > 50) {
+                    goPrev();
                   }
                 }}
-                onAnimationComplete={handleAnimationComplete}
-                transition={
-                  isResetting.current || reduced
-                    ? { duration: 0 }
-                    : {
-                        type: "spring",
-                        damping: 30,
-                        stiffness: 150,
-                        mass: 0.8,
-                      }
-                }
+                transition={slideTransition}
               >
                 {loopedTestimonials.map((t) => (
                   <div

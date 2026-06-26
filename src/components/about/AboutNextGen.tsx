@@ -9,7 +9,7 @@ const AboutNextGen = () => {
   return (
     <section id="about-next-gen" className="relative site-section overflow-hidden">
       <div className="container-standard relative z-10">
-        <div className="section-inner">
+        <div className="section-inner px-8">
           <div className="grid grid-cols-1 items-center gap-12 px-2 lg:grid-cols-2 lg:gap-20">
             {/* Text Content */}
             <motion.div

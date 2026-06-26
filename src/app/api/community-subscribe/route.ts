@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import {
-  isAllowedPublicEmailDomain,
-  PUBLIC_EMAIL_DOMAIN_MESSAGE,
-} from "@/utils/emailProviders";
+  createMailTransporter,
+  escapeHtml,
+  formatFrom,
+  getSmtpConfig,
+  smtpErrorHint,
+} from "@/lib/smtp";
 
 function isValidEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -20,43 +22,39 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
     if (!isValidEmail(email)) {
-      return NextResponse.json({ error: "Please enter a valid email address" }, { status: 400 });
-    }
-
-    const emailHost = process.env.EMAIL_HOST;
-    const emailPort = Number(process.env.EMAIL_PORT ?? "465");
-    const emailUser = process.env.EMAIL_USER;
-    const emailPass = process.env.EMAIL_PASS;
-    const emailTo = process.env.EMAIL_TO;
-
-    if (!emailHost || !emailUser || !emailPass || !emailTo) {
       return NextResponse.json(
-        { error: "Email service is not configured correctly" },
-        { status: 500 }
+        { error: "Please enter a valid email address" },
+        { status: 400 },
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      host: emailHost,
-      port: emailPort,
-      secure: emailPort === 465,
-      auth: {
-        user: emailUser,
-        pass: emailPass,
-      },
-    });
+    const smtp = getSmtpConfig();
+    if (!smtp.ok) {
+      console.error("Subscribe SMTP config error:", smtp.error);
+      return NextResponse.json(
+        { error: "Email service is not configured correctly" },
+        { status: 500 },
+      );
+    }
+
+    const { config } = smtp;
+    const transporter = createMailTransporter(config);
 
     await transporter.sendMail({
-      from: `"Community Signup" <${emailUser}>`,
-      to: emailTo,
+      from: formatFrom(config),
+      to: config.to,
       replyTo: email,
-      subject: "New Community Signup",
-      text: `A new email subscribed from the community section.\n\nEmail: ${email}`,
+      subject: `Subscribe: ${email}`,
+      text: [
+        "New newsletter / community signup",
+        "",
+        `Email: ${email}`,
+      ].join("\n"),
       html: `
-        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 6px;">
-          <h2 style="margin-top: 0;">New Community Signup</h2>
-          <p>A new email subscribed from the community section.</p>
-          <p><strong>Email:</strong> ${email}</p>
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+          <h2 style="color: #15202f; margin-top: 0;">New Newsletter Signup</h2>
+          <p>Someone subscribed from the community section on the website.</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         </div>
       `,
     });
@@ -64,7 +62,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("Community subscribe error:", error);
-    return NextResponse.json({ error: "Failed to process subscription" }, { status: 500 });
+    return NextResponse.json(
+      { error: smtpErrorHint(error) },
+      { status: 500 },
+    );
   }
 }
-

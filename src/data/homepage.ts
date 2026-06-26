@@ -255,7 +255,7 @@ export const community = {
     title: 'Twitter',
     description: 'Follow @Elementapro for breaking news and technical milestones.',
     cta: 'Follow Updates',
-    href: 'https://x.com/Elementa',
+    href: 'https://x.com/ElementaPro',
   },
   telegram: {
     title: 'Telegram',

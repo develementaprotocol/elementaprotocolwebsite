@@ -14,7 +14,7 @@ import Preloader from "@/components/ui/Preloader";
 import { navigation, footer } from "@/data/homepage";
 
 /** No global footer on these paths (plus error/404 via FooterControl). */
-const PATHS_WITHOUT_FOOTER = ["/contact", "/blockchain"] as const;
+const PATHS_WITHOUT_FOOTER = ["/blockchain"] as const;
 
 function pathHidesFooter(pathname: string | null) {
   if (!pathname) return false;

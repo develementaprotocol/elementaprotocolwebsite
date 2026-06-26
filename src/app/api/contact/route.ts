@@ -1,72 +1,87 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { NextResponse } from "next/server";
+import {
+  createMailTransporter,
+  escapeHtml,
+  formatFrom,
+  getSmtpConfig,
+  smtpErrorHint,
+} from "@/lib/smtp";
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
 
 export async function POST(request: Request) {
   try {
     const { name, email, message, subject } = await request.json();
 
-    // Basic validation
-    if (!name || !email || !message) {
+    if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json(
-        { error: 'Name, email, and message are required' },
-        { status: 400 }
+        { error: "Name, email, and message are required" },
+        { status: 400 },
       );
     }
 
-    const emailHost = process.env.EMAIL_HOST;
-    const emailPort = Number(process.env.EMAIL_PORT ?? '465');
-    const emailUser = process.env.EMAIL_USER;
-    const emailPass = process.env.EMAIL_PASS;
-    const emailTo = process.env.EMAIL_TO;
-
-    if (!emailHost || !emailUser || !emailPass || !emailTo) {
+    if (!isValidEmail(email)) {
       return NextResponse.json(
-        { error: 'Email service is not configured correctly' },
-        { status: 500 }
+        { error: "Please enter a valid email address" },
+        { status: 400 },
       );
     }
 
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      host: emailHost,
-      port: emailPort,
-      secure: emailPort === 465,
-      auth: {
-        user: emailUser,
-        pass: emailPass,
-      },
-    });
+    const smtp = getSmtpConfig();
+    if (!smtp.ok) {
+      console.error("Contact SMTP config error:", smtp.error);
+      return NextResponse.json(
+        { error: "Email service is not configured correctly" },
+        { status: 500 },
+      );
+    }
 
-    // Email options
-    const mailOptions = {
-      from: `"${name}" <${emailUser}>`,
-      to: emailTo,
-      replyTo: email,
-      subject: subject ? `Contact: ${subject}` : `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject || 'N/A'}\n\nMessage:\n${message}`,
+    const { config } = smtp;
+    const transporter = createMailTransporter(config);
+
+    const safeName = name.trim();
+    const safeEmail = email.trim();
+    const safeSubject = subject?.trim() || "General inquiry";
+    const safeMessage = message.trim();
+
+    await transporter.sendMail({
+      from: formatFrom(config),
+      to: config.to,
+      replyTo: `"${safeName}" <${safeEmail}>`,
+      subject: `Contact: ${safeSubject}`,
+      text: [
+        `Name: ${safeName}`,
+        `Email: ${safeEmail}`,
+        `Subject: ${safeSubject}`,
+        "",
+        "Message:",
+        safeMessage,
+      ].join("\n"),
       html: `
-        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 5px;">
-          <h2 style="color: #333;">New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+          <h2 style="color: #15202f; margin-top: 0;">New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${escapeHtml(safeName)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(safeEmail)}</p>
+          <p><strong>Subject:</strong> ${escapeHtml(safeSubject)}</p>
           <p><strong>Message:</strong></p>
           <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #24bace;">
-            ${message.replace(/\n/g, '<br>')}
+            ${escapeHtml(safeMessage).replace(/\n/g, "<br>")}
           </div>
         </div>
       `,
-    };
+    });
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json({ success: 'Email sent successfully' }, { status: 200 });
-  } catch (error) {
-    console.error('Error sending email:', error);
     return NextResponse.json(
-      { error: 'Failed to send email' },
-      { status: 500 }
+      { success: true, message: "Email sent successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error sending contact email:", error);
+    return NextResponse.json(
+      { error: smtpErrorHint(error) },
+      { status: 500 },
     );
   }
 }

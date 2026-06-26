@@ -2,30 +2,17 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import topReflect from "@/assets/top-reflect.png";
 
 const AboutHero = () => {
   return (
-    <section id="about-hero" className="relative flex h-screen flex-col overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={topReflect}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-60"
-        />
-        
-        {/* Theme Atmospheric Gradient */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
-          <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
-        </div>
-        
+    <section id="about-hero" className="relative flex min-h-[100svh] flex-col overflow-hidden">
+      {/* Background glow — top reflect is provided globally by RootChrome */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
       </div>
 
-      <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-2 pt-20 pb-10 sm:px-0 sm:pt-24 md:pt-28">
+      <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20 md:pt-32">
         <div className="section-inner mx-auto flex max-w-4xl flex-col items-center gap-5 text-center sm:gap-6 md:gap-7">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

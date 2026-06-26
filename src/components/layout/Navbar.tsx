@@ -670,20 +670,6 @@ function MobileDrawerContent({
           Navigate
         </p>
         <nav className="flex flex-col gap-2" aria-label="Primary">
-          {/* Home Link */}
-          <Link
-            href="/"
-            onClick={onClose}
-            className={cn(
-              "flex items-center gap-3 rounded-[16px] border px-4 py-3 font-display text-[16px] font-bold transition-all",
-              pathname === "/"
-                ? "border-[#24bace]/40 bg-[#24bace]/12 text-white"
-                : "border-white/10 bg-white/[0.04] text-white/90 hover:bg-white/[0.07]"
-            )}
-          >
-            <Home className="h-5 w-5 text-[#24bace]" strokeWidth={1.65} />
-            Home
-          </Link>
 
           {/* Products Dropdown */}
           <div className="flex flex-col gap-1">

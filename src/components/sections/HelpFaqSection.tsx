@@ -34,7 +34,7 @@ export function HelpFaqSection({ help, faq }) {
           {/* Header + search — Figma: gap-[80px] column; title 56px / 60px lh, -3px tracking */}
           <div className="flex w-full max-w-3xl flex-col items-center gap-10">
             <div className="section-heading-gap flex w-full flex-col items-center gap-6">
-              <h2>
+              <h2 className="max-md:w-full max-md:overflow-x-auto max-md:whitespace-nowrap max-md:text-left max-md:[-webkit-overflow-scrolling:touch] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
                 <span>{help.titleLead}</span>
                 <span>{help.titleAccent}</span>
                 <span>{help.titleTrail}</span>
@@ -85,9 +85,14 @@ export function HelpFaqSection({ help, faq }) {
                       <button
                         type="button"
                         onClick={() => setOpenId(open ? null : item.id)}
-                        className="flex w-full items-center gap-3 p-6 text-center sm:items-center sm:justify-between sm:gap-4 sm:text-left"
+                        className="flex w-full min-w-0 items-center gap-3 p-6 text-left"
                       >
-                        <span className="font-display text-[18px] font-bold leading-7 text-black">
+                        <span
+                          className={cn(
+                            "min-w-0 flex-1 font-display text-[18px] font-bold leading-7 text-black",
+                            "max-md:overflow-x-auto max-md:whitespace-nowrap max-md:[-webkit-overflow-scrolling:touch] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden",
+                          )}
+                        >
                           {item.question}
                         </span>
                         <ChevronDown

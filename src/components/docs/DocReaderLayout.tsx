@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, Menu, Search, X } from "lucide-react";
@@ -29,13 +29,15 @@ type Props = {
   enableNavSearch?: boolean;
 };
 
-/** Fixed panel: `w-[260px]` matches grid column — avoid `w-full` on `fixed` (resolves to viewport). */
-const sidebarPanelClass =
-  "sticky top-32 z-20 w-[260px] overflow-hidden rounded-[16px] border border-white/10 bg-[#15202f]/82 p-4 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl " +
-  "left-[max(1.25rem,calc((100vw-min(100vw,1440px))/2+1.25rem))] " +
-  "sm:left-[max(1.5rem,calc((100vw-min(100vw,1440px))/2+1.5rem))] " +
-  "md:left-[max(2rem,calc((100vw-min(100vw,1440px))/2+2rem))] " +
-  "lg:left-[max(3rem,calc((100vw-min(100vw,1440px))/2+3rem))]";
+/** Shared shell height for docs sidebar and reading pane (desktop). */
+const docPanelHeightClass =
+  "md:min-h-[calc(100dvh-9.5rem)] md:max-h-[calc(100dvh-9.5rem)]";
+
+const sidebarShellClass =
+  "flex w-full flex-col overflow-hidden rounded-[16px] border border-white/10 bg-[#15202f]/82 p-4 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl";
+
+const mainShellClass =
+  "flex w-full flex-col overflow-hidden rounded-[20px] border border-white/[0.08] bg-[#1b3144]/80 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl";
 
 function Sidebar({
   children,
@@ -67,6 +69,8 @@ export function DocReaderLayout({
   const [searchQuery, setSearchQuery] = useState("");
   const [activeId, setActiveId] = useState<string>(() => tocItems[0]?.id ?? "");
   const [navOpen, setNavOpen] = useState(false);
+  const mainScrollRef = useRef<HTMLDivElement>(null);
+  const sidebarScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!navOpen) return;
@@ -102,6 +106,8 @@ export function DocReaderLayout({
   const selectSection = (id: string) => {
     setActiveId(id);
     setNavOpen(false);
+    mainScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    sidebarScrollRef.current?.scrollTo({ top: 0, behavior: "auto" });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -140,10 +146,7 @@ export function DocReaderLayout({
     </nav>
   );
 
-  // Main search inlined below
-
-  /** Docs hub: keep a comfortable reading pane. Legal (contentMap): height follows section content only. */
-  const readingPaneMinHeight = !contentMap;
+  // Main reading pane uses matched height with sidebar on desktop (see doc-panel-height).
 
   return (
     <div className="relative flex min-h-0 flex-1 flex-col overflow-x-clip pb-12 pt-[calc(5.5rem+env(safe-area-inset-top,0px))] md:pb-16 md:pt-32">
@@ -177,48 +180,50 @@ export function DocReaderLayout({
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-start md:gap-10 lg:gap-12">
-          {/* Reserve column width; fixed panel overlays this track at full width */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-stretch md:gap-10 lg:gap-12">
           <Sidebar
             aria-label="Section navigation"
-            className="sticky top-[100px] right-0 pointer-events-none hidden min-h-0 w-full min-w-0 md:block md:w-full md:max-w-[260px]"
+            className={cn("hidden min-w-0 md:flex md:flex-col", docPanelHeightClass)}
           >
-            <div className={cn(sidebarPanelClass, "pointer-events-auto")}>
-              <p className="mb-8 text-left font-display text-[24px] font-semibold text-[var(--btn-primary-bg)]">
+            <div className={cn(sidebarShellClass, "h-full min-h-0")}>
+              <p className="mb-6 shrink-0 text-left font-display text-[24px] font-semibold text-[var(--btn-primary-bg)]">
                 Documentation:
               </p>
-              <SectionsRail />
+              <div
+                ref={sidebarScrollRef}
+                className="doc-scroll min-h-0 flex-1 pr-1"
+              >
+                <SectionsRail />
+              </div>
             </div>
           </Sidebar>
 
-          <article className="min-w-0">
-            {/* Search bar removed as requested */}
-
-            <div
-              className={cn(
-                "rounded-[20px] border border-white/[0.08] bg-[#1b3144]/80 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-8 md:p-10",
-                readingPaneMinHeight && "min-h-[min(60vh,720px)]",
-              )}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeId}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {contentMap ? (
-                    contentMap[activeId] ?? (
-                      <p className="text-sm text-white">
-                        This section could not be loaded. Choose another section from the list.
-                      </p>
-                    )
-                  ) : (
-                    <DocsArticleBody activeId={activeId} />
-                  )}
-                </motion.div>
-              </AnimatePresence>
+          <article className={cn("flex min-w-0 flex-col", docPanelHeightClass)}>
+            <div className={cn(mainShellClass, "h-full min-h-0")}>
+              <div
+                ref={mainScrollRef}
+                className="doc-scroll min-h-0 flex-1 p-6 sm:p-8 md:p-10"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeId}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {contentMap ? (
+                      contentMap[activeId] ?? (
+                        <p className="text-sm text-white">
+                          This section could not be loaded. Choose another section from the list.
+                        </p>
+                      )
+                    ) : (
+                      <DocsArticleBody activeId={activeId} />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </article>
         </div>
@@ -262,7 +267,7 @@ export function DocReaderLayout({
                 </button>
               </div>
               <div
-                className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4 pt-4"
+                className="doc-scroll min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4 pt-4"
                 style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
               >
                 <SectionsRail />

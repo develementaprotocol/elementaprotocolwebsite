@@ -65,12 +65,6 @@ export function CommunitySection({ community }) {
         setNewsletterSuccess(null);
         return;
       }
-      const emailLower = v.toLowerCase();
-      if (!emailLower.endsWith("@gmail.com") && !emailLower.endsWith("@hotmail.com")) {
-        setNewsletterError("Only Gmail and Hotmail addresses are accepted.");
-        setNewsletterSuccess(null);
-        return;
-      }
 
       setNewsletterError(null);
       setNewsletterSuccess(null);

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:email": "node scripts/test-email.mjs",
+    "test:email:verify": "node scripts/test-email.mjs --verify-only"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
