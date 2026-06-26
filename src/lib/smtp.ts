@@ -18,12 +18,29 @@ export const SMTP_REQUIRED_ENV_KEYS = [
   "EMAIL_TO",
 ] as const;
 
+/**
+ * Read env at request time. Bracket access stops Next.js from inlining
+ * `undefined` at build time when Vercel vars were added after the last deploy.
+ */
+function readEnv(key: string): string | undefined {
+  const value = process.env[key];
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+/** Password may contain leading/trailing spaces — do not trim. */
+function readEnvSecret(key: string): string | undefined {
+  const value = process.env[key];
+  return typeof value === "string" && value.length > 0 ? value : undefined;
+}
+
 export function getMissingSmtpEnvKeys(): string[] {
   const missing: string[] = [];
-  if (!process.env.EMAIL_HOST?.trim()) missing.push("EMAIL_HOST");
-  if (!process.env.EMAIL_USER?.trim()) missing.push("EMAIL_USER");
-  if (!process.env.EMAIL_PASS) missing.push("EMAIL_PASS");
-  if (!process.env.EMAIL_TO?.trim()) missing.push("EMAIL_TO");
+  if (!readEnv("EMAIL_HOST")) missing.push("EMAIL_HOST");
+  if (!readEnv("EMAIL_USER")) missing.push("EMAIL_USER");
+  if (!readEnvSecret("EMAIL_PASS")) missing.push("EMAIL_PASS");
+  if (!readEnv("EMAIL_TO")) missing.push("EMAIL_TO");
   return missing;
 }
 
@@ -39,15 +56,14 @@ export function getSmtpConfig():
     };
   }
 
-  const host = process.env.EMAIL_HOST!.trim();
-  const user = process.env.EMAIL_USER!.trim();
-  const pass = process.env.EMAIL_PASS!;
-  const to = process.env.EMAIL_TO!.trim();
+  const host = readEnv("EMAIL_HOST")!;
+  const user = readEnv("EMAIL_USER")!;
+  const pass = readEnvSecret("EMAIL_PASS")!;
+  const to = readEnv("EMAIL_TO")!;
 
-  const port = Number(process.env.EMAIL_PORT ?? "465");
-  const fromEmail = process.env.EMAIL_FROM?.trim() || user;
-  const fromName =
-    process.env.EMAIL_FROM_NAME?.trim() || "Elementa Protocol";
+  const port = Number(readEnv("EMAIL_PORT") ?? "465");
+  const fromEmail = readEnv("EMAIL_FROM") || user;
+  const fromName = readEnv("EMAIL_FROM_NAME") || "Elementa Protocol";
 
   return {
     ok: true,

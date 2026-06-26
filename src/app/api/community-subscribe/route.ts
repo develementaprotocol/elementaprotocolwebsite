@@ -7,6 +7,9 @@ import {
   smtpErrorHint,
 } from "@/lib/smtp";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 function isValidEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 }
