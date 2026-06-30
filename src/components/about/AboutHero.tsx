@@ -8,8 +8,8 @@ const AboutHero = () => {
   return (
     <section id="about-hero" className="relative flex min-h-[100svh] flex-col overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
-        <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
+        <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] " />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] " />
         <HeroBlurOverlay />
       </div>
 
