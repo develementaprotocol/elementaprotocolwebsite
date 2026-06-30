@@ -28,12 +28,10 @@ type Props = {
   enableNavSearch?: boolean;
 };
 
-/** Docs panes fit content, then scroll only when taller than the viewport. */
-const docPanelHeightClass =
-  "md:max-h-[calc(100dvh-var(--docs-reader-chrome))]";
+/** Main documentation content box — fixed 780px with internal scroll. */
+const docPanelHeightClass = "h-[780px] max-h-[780px]";
 
-const docScrollHeightClass =
-  "md:max-h-[calc(100dvh-var(--docs-reader-chrome)-4rem)]";
+const docScrollHeightClass = "min-h-0 flex-1";
 
 /** Sidebar should fit its nav content, then scroll only when the nav is taller than the viewport. */
 const sidebarPanelHeightClass =
@@ -293,7 +291,7 @@ export function DocReaderLayout({
           </Sidebar>
 
           <article className={cn("flex min-w-0 self-start flex-col", docPanelHeightClass)}>
-            <div className={cn(mainShellClass, "min-h-0", docPanelHeightClass)}>
+            <div className={cn(mainShellClass, "h-full min-h-0")}>
               <div
                 ref={mainScrollRef}
                 className={cn("doc-scroll min-h-0", docScrollHeightClass)}

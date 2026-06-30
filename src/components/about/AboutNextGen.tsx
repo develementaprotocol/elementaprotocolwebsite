@@ -44,14 +44,14 @@ const AboutNextGen = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="order-1 lg:order-2"
             >
-              <div className="w-full max-w-[500px] mx-auto lg:ml-auto">
+              <div className="w-full max-w-[530px] mx-auto lg:ml-auto">
                 <div className="relative z-10 flex items-center justify-center overflow-hidden rounded-[16px] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(rgba(36,186,206,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(36,186,206,0.1)_1px,transparent_1px)] after:bg-[size:40px_40px] after:opacity-30">
                   <Image
                     src={image5Img}
                     alt="Elementa Next Gen"
-                    width={500}
+                    width={530}
                     height={500}
-                    className="object-contain w-full h-full"
+                    className="object-contain  h-full"
                   />
                 </div>
               </div>
