@@ -60,7 +60,7 @@ export function JoinWalletSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="mt-8 flex w-full flex-col items-stretch justify-start gap-4 sm:flex-row sm:items-center"
+              className="mt-8 flex w-full flex-col items-stretch justify-start gap-4 sm:flex-col sm:items-normal lg:flex-row xl:flex-row"
             >
               <DownloadAppButton className="btn-primary h-[56px] w-full px-10 font-display text-[14px] font-bold tracking-widest sm:w-auto md:h-[64px] md:px-12 md:text-[15px]">
                 {joinWalletData.primaryCta}

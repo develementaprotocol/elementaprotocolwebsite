@@ -526,6 +526,38 @@
     background: transparent;
   }
 
+  /** Docs mobile nav — scrollable with hidden scrollbar. */
+  .doc-scroll-invisible {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .doc-scroll-invisible::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /**
+   * 3-card grids (tablet 2-col): lone third card full width + centered content.
+   * Pairs with `threeCardGridClass` / `threeCardItemClass` in `@/utils/threeCardGrid`.
+   */
+  @media (min-width: 640px) and (max-width: 1279px) {
+    .grid-three-cards > :nth-child(3):last-child {
+      grid-column: 1 / -1;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    .grid-three-cards > :nth-child(3):last-child > :first-child {
+      margin-inline: auto;
+    }
+  }
+
 }
 
 /* App Router template — lightweight route enter (replaces framer-motion on every navigation). */

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { walletAssets } from "../../data/walletAssets";
 import { powerWalletData } from "../../data/walletPage";
+import { cn } from "@/utils/cn";
+import { threeCardGridClass, threeCardItemClass } from "@/utils/threeCardGrid";
 
 export function PowerYourWalletSection() {
   return (
@@ -21,7 +23,7 @@ export function PowerYourWalletSection() {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-12 justify-center">
+          <div className={threeCardGridClass("gap-8 mt-12 justify-center grid-three-cards")}>
             {powerWalletData.items.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -33,7 +35,10 @@ export function PowerYourWalletSection() {
                   duration: 0.6,
                   ease: [0.215, 0.61, 0.355, 1.0],
                 }}
-                className="flex flex-col items-center gap-8 rounded-[16px] border border-white/[0.06] p-8 text-center shadow-[0_24px_48px_rgba(0,0,0,0.3)] sm:p-10 md:items-start md:text-left"
+                className={cn(
+                  "flex flex-col items-center gap-8 rounded-[16px] border border-white/[0.06] p-8 text-center shadow-[0_24px_48px_rgba(0,0,0,0.3)] sm:p-10 md:items-start md:text-left",
+                  threeCardItemClass(idx, powerWalletData.items.length),
+                )}
                 style={{
                   background: "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)",
                 }}

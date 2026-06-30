@@ -275,6 +275,14 @@ interface ProductItem {
   href: string;
 }
 
+function isRouteActive(pathname: string, href: string) {
+  return href.startsWith("/") && (pathname === href || pathname.startsWith(`${href}/`));
+}
+
+function hasActiveChild(pathname: string, children?: readonly ProductItem[]) {
+  return children?.some((child) => isRouteActive(pathname, child.href)) ?? false;
+}
+
 interface ProductCardProps {
   item: ProductItem;
   onClose: () => void;
@@ -446,12 +454,16 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                       <AnimatedText
                         text={link.label}
                         active={activeDropdown === link.id}
-                        isActiveRoute={activeDropdown === link.id}
+                        isActiveRoute={
+                          activeDropdown === link.id ||
+                          hasActiveChild(pathname, link.children)
+                        }
                       />
                       <ChevronDownIcon
                         open={activeDropdown === link.id}
                         className={`h-[18px] w-[18px] transition-colors duration-300 ${
-                          activeDropdown === link.id
+                          activeDropdown === link.id ||
+                          hasActiveChild(pathname, link.children)
                             ? "text-[#24bace] drop-shadow-[0_0_12px_rgba(36,186,206,0.45)]"
                             : "text-[#F5F5F5]/55 group-hover:text-[#24bace] group-hover:drop-shadow-[0_0_10px_rgba(36,186,206,0.35)]"
                         }`}
@@ -488,7 +500,7 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                                   key={c.id}
                                   item={c}
                                   onClose={closeDropdownNow}
-                                  isActive={pathname === c.href}
+                                  isActive={isRouteActive(pathname, c.href)}
                                 />
                               ))}
                             </div>
@@ -503,7 +515,7 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                     href={link.href}
                     className="group flex font-display text-[16px] font-medium leading-6 transition-colors"
                   >
-                    <AnimatedText text={link.label} isActiveRoute={pathname === link.href} />
+                    <AnimatedText text={link.label} isActiveRoute={isRouteActive(pathname, link.href)} />
                   </Link>
                 ) : (
                   <a
@@ -640,6 +652,7 @@ function MobileDrawerContent({
   
   const blockchainHref = productsChildren.find((c) => c.id === "blockchains")?.href ?? "/blockchain";
   const walletHref = productsChildren.find((c) => c.id === "Elementa-wallet")?.href ?? "/wallet";
+  const productsActive = hasActiveChild(pathname, productsChildren);
   
   const otherLinks = navigation.links.filter(
     (l) => !l.children && l.id !== "home" && l.id !== "contact",
@@ -692,7 +705,7 @@ function MobileDrawerContent({
               onClick={() => setIsProductsOpen(!isProductsOpen)}
               className={cn(
                 "flex w-full items-center justify-between rounded-[16px] border px-4 py-3 font-display text-[16px] font-bold transition-all",
-                pathname === blockchainHref || pathname === walletHref
+                productsActive
                   ? "border-[#24bace]/40 bg-[#24bace]/12 text-white"
                   : "border-white/10 bg-white/[0.04] text-white/90 hover:bg-white/[0.07]"
               )}
@@ -718,7 +731,7 @@ function MobileDrawerContent({
                       onClick={onClose}
                       className={cn(
                         "flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[15px] font-medium transition-colors",
-                        pathname === blockchainHref ? "bg-[#24bace]/15 text-[#24bace]" : "text-white/70 hover:text-white"
+                        isRouteActive(pathname, blockchainHref) ? "bg-[#24bace]/15 text-[#24bace]" : "text-white/70 hover:text-white"
                       )}
                     >
                       Blockchain
@@ -728,7 +741,7 @@ function MobileDrawerContent({
                       onClick={onClose}
                       className={cn(
                         "flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[15px] font-medium transition-colors",
-                        pathname === walletHref ? "bg-[#24bace]/15 text-[#24bace]" : "text-white/70 hover:text-white"
+                        isRouteActive(pathname, walletHref) ? "bg-[#24bace]/15 text-[#24bace]" : "text-white/70 hover:text-white"
                       )}
                     >
                       Wallet
@@ -741,7 +754,7 @@ function MobileDrawerContent({
 
           {/* Other Links */}
           {otherLinks.map((link) => {
-            const active = pathname === link.href;
+            const active = isRouteActive(pathname, link.href);
             const IconComp = link.id === "about" ? Info : HelpCircle;
             return (
               <Link

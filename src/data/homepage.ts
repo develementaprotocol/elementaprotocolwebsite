@@ -296,7 +296,7 @@ export const footer = {
     { label: 'SUPPORT', href: '/contact' },
   ],
   social: [
-    { id: 'twitter', label: 'Twitter', href: 'https://x.com/Elementa', asset: 'twitter' },
+    { id: 'twitter', label: 'Twitter', href: 'https://x.com/ElementaPro', asset: 'twitter' },
     { id: 'discord', label: 'Discord', href: 'https://discord.gg/Elementa', asset: 'discord' },
     { id: 'telegram', label: 'Telegram', href: 'https://t.me/Elementa', asset: 'telegram' },
   ],

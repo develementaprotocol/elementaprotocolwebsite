@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
-import topReflect from "@/assets/top-reflect.png";
+import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
 import { cn } from "@/utils/cn";
 
 /** Page chrome — top offset matches navbar; 100px bottom gap below the container. */
@@ -31,27 +30,14 @@ export function LegalPageLayout({
   return (
     <div
       className={cn(
-        "relative overflow-x-clip bg-[var(--color-Elementa-bg)] pt-[calc(var(--legal-reader-top)+env(safe-area-inset-top,0px))] pb-[calc(var(--legal-reader-bottom)+env(safe-area-inset-bottom,0px))]",
+        "relative overflow-x-clip bg-transparent pt-[calc(var(--legal-reader-top)+env(safe-area-inset-top,0px))] pb-[calc(var(--legal-reader-bottom)+env(safe-area-inset-bottom,0px))]",
         legalPageVars,
       )}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[620px] overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_58%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_58%,transparent_100%)]">
-        <Image
-          src={topReflect}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-45"
-          priority
-        />
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="atmosphere-blob-tl absolute -left-[20%] top-0 h-[70%] w-[70%] opacity-70" />
-        </div>
-      </div>
+      <PageHeroBackground />
 
-      <div className="container-standard relative z-10">
-        <div className="logo-align-inset pr-4 md:pr-8 xl:pr-12">
-          <article className="mx-auto w-full max-w-[1000px] text-center">
+      <div className="container-standard relative z-10 w-full min-w-0">
+        <article className="w-full min-w-0 text-center">
             <header className="shrink-0 pb-6 text-center md:pb-8">
               <h1 className="mx-auto max-w-3xl font-display text-[clamp(2.4rem,5vw,4rem)] font-bold leading-tight tracking-normal text-white">
                 {title}
@@ -87,7 +73,6 @@ export function LegalPageLayout({
               </div>
             </div>
           </article>
-        </div>
       </div>
     </div>
   );

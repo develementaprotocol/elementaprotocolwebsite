@@ -3,9 +3,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, Menu, X } from "lucide-react";
-import Image from "next/image";
-import topReflect from "@/assets/top-reflect.png";
 import { DocsArticleBody } from "@/components/docs/DocsArticleBody";
+import { useSuppressFooterWhile } from "@/components/providers/FooterControl";
+import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
 import { cn } from "@/utils/cn";
 
 export type DocNavGroup = {
@@ -100,6 +100,8 @@ export function DocReaderLayout({
       document.body.style.overflow = prev;
     };
   }, [navOpen]);
+
+  useSuppressFooterWhile(navOpen);
 
   const filteredNavGroups = useMemo(() => {
     if (!enableNavSearch || !searchQuery.trim()) return [...navGroups];
@@ -237,24 +239,11 @@ export function DocReaderLayout({
   // Main reading pane uses matched height with sidebar on desktop (see doc-panel-height).
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col overflow-x-clip bg-[var(--color-Elementa-bg)] pb-12 pt-[calc(var(--docs-reader-top)+env(safe-area-inset-top,0px))] [--docs-reader-chrome:calc(var(--docs-reader-top)+1.5rem)] [--docs-reader-top:6rem] md:pb-16 md:[--docs-reader-top:9rem] xl:[--docs-reader-top:9.5rem]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[620px] overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_58%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_58%,transparent_100%)]">
-        <Image
-          src={topReflect}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-45"
-        />
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="atmosphere-blob-tl absolute -left-[20%] top-0 h-[70%] w-[70%] opacity-70" />
-        </div>
-      </div>
+    <div className="relative flex min-h-0 flex-1 flex-col overflow-x-clip bg-transparent pb-12 pt-[calc(var(--docs-reader-top)+env(safe-area-inset-top,0px))] [--docs-reader-chrome:calc(var(--docs-reader-top)+1.5rem)] [--docs-reader-top:6rem] md:pb-16 md:[--docs-reader-top:9rem] xl:[--docs-reader-top:9.5rem]">
+      <PageHeroBackground />
 
-      <div className="container-standard relative z-10">
-        {/* Breadcrumb removed as requested */}
-
-        <div className="">
+      <div className="container-standard relative z-10 w-full min-w-0">
+        <div className="section-inner w-full min-w-0">
           {/* Mobile: sections drawer trigger only */}
           <div className="mb-5 flex justify-start md:hidden">
             <button
@@ -269,7 +258,7 @@ export function DocReaderLayout({
             </button>
           </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-stretch md:gap-10 lg:gap-12">
+        <div className="grid w-full min-w-0 grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-stretch md:gap-10 lg:gap-12">
           <Sidebar
             aria-label="Section navigation"
             className={cn(
@@ -326,18 +315,18 @@ export function DocReaderLayout({
       <AnimatePresence>
         {navOpen && (
           <motion.div
-            className="fixed inset-0 z-[120] md:hidden"
+            className="fixed inset-0 z-[120] touch-none md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <button
               type="button"
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0 bg-black/85 backdrop-blur-md"
               aria-label="Close menu"
               onClick={() => setNavOpen(false)}
             />
-            <motion.div
+            <motion.aside
               role="complementary"
               aria-label="Section navigation"
               initial={{ x: "-100%" }}
@@ -349,10 +338,9 @@ export function DocReaderLayout({
                 stiffness: 320,
                 mass: 0.85,
               }}
-              className="absolute left-0 top-0 flex h-full w-[min(100vw-1rem,380px)] flex-col border-r border-white/10 bg-[#15202f]/97 shadow-[0_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
-              style={{ paddingTop: "65px" }}
+              className="absolute left-0 top-0 flex h-[100dvh] max-h-[100dvh] w-[min(100vw-1rem,380px)] flex-col overflow-hidden border-r border-white/10 bg-[#15202f]/97 shadow-[0_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
             >
-              <div className="flex items-center justify-between border-b border-white/10 px-5 pb-3 pt-5">
+              <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-5 pb-3 pt-[calc(env(safe-area-inset-top,0px)+4.25rem)]">
                 <p className="text-left font-display text-[20px] font-semibold text-[var(--btn-primary-bg)]">
                   {title}
                 </p>
@@ -366,14 +354,11 @@ export function DocReaderLayout({
                 </button>
               </div>
               <div
-                className="doc-scroll min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4 pt-4"
-                style={{
-                  paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
-                }}
+                className="doc-scroll-invisible min-h-0 flex-1 overflow-y-scroll overscroll-y-contain px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4"
               >
                 <SectionsRail />
               </div>
-            </motion.div>
+            </motion.aside>
           </motion.div>
         )}
       </AnimatePresence>

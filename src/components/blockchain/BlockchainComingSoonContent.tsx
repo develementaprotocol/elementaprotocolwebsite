@@ -89,9 +89,10 @@ export function BlockchainComingSoonContent() {
         <HeroBlurOverlay />
       </div>
 
-      <section className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-16 sm:py-20" aria-label="Blockchain coming soon">
+      <section className="relative z-10 flex flex-1 flex-col items-center justify-center py-16 sm:py-20" aria-label="Blockchain coming soon">
+        <div className="container-standard w-full min-w-0">
         <motion.div
-          className="relative flex w-full max-w-[720px] flex-col items-center rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-10 text-center shadow-[0_22px_100px_rgba(0,0,0,0.42)] backdrop-blur-2xl sm:px-10 sm:py-14"
+          className="relative flex w-full min-w-0 flex-col items-center rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-10 text-center shadow-[0_22px_100px_rgba(0,0,0,0.42)] backdrop-blur-2xl sm:px-10 sm:py-14"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
@@ -144,6 +145,7 @@ export function BlockchainComingSoonContent() {
             </Link>
           </motion.div>
         </motion.div>
+        </div>
       </section>
     </main>
   );

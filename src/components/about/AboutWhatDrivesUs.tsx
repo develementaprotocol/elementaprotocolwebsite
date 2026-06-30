@@ -46,7 +46,7 @@ const AboutWhatDrivesUs = () => {
           </div>
 
           {/* Small Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {driveItems.map((item, index) => (
               <motion.div
                 key={index}
@@ -59,7 +59,7 @@ const AboutWhatDrivesUs = () => {
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-[16px] border border-white/20 bg-white/10 mx-auto md:mx-0">
                   {item.icon}
                 </div>
-                <h3 className="mb-3 text-[24px] leading-tight text-Elementa-primary">
+                <h3 className="mb-3 text-[24px] leading-tight text-Elementa-primary break-words">
                   {item.title}
                 </h3>
                 <p className="text-base leading-relaxed text-white/80">

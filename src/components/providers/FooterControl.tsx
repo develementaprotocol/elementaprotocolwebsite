@@ -46,6 +46,19 @@ export function useFooterSuppressed() {
   return ctx ? ctx.suppressCount > 0 : false;
 }
 
+/** Hides the site footer while `active` is true (e.g. docs mobile nav drawer). */
+export function useSuppressFooterWhile(active: boolean) {
+  const ctx = useContext(FooterControlContext);
+
+  useEffect(() => {
+    if (!ctx || !active) return;
+    ctx.suppressFooter();
+    return () => {
+      ctx.releaseFooter();
+    };
+  }, [active, ctx]);
+}
+
 function useFooterControl() {
   const ctx = useContext(FooterControlContext);
   if (!ctx) {

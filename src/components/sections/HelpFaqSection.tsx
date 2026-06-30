@@ -33,13 +33,13 @@ export function HelpFaqSection({ help, faq }) {
         <div className="section-inner flex flex-col items-center gap-8 xl:gap-12">
           {/* Header + search — Figma: gap-[80px] column; title 56px / 60px lh, -3px tracking */}
           <div className="flex w-full max-w-3xl flex-col items-center gap-10">
-            <div className="section-heading-gap flex w-full flex-col items-center gap-6">
-              <h2 className="max-md:w-full max-md:overflow-x-auto max-md:whitespace-nowrap max-md:text-left max-md:[-webkit-overflow-scrolling:touch] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
+            <div className="section-heading-gap flex w-full flex-col items-center gap-6 px-1">
+              <h2 className="w-full text-center font-display text-[clamp(1.75rem,6.5vw,3rem)] font-bold leading-[1.15] tracking-[-0.04em] text-Elementa-primary sm:tracking-[-2.4px]">
                 <span>{help.titleLead}</span>
                 <span>{help.titleAccent}</span>
                 <span>{help.titleTrail}</span>
               </h2>
-              <p className="max-w-[672px] mt-4 text-[clamp(1rem,2.5vw,1.125rem)] text-white text-center">
+              <p className="mx-auto mt-4 max-w-[672px] px-1 text-center text-[clamp(1rem,2.5vw,1.125rem)] leading-relaxed text-white">
                 {help.subtitleBeforeBreak}
                 {help.subtitleAfterBreak}
               </p>
@@ -90,7 +90,6 @@ export function HelpFaqSection({ help, faq }) {
                         <span
                           className={cn(
                             "min-w-0 flex-1 font-display text-[18px] font-bold leading-7 text-black",
-                            "max-md:overflow-x-auto max-md:whitespace-nowrap max-md:[-webkit-overflow-scrolling:touch] max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden",
                           )}
                         >
                           {item.question}

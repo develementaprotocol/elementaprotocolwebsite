@@ -95,7 +95,7 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
                 ),
               )}
             </h1>
-            <p className="mt-4 max-w-[min(100%,36rem)] px-1 font-body text-[clamp(0.875rem,3.2vw,1.25rem)] font-light leading-[1.55] text-Elementa-muted sm:mt-5 sm:px-0 md:max-w-[700px] md:leading-relaxed">
+            <p className="mt-4 max-w-[min(100%,36rem)]  px-1 font-body text-[clamp(0.875rem,3.2vw,1.25rem)] font-light leading-[1.55] text-Elementa-muted sm:mt-5 sm:px-0 md:max-w-[600px] md:leading-relaxed">
               {hero.subheadline}
             </p>
 

@@ -9,6 +9,8 @@ import {
   LineChart,
   Shield,
 } from "lucide-react";
+import { threeCardGridClass, threeCardItemClass } from "@/utils/threeCardGrid";
+import { cn } from "@/utils/cn";
 
 const iconMap = {
   shield: Shield,
@@ -42,7 +44,7 @@ export function WalletFeaturesSection({ features }) {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className={threeCardGridClass("gap-6 grid-three-cards")}>
           {features.items.map((item, i) => {
             const Icon = iconMap[item.iconKey] ?? Shield;
             return (
@@ -50,9 +52,12 @@ export function WalletFeaturesSection({ features }) {
                 key={item.id}
                 {...cardMotion}
                 transition={{ ...cardMotion.transition, delay: i * 0.05 }}
-                className="flex flex-col gap-4 rounded-[16px] border border-white/[0.08] bg-[#081421]/80 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.25)]"
+                className={cn(
+                  "flex flex-col gap-4 rounded-[16px] border border-white/[0.08] bg-[#081421]/80 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.25)]",
+                  threeCardItemClass(i, features.items.length),
+                )}
               >
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-[16px] border border-[#24bace]/25 bg-[#24bace]/10 md:mx-0">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-[16px] border border-[#24bace]/25 bg-[#24bace]/10 max-xl:mx-auto md:mx-0">
                   <Icon className="h-6 w-6 text-[#24bace]" strokeWidth={1.5} />
                 </div>
                 <h3>

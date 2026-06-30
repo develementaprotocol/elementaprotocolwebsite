@@ -163,7 +163,7 @@ export function CommunitySection({ community }) {
                     href={discordHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="z-20 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-[10px] font-bold tracking-[0.2em] text-white/90 outline-none ring-[#24bace]/40 transition-all hover:bg-white/10 hover:text-white focus-visible:ring-2"
+                    className="z-20 rounded-md border border-[#24bace] bg-[#24bace3b] px-3 py-1.5 text-[10px] font-bold tracking-[0.2em] text-[#24bace] outline-none ring-[#24bace]/40 transition-all hover:bg-white hover:text-white focus-visible:ring-2"
                   >
                     ACTIVE NOW
                   </a>

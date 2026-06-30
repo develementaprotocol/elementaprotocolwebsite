@@ -6,6 +6,8 @@ import iconBlockchain from "@/assets/blockchain.svg";
 import iconMultichain from "@/assets/multichain-power.svg";
 import iconSecurity from "@/assets/security.svg";
 import type { BlockchainCard } from "@/data/homepage";
+import { cn } from "@/utils/cn";
+import { threeCardGridClass, threeCardItemClass } from "@/utils/threeCardGrid";
 
 const iconUrlByKey: Record<string, any> = {
   "what-is-blockchain": iconBlockchain,
@@ -42,10 +44,10 @@ export function BlockchainSection({ cards }: { cards: BlockchainCard[] }) {
   return (
     <section
       id="blockchain-section"
-      className="site-section relative overflow-hidden"
+      className="site-section relative w-full min-w-0 overflow-hidden"
     >
-      <div className="container-standard relative z-10">
-        <div className="section-inner grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 lg:gap-8">
+      <div className="container-standard relative z-10 w-full min-w-0">
+        <div className={threeCardGridClass("section-inner gap-6 lg:gap-8 grid-three-cards")}>
           {cards.map((card, i) => (
             <motion.div
               key={card.id}
@@ -53,7 +55,11 @@ export function BlockchainSection({ cards }: { cards: BlockchainCard[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-             className="relative flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#18474d]/95 px-6 py-8 shadow-xl backdrop-blur-[12px] sm:min-h-[272px] sm:px-[41px] sm:py-[43px] xl:h-[272px]"
+             className={cn(
+               "relative flex min-h-[240px] w-full min-w-0 flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#18474d]/95 px-6 py-8 shadow-xl backdrop-blur-[12px] sm:min-h-[272px] sm:px-[41px] sm:py-[43px] xl:h-[272px]",
+               threeCardItemClass(i, cards.length),
+               "max-xl:[&>div:first-child]:flex max-xl:[&>div:first-child]:w-full max-xl:[&>div:first-child]:justify-center",
+             )}
             >
               <CardIcon iconKey={card.iconKey} />
 

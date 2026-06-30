@@ -1,9 +1,14 @@
 'use client'
 
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useRef, useState, useEffect, type CSSProperties } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars, PointMaterial, Points } from '@react-three/drei'
 import * as THREE from 'three'
+
+const STATIC_BG_STYLE: CSSProperties = {
+  background:
+    'linear-gradient(135deg, rgba(8, 20, 33, 0.98) 0%, rgba(15, 34, 49, 0.94) 50%, rgba(8, 20, 33, 0.98) 100%)',
+}
 
 function SpaceDust({ count = 2000 }: { count: number }) {
   const ref = useRef<THREE.Group>(null)
@@ -39,6 +44,7 @@ function SpaceDust({ count = 2000 }: { count: number }) {
     </group>
   )
 }
+
 function StarField({ starCount }: { starCount: number }) {
   const ref = useRef<THREE.Group>(null)
 
@@ -55,16 +61,25 @@ function StarField({ starCount }: { starCount: number }) {
   )
 }
 
-function useResponsiveStarCounts() {
+function useSpaceBackground() {
+  const [canAnimate, setCanAnimate] = useState(true)
   const [starCount, setStarCount] = useState(2000)
   const [dustCount, setDustCount] = useState(800)
   const [dpr, setDpr] = useState(1.2)
 
   useEffect(() => {
+    const mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     const mqSm = window.matchMedia('(max-width: 768px)')
     const mqMd = window.matchMedia('(max-width: 1280px)')
 
     const apply = () => {
+      const isLowPower = (navigator.hardwareConcurrency || 4) < 4
+      const prefersReduced = mqReduced.matches
+      const animate = !isLowPower && !prefersReduced
+      setCanAnimate(animate)
+
+      if (!animate) return
+
       if (mqSm.matches) {
         setStarCount(800)
         setDustCount(300)
@@ -81,21 +96,23 @@ function useResponsiveStarCounts() {
     }
 
     apply()
+    mqReduced.addEventListener('change', apply)
     mqSm.addEventListener('change', apply)
     mqMd.addEventListener('change', apply)
     window.addEventListener('resize', apply)
     return () => {
+      mqReduced.removeEventListener('change', apply)
       mqSm.removeEventListener('change', apply)
       mqMd.removeEventListener('change', apply)
       window.removeEventListener('resize', apply)
     }
   }, [])
 
-  return { starCount, dustCount, dpr }
+  return { canAnimate, starCount, dustCount, dpr }
 }
 
 export function SpaceBackground() {
-  const { starCount, dustCount, dpr } = useResponsiveStarCounts()
+  const { canAnimate, starCount, dustCount, dpr } = useSpaceBackground()
   const [isActive, setIsActive] = useState(true)
 
   useEffect(() => {
@@ -104,6 +121,16 @@ export function SpaceBackground() {
     document.addEventListener('visibilitychange', handleVisibility)
     return () => document.removeEventListener('visibilitychange', handleVisibility)
   }, [])
+
+  if (!canAnimate) {
+    return (
+      <div
+        className="pointer-events-none fixed inset-0 z-[-1]"
+        style={STATIC_BG_STYLE}
+        aria-hidden
+      />
+    )
+  }
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[-1] bg-[#15202f]">
