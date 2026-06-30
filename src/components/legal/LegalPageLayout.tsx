@@ -37,7 +37,7 @@ export function LegalPageLayout({
       <PageHeroBackground />
 
       <div className="container-standard relative z-10 w-full min-w-0">
-        <article className="w-full min-w-0 text-center">
+        <article className="w-[80%] mx-auto min-w-0 text-center">
             <header className="shrink-0 pb-6 text-center md:pb-8">
               <h1 className="mx-auto max-w-3xl font-display text-[clamp(2.4rem,5vw,4rem)] font-bold leading-tight tracking-normal text-white">
                 {title}
