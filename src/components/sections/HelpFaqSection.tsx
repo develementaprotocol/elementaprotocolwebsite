@@ -85,7 +85,7 @@ export function HelpFaqSection({ help, faq }) {
                       <button
                         type="button"
                         onClick={() => setOpenId(open ? null : item.id)}
-                        className="flex w-full min-w-0 items-center gap-3 p-6 text-left"
+                        className="flex w-full min-w-0 items-center gap-3 p-3 text-left md:p-6"
                       >
                         <span
                           className={cn(
@@ -112,7 +112,7 @@ export function HelpFaqSection({ help, faq }) {
                             transition={{ duration: 0.25 }}
                             className="overflow-hidden"
                           >
-                            <p className="px-6 pb-6 font-manrope text-sm font-normal leading-6 text-black/70">
+                            <p className="px-3 pb-3 font-manrope text-sm font-normal leading-6 text-black/70 md:px-6 md:pb-6">
                               {item.answer}
                             </p>
                           </motion.div>

@@ -14,7 +14,7 @@ import fastTransactionsIcon from '@/assets/fast-trasactions.svg'
 import blockchainLogo from '@/assets/50+blockchain-cardlogo-wallet.svg'
 import evmLogo from '@/assets/evm-cardlogo-wallet.svg'
 import solanaLogo from '@/assets/solana-cardlogo-wallet.svg'
-import coreLogo from '@/assets/core-capabilities-logo.svg'
+import coreLogo from '@/assets/Icon (4).svg'
 import omnichainLogo from '@/assets/logo1.png'
 import bitcoinLogo from '@/assets/bitcoin-cardlogo-wallet.svg'
 

@@ -7,6 +7,7 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import topReflect from "@/assets/top-reflect.png";
 
 import type { HeroContent, StatMetric } from "@/data/homepage";
+import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
 
 function StatCounter({
   stat,
@@ -66,21 +67,22 @@ export function HeroSection({
       >
         {/* Background Layer (Managed globally by RootChrome) */}
         <div className="absolute inset-0 z-[-1]" />
-        
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={topReflect}
-            alt=""
-            fill
-            priority
-            className="object-cover opacity-60"
-          />
-          
+
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={topReflect}
+              alt=""
+              fill
+              priority
+              className="object-cover opacity-60"
+            />
+
           {/* Theme Atmospheric Gradient */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
             <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
           </div>
+          <HeroBlurOverlay />
         </div>
 
         <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-2 sm:px-0">
@@ -90,14 +92,14 @@ export function HeroSection({
                 id="hero-heading"
                 className="w-full max-w-[1000px] text-center font-display text-[clamp(2.5rem,8vw,6rem)] font-bold leading-[1.05] tracking-tight text-Elementa-primary drop-shadow-[0_4px_48px_rgba(0,0,0,0.45)] xl:tracking-[-0.04em]"
               >
-                {hero.headlineParts.map((part, i) => 
+                {hero.headlineParts.map((part, i) =>
                   part.highlight ? (
                     <span key={i} className="text-Elementa-accent">
                       {part.text}
                     </span>
                   ) : (
                     <span key={i}>{part.text}</span>
-                  )
+                  ),
                 )}
               </h1>
             </div>

@@ -2,14 +2,15 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
 
 const AboutHero = () => {
   return (
     <section id="about-hero" className="relative flex min-h-[100svh] flex-col overflow-hidden">
-      {/* Background glow — top reflect is provided globally by RootChrome */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
         <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
+        <HeroBlurOverlay />
       </div>
 
       <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-24 pb-16 sm:px-6 sm:pt-28 sm:pb-20 md:pt-32">

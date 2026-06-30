@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import phoneL from "@/assets/wallet-hero-left.png";
 import phoneR from "@/assets/right-phone-hero.png";
@@ -9,6 +9,7 @@ import walletFlowBg from "@/assets/Elementa-walletcard-bottom-background.png";
 import chainLock from "@/assets/lock.svg";
 import ElementaChainBg from "@/assets/Elementa-chain.png";
 import type { EcosystemContent } from "@/data/homepage";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -19,7 +20,7 @@ const fadeUp = (delay = 0) => ({
 
 /** Sequential dot elementa — suggests “loading / chain incoming” */
 function ComingSoonDots({ className = "" }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   if (reduceMotion) {
     return <span className={className}>...</span>;
@@ -62,7 +63,7 @@ function SectionHeading({ title }) {
 
 /** Phones: one-time rise from below when scrolled into view (no looping motion) */
 function PhoneShowcase() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   const phoneMotion = reduceMotion
     ? {
@@ -78,6 +79,19 @@ function PhoneShowcase() {
         transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] as const },
       };
 
+  const floatTransition = reduceMotion
+    ? undefined
+    : { duration: 6, repeat: Infinity, ease: "easeInOut" as const };
+
+  const floatTransitionRight = reduceMotion
+    ? undefined
+    : {
+        duration: 7,
+        repeat: Infinity,
+        ease: "easeInOut" as const,
+        delay: 1,
+      };
+
   return (
     <div className="relative flex h-full min-h-[220px] w-full items-start justify-center overflow-hidden px-4 pt-6 sm:min-h-[256px] sm:pt-8 sm:px-6">
       <div className="relative flex w-full max-w-[538px] items-start justify-center max-md:mx-auto md:mx-0">
@@ -88,8 +102,8 @@ function PhoneShowcase() {
           className="relative z-[1] -mr-[28%] w-[78%] sm:-mr-[149px] sm:w-[422px] mt-[4.5%] sm:mt-[25px]"
         >
           <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            animate={reduceMotion ? undefined : { y: [0, -6, 0] }}
+            transition={floatTransition}
             className="relative w-full"
           >
             <Image
@@ -109,13 +123,8 @@ function PhoneShowcase() {
           className="relative z-[2] w-[49%] sm:w-[265px]"
         >
           <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
+            animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+            transition={floatTransitionRight}
             className="relative w-full"
           >
             <Image

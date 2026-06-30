@@ -17,7 +17,7 @@ import {
   Globe,
   Shield,
   Zap,
-  Home,
+  Home as HomeIcon,
 } from "lucide-react";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
@@ -641,7 +641,9 @@ function MobileDrawerContent({
   const blockchainHref = productsChildren.find((c) => c.id === "blockchains")?.href ?? "/blockchain";
   const walletHref = productsChildren.find((c) => c.id === "Elementa-wallet")?.href ?? "/wallet";
   
-  const otherLinks = navigation.links.filter((l) => !l.children);
+  const otherLinks = navigation.links.filter(
+    (l) => !l.children && l.id !== "home" && l.id !== "contact",
+  );
 
   return (
     <div className="relative z-10 flex h-full min-h-0 flex-col">
@@ -670,6 +672,19 @@ function MobileDrawerContent({
           Navigate
         </p>
         <nav className="flex flex-col gap-2" aria-label="Primary">
+          <Link
+            href="/"
+            onClick={onClose}
+            className={cn(
+              "flex items-center gap-3 rounded-[16px] border px-4 py-3 font-display text-[16px] font-bold transition-all",
+              pathname === "/"
+                ? "border-[#24bace]/40 bg-[#24bace]/12 text-white"
+                : "border-white/10 bg-white/[0.04] text-white/90 hover:bg-white/[0.07]",
+            )}
+          >
+            <HomeIcon className="h-5 w-5 text-[#24bace]" strokeWidth={1.65} />
+            Home
+          </Link>
 
           {/* Products Dropdown */}
           <div className="flex flex-col gap-1">

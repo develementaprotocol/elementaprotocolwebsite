@@ -55,49 +55,47 @@ function StarField({ starCount }: { starCount: number }) {
   )
 }
 
-function useReducedStars() {
+function useResponsiveStarCounts() {
   const [starCount, setStarCount] = useState(2000)
   const [dustCount, setDustCount] = useState(800)
-  const [shouldRender, setShouldRender] = useState(true)
+  const [dpr, setDpr] = useState(1.2)
 
   useEffect(() => {
-    // Detect low-power devices or reduced motion preference
-    const isLowPower = typeof navigator !== 'undefined' && (navigator.hardwareConcurrency || 4) < 4
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    
-    if (isLowPower || prefersReduced) {
-      setShouldRender(false)
-      return
-    }
+    const mqSm = window.matchMedia('(max-width: 768px)')
+    const mqMd = window.matchMedia('(max-width: 1280px)')
 
-    const mq = window.matchMedia('(max-width: 768px)')
     const apply = () => {
-      if (mq.matches) {
+      if (mqSm.matches) {
         setStarCount(800)
         setDustCount(300)
-      } else if (window.matchMedia('(max-width: 1280px)').matches) {
+        setDpr(Math.min(window.devicePixelRatio || 1, 1.5))
+      } else if (mqMd.matches) {
         setStarCount(1200)
         setDustCount(500)
+        setDpr(Math.min(window.devicePixelRatio || 1, 1.75))
       } else {
         setStarCount(2000)
         setDustCount(800)
+        setDpr(Math.min(window.devicePixelRatio || 1, 2))
       }
     }
+
     apply()
-    mq.addEventListener('change', apply)
-    const mqLg = window.matchMedia('(max-width: 1280px)')
-    mqLg.addEventListener('change', apply)
+    mqSm.addEventListener('change', apply)
+    mqMd.addEventListener('change', apply)
+    window.addEventListener('resize', apply)
     return () => {
-      mq.removeEventListener('change', apply)
-      mqLg.removeEventListener('change', apply)
+      mqSm.removeEventListener('change', apply)
+      mqMd.removeEventListener('change', apply)
+      window.removeEventListener('resize', apply)
     }
   }, [])
 
-  return { starCount, dustCount, shouldRender }
+  return { starCount, dustCount, dpr }
 }
 
 export function SpaceBackground() {
-  const { starCount, dustCount, shouldRender } = useReducedStars()
+  const { starCount, dustCount, dpr } = useResponsiveStarCounts()
   const [isActive, setIsActive] = useState(true)
 
   useEffect(() => {
@@ -107,17 +105,14 @@ export function SpaceBackground() {
     return () => document.removeEventListener('visibilitychange', handleVisibility)
   }, [])
 
-  if (!shouldRender) {
-    return <div className="pointer-events-none fixed inset-0 z-[-1]" />
-  }
-
   return (
     <div className="pointer-events-none fixed inset-0 z-[-1] bg-[#15202f]">
       <Canvas
+        className="h-full w-full touch-none"
         camera={{ position: [0, 0, 1], fov: 60 }}
         gl={{ alpha: false, antialias: false, powerPreference: 'high-performance' }}
-        dpr={[1, 1.2]}
-        frameloop={isActive ? "always" : "never"}
+        dpr={dpr}
+        frameloop={isActive ? 'always' : 'never'}
       >
         <color attach="background" args={['#15202f']} />
         <ambientLight intensity={1} />

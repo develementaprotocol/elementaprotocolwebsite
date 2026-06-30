@@ -403,6 +403,11 @@
     @apply min-w-0;
   }
 
+  /** Inner nav padding — aligns section copy with header logo (not nav bar edge). */
+  .logo-align-inset {
+    @apply pl-4 md:pl-8 xl:pl-12;
+  }
+
   /** Space below section titles (responsive; caps at 64px on md+) */
   .section-heading-gap {
     @apply mb-10 sm:mb-12 md:mb-[64px];
@@ -420,31 +425,31 @@
    * comfortable size/line-height for long-form reading (overrides base `p` weight:300).
    */
   .prose-docs {
-    @apply font-body text-[14px] font-normal leading-snug text-white;
+    @apply font-body text-sm font-normal leading-relaxed text-white/88 md:text-[15px];
   }
   .prose-docs > * + * {
-    margin-top: 1.75rem;
+    margin-top: 0.9rem;
   }
   .prose-docs p {
-    @apply text-[14px] font-normal leading-snug transition-colors text-white;
+    @apply text-sm font-normal leading-relaxed transition-colors text-white/88 md:text-[15px];
   }
   .prose-docs h3 {
-    @apply mt-8 font-display text-lg font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-xl;
+    @apply mt-5 font-display text-lg font-semibold tracking-normal text-[var(--btn-primary-bg)] md:text-xl;
   }
   .prose-docs h3:first-child {
     margin-top: 0;
   }
   .prose-docs h4 {
-    @apply font-display text-base font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-lg;
+    @apply font-display text-base font-semibold tracking-normal text-[var(--btn-primary-bg)] md:text-lg;
   }
   .prose-docs ul {
-    @apply flex list-disc flex-col gap-4 pl-6 text-left font-normal text-white;
+    @apply flex list-disc flex-col gap-2 pl-6 text-left font-normal leading-relaxed text-white/88;
   }
   .prose-docs ol {
-    @apply flex list-decimal flex-col gap-4 pl-6 text-left font-normal text-white;
+    @apply flex list-decimal flex-col gap-2 pl-6 text-left font-normal leading-relaxed text-white/88;
   }
   .prose-docs li {
-    @apply pl-0.5 text-left font-normal text-white;
+    @apply pl-0.5 text-left text-sm font-normal leading-relaxed text-white/88 md:text-[15px];
   }
   .prose-docs ul li::marker,
   .prose-docs ol li::marker {
@@ -457,19 +462,68 @@
     @apply font-semibold text-white/95;
   }
 
-  /** Docs reader — hidden scrollbar, scroll chains to page at top/bottom. */
+  /** Docs reader — themed visible scrollbar, scroll chains to page at top/bottom. */
   .doc-scroll {
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior-y: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-color: color-mix(in srgb, var(--btn-primary-bg) 30%, #ffffff 6%) rgba(255, 255, 255, 0.035);
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+  .doc-scroll:hover {
+    scrollbar-color: color-mix(in srgb, var(--btn-primary-bg) 82%, #ffffff 12%) rgba(255, 255, 255, 0.08);
   }
   .doc-scroll::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+  }
+  .doc-scroll::-webkit-scrollbar-track {
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035) padding-box;
+    background-clip: padding-box;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  }
+  .doc-scroll::-webkit-scrollbar-thumb {
+    min-height: 44px;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--btn-primary-bg) 34%, #ffffff 4%) 0%, color-mix(in srgb, #0a6a7e 52%, transparent) 100%) padding-box,
+      rgba(255, 255, 255, 0.06) border-box;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--btn-primary-bg) 12%, transparent);
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .doc-scroll:hover::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.065) padding-box;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      inset 0 0 18px color-mix(in srgb, var(--btn-primary-bg) 10%, transparent);
+  }
+  .doc-scroll:hover::-webkit-scrollbar-thumb {
+    background:
+      var(--btn-primary-gradient) padding-box,
+      rgba(255, 255, 255, 0.14) border-box;
+    box-shadow: 0 0 18px color-mix(in srgb, var(--btn-primary-bg) 34%, transparent);
+  }
+  .doc-scroll::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--btn-primary-bg) 88%, white) 0%, #0a6a7e 100%) padding-box,
+      rgba(255, 255, 255, 0.18) border-box;
+    box-shadow: 0 0 22px color-mix(in srgb, var(--btn-primary-bg) 42%, transparent);
+  }
+  .doc-scroll::-webkit-scrollbar-thumb:active {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--btn-primary-bg) 94%, white) 0%, #085b6d 100%) padding-box,
+      rgba(255, 255, 255, 0.22) border-box;
+    box-shadow: 0 0 26px color-mix(in srgb, var(--btn-primary-bg) 52%, transparent);
+  }
+  .doc-scroll::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
 }

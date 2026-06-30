@@ -6,6 +6,8 @@ import { useRef, useEffect } from "react";
 
 import { walletAssets } from "@/data/walletAssets";
 import type { WalletHeroContent } from "@/data/walletPage";
+import { DownloadAppButton } from "@/components/ui/DownloadAppButton";
+import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
 
 function Counter({
   end,
@@ -49,20 +51,18 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
 
   return (
     <div className="relative">
-      <section className="relative wallet-hero-section flex min-h-screen w-full flex-col overflow-hidden bg-transparent pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32 lg:pt-36 xl:h-screen xl:pb-0 xl:pt-0 lg:justify-start">
-        {/* Background Layer (Managed globally by RootChrome) */}
+      <section className="relative wallet-hero-section flex min-h-screen w-full flex-col overflow-hidden bg-transparent pb-6 pt-24 sm:pb-8 sm:pt-28 md:pb-12 md:pt-32 lg:pt-36 xl:h-screen xl:pb-0 xl:pt-0 lg:justify-start">
         <div className="absolute inset-0 z-[-1]" />
-        
+
         <div className="absolute inset-0 z-0">
-          {/* Theme Atmospheric Gradient — top reflect is provided globally by RootChrome */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
             <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
           </div>
-          
+          <HeroBlurOverlay />
+
           <div className="container-standard relative z-[2] h-full w-full">
-            {/* Dashboard Phone (Left, Desktop) — Precise Positioning from Image */}
-            <div className="pointer-events-none absolute z-10 hidden xl:block xl:bottom-[-22%] xl:left-[10%] xl:h-[70%] xl:w-[35%] 2xl:bottom-[-24%] 2xl:left-[14%] 2xl:h-[78%] 2xl:w-[38%]">
+            <div className="pointer-events-none absolute z-[5] hidden xl:block xl:bottom-[-18%] xl:left-[4%] xl:h-[62%] xl:w-[30%] 2xl:bottom-[-20%] 2xl:left-[8%] 2xl:h-[70%] 2xl:w-[32%]">
               <img
                 src={getSrc(walletAssets.walletHeroLeft)}
                 alt=""
@@ -71,8 +71,7 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
               />
             </div>
 
-            {/* Wallet App Phone (Right, Desktop) — Precise Positioning from Image */}
-            <div className="pointer-events-none absolute z-10 hidden origin-center xl:block xl:bottom-[-22%] xl:right-[10%] xl:h-[70%] xl:w-[35%] 2xl:bottom-[-24%] 2xl:right-[14%] 2xl:h-[78%] 2xl:w-[38%]">
+            <div className="pointer-events-none absolute z-[5] hidden origin-center xl:block xl:bottom-[-18%] xl:right-[4%] xl:h-[62%] xl:w-[30%] 2xl:bottom-[-20%] 2xl:right-[8%] 2xl:h-[70%] 2xl:w-[32%]">
               <img
                 src={getSrc(walletAssets.walletHeroRight)}
                 alt=""
@@ -83,16 +82,12 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
           </div>
         </div>
 
-        {/* Content Layer */}
-        <div className="container-standard relative z-20 flex h-full w-full flex-col items-center justify-start pt-[92px] sm:pt-[104px] md:pt-[120px] xl:pt-[160px]">
-          <div className="section-inner flex w-full max-w-[900px] flex-col items-center text-center">
-            <h1 className="w-full font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-tight text-Elementa-primary xl:tracking-[-0.04em]">
+        <div className="container-standard relative z-20 flex h-full w-full flex-col items-center justify-start pt-[88px] sm:pt-[96px] md:pt-[108px] xl:pt-[160px]">
+          <div className="section-inner relative z-20 flex w-full max-w-[900px] flex-col items-center px-0 text-center">
+            <h1 className="w-full font-display text-[clamp(2.25rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-tight text-Elementa-primary xl:tracking-[-0.04em]">
               {hero.headlineParts.map((part, i) =>
                 part.highlight ? (
-                  <span
-                    key={i}
-                    className="text-Elementa-accent"
-                  >
+                  <span key={i} className="text-Elementa-accent">
                     {part.text}
                   </span>
                 ) : (
@@ -100,65 +95,46 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
                 ),
               )}
             </h1>
-            <p className="mt-6 max-w-[700px] font-body text-[clamp(1rem,2.5vw,1.35rem)] font-light text-Elementa-muted">
+            <p className="mt-4 max-w-[min(100%,36rem)] px-1 font-body text-[clamp(0.875rem,3.2vw,1.25rem)] font-light leading-[1.55] text-Elementa-muted sm:mt-5 sm:px-0 md:max-w-[700px] md:leading-relaxed">
               {hero.subheadline}
             </p>
 
-            <div className="mt-12 md:mt-20 flex w-full flex-col items-stretch justify-center gap-4 px-4 sm:flex-row sm:items-center sm:justify-center sm:px-0">
-              <a
-                href={hero.primaryCta.href}
-                className="btn-primary flex h-[56px] w-full px-10 font-body text-[16px] sm:w-auto md:h-[64px] md:px-14 md:text-lg"
-              >
+            <div className="relative z-30 mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4 md:mt-12">
+              <DownloadAppButton className="btn-primary relative z-30 flex h-[52px] w-full px-8 font-body text-[15px] sm:w-auto md:h-[56px] md:px-12 md:text-base">
                 {hero.primaryCta.label}
-              </a>
+              </DownloadAppButton>
               <a
                 href={hero.secondaryCta.href}
-                className="btn-secondary flex h-[56px] w-full px-10 font-body text-[16px] sm:w-auto md:h-[64px] md:px-14 md:text-lg"
+                className="btn-secondary relative z-30 flex h-[52px] w-full px-8 font-body text-[15px] sm:w-auto md:h-[56px] md:px-12 md:text-base"
               >
                 {hero.secondaryCta.label}
               </a>
             </div>
           </div>
 
-          {/* Phones for mobile / tablet — stacked on small screens, side-by-side on md+ */}
-          <div className="mt-10 flex w-full max-w-md flex-col items-center justify-center gap-8 px-4 sm:mt-14 sm:max-w-2xl md:mt-16 md:max-w-3xl md:flex-row md:items-end md:justify-center md:gap-10 lg:mt-20 lg:gap-12 xl:hidden">
+          {/* Mobile / tablet: single mockup, spaced below CTAs */}
+          <div className="relative z-10 mt-10 flex w-full justify-center px-2 sm:mt-12 md:mt-14 xl:hidden">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="relative z-10 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[300px]"
+              className="w-full max-w-[min(72vw,220px)] sm:max-w-[240px] md:max-w-[260px]"
             >
               <img
                 src={getSrc(walletAssets.walletHeroLeft)}
-                className="relative z-10 h-auto w-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.55)]"
-                alt="Elementa Dashboard"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: 0.08 }}
-              className="relative z-10 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[300px]"
-            >
-              <img
-                src={getSrc(walletAssets.walletHeroRight)}
-                className="relative z-10 h-auto w-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.55)]"
-                alt="Elementa Wallet onboarding"
+                className="h-auto w-full object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.5)]"
+                alt="Elementa Wallet app"
               />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Cards Layer — Overlaying the Hero Section */}
-      <section className="site-section relative z-30 -mt-20 w-full xl:-mt-40">
+      <section className="site-section relative z-30 mt-6 w-full sm:mt-8 md:mt-10 xl:-mt-28">
         <div className="container-standard">
           <div className="section-inner">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
-              {/* Large Total Volume Card (50% on desktop, 100% on tablet) */}
+            <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 xl:grid-cols-4">
               <div
                 className="relative flex h-full flex-col justify-between overflow-hidden rounded-[16px] p-6 shadow-2xl backdrop-blur-3xl sm:p-8 md:col-span-2 md:p-10 xl:col-span-2"
                 style={{
@@ -168,23 +144,25 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
                 }}
               >
                 <div className="flex flex-col gap-3 sm:gap-4 md:gap-6">
-                  <span className="font-display text-[10px] sm:text-[12px] font-black uppercase tracking-[0.4em] text-[#24bace]">
+                  <span className="font-display text-[10px] font-black uppercase tracking-[0.4em] text-[#24bace] sm:text-[12px]">
                     Total Volume
                   </span>
-                  <h3 className="font-display text-4xl font-bold text-white sm:text-5xl lg:text-5xl xl:text-6xl tracking-tight">
+                  <h3 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl xl:text-6xl">
                     <Counter end={2.4} decimals={1} prefix="$" suffix="B+" />
                   </h3>
                 </div>
-                <p className="text-white mt-8 max-w-[400px] font-body text-sm font-normal leading-relaxed md:mt-16 sm:text-base">
-                  Processed through Elementa's autonomous nodes in the last
+                <p className="mt-6 max-w-[400px] font-body text-sm font-normal leading-relaxed text-white sm:mt-8 sm:text-base md:mt-12">
+                  Processed through Elementa&apos;s autonomous nodes in the last
                   quarter.
                 </p>
               </div>
 
-              {/* AI Uptime Card (25%) */}
               <div
-                className="flex h-full flex-col items-center justify-between rounded-[16px] border border-white/10 p-8 shadow-2xl backdrop-blur-3xl md:col-span-1 md:items-start md:p-10"
-                style={{ background: "#2d4669" }}
+                className="flex h-full flex-col items-center justify-between rounded-[16px] border border-white/10 p-6 shadow-2xl backdrop-blur-3xl sm:p-8 md:col-span-1 md:items-start md:p-10"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(21,111,122, 0.92) 0%, rgba(21, 32, 47, 0.96) 50%, rgba(21,111,122, 0.92) 100%)",
+                }}
               >
                 <div className="flex h-14 w-14 items-center justify-center rounded-[16px] bg-[#24bace]/10 md:h-16 md:w-16">
                   <Activity
@@ -193,19 +171,18 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
                     aria-hidden
                   />
                 </div>
-                <div className="mt-12 flex flex-col gap-2 md:mt-20">
+                <div className="mt-8 flex flex-col gap-2 md:mt-16">
                   <h4 className="font-display text-[clamp(2rem,5vw,3rem)] font-bold leading-none text-white">
                     <Counter end={99.9} decimals={1} suffix="%" />
                   </h4>
-                  <h4 className="font-body text-xs sm:text-sm font-medium text-white">
+                  <p className="font-body text-xs font-medium text-white sm:text-sm">
                     AI Uptime
-                  </h4>
+                  </p>
                 </div>
               </div>
 
-              {/* Vault-Grade Card (25%) */}
               <div
-                className="flex h-full flex-col items-center justify-between rounded-[16px] border border-white/10 p-8 shadow-2xl backdrop-blur-3xl md:col-span-1 md:items-start md:p-10"
+                className="flex h-full flex-col items-center justify-between rounded-[16px] border border-white/10 p-6 shadow-2xl backdrop-blur-3xl sm:p-8 md:col-span-1 md:items-start md:p-10"
                 style={{
                   background:
                     "linear-gradient(135deg, rgba(21,111,122, 0.92) 0%, rgba(21, 32, 47, 0.96) 50%, rgba(21,111,122, 0.92) 100%)",
@@ -214,11 +191,11 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
                 <div className="flex h-14 w-14 items-center justify-center rounded-[16px] bg-white/5 md:h-16 md:w-16">
                   <ShieldIcon />
                 </div>
-                <div className="mt-12 flex flex-col gap-2 md:mt-20">
+                <div className="mt-8 flex flex-col gap-2 md:mt-16">
                   <h4 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-none text-white">
                     Vault-Grade
                   </h4>
-                  <p className="font-body text-xs sm:text-sm font-medium text-white">
+                  <p className="font-body text-xs font-medium text-white sm:text-sm">
                     Security Standards
                   </p>
                 </div>
@@ -249,5 +226,3 @@ function ShieldIcon() {
     </svg>
   );
 }
-
-

@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, QrCode, Apple, Play } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 import phoneMockup from "@/assets/wallet-hero-left.png";
-import appleBadge from "@/assets/apple-button.png";
-import googleBadge from "@/assets/google-export-button.png";
+import dotGridBg from "@/assets/Group 1261155213.png";
+import ellipseGlow from "@/assets/Ellipse 4.png";
+import { AppStoreButtons } from "@/components/ui/AppStoreButtons";
+
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -12,193 +14,101 @@ const fadeUp = (delay = 0) => ({
   viewport: { once: true },
   transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
+
 export function DownloadAppSection() {
-  const [activeModal, setActiveModal] = useState<"apple" | "google" | null>(
-    null,
-  );
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    const checkViewport = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    checkViewport();
-    window.addEventListener("resize", checkViewport);
-    return () => window.removeEventListener("resize", checkViewport);
-  }, []);
-
-  const handleDownloadClick = (
-    platform: "apple" | "google",
-    e: React.MouseEvent,
-  ) => {
-    if (isDesktop) {
-      e.preventDefault();
-      setActiveModal(platform);
-    }
-  };
-
   return (
-    <section className="site-section relative w-full overflow-hidden">
+    <section className="site-section relative w-full overflow-hidden bg-transparent">
       <div className="container-standard relative z-10">
         <div className="section-inner">
-        <div className="flex flex-col gap-16 lg:flex-row lg:items-center px-10">
-          {/* Left Content Side */}
-          <div className="relative z-10 flex flex-1 flex-col items-center text-center lg:items-start lg:text-left px-2">
-            <motion.h2
-              {...fadeUp(0)}
-              className="font-display text-[clamp(2.5rem,5vw,4.25rem)] font-bold leading-[1.1] tracking-[-0.04em] text-white"
-            >
-              Download our app and <br className="hidden md:block" />
-              get most out of it
-            </motion.h2>
-
-            <motion.p
-              {...fadeUp(0.1)}
-              className="mt-6 w-full max-w-[540px] mx-auto font-body text-lg leading-relaxed text-Elementa-muted md:text-xl lg:mx-0"
-            >
-              Get Elementa Wallet: Your Gateway to a Vibrant{" "}
-              <br className="hidden sm:block" /> Digital Ecosystem
-            </motion.p>
-
-            <motion.div
-              {...fadeUp(0.2)}
-              className="mt-10 flex flex-nowrap justify-center gap-6 lg:justify-start"
-            >
-              <a
-                href="https://apps.apple.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => handleDownloadClick("apple", e)}
-                className="group relative h-[48px] w-[140px] md:h-[52px] md:w-[160px] transition-all hover:shadow-[0_0_24px_rgba(36,186,206,0.35)] active:opacity-90 flex items-center justify-center"
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
+            <div className="logo-align-inset relative z-10 flex flex-1 flex-col items-start text-left">
+              <motion.h2
+                {...fadeUp(0)}
+                className="font-display text-[clamp(2.5rem,5vw,4.25rem)] font-bold leading-[1.1] tracking-[-0.04em] text-white"
               >
-                <Image
-                  src={appleBadge}
-                  alt="Download on the App Store"
-                  className="h-full w-full object-contain"
-                />
-              </a>
-              <a
-                href="https://play.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => handleDownloadClick("google", e)}
-                className="group relative h-[48px] w-[140px] md:h-[52px] md:w-[160px] transition-all hover:shadow-[0_0_24px_rgba(36,186,206,0.35)] active:opacity-90 flex items-center justify-center"
-              >
-                <Image
-                  src={googleBadge}
-                  alt="Get it on Google Play"
-                  className="h-full w-full object-contain"
-                />
-              </a>
-            </motion.div>
-          </div>
+                Download our app and <br className="hidden md:block" />
+                get most out of it
+              </motion.h2>
 
-          {/* Right Visual Side */}
-          <div className="relative flex flex-1 items-center justify-center pt-10 lg:justify-end lg:pt-0">
-            <div className="relative h-[450px] w-full max-w-[500px] sm:h-[600px] lg:h-[700px]">
-              {/* Phone Mockup with Floating Animation */}
-              <motion.div
-                initial={{ opacity: 0, y: 60, rotateY: 10 }}
-                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="relative z-20 flex h-full w-full items-center justify-center p-4"
+              <motion.p
+                {...fadeUp(0.1)}
+                className="mt-6 w-full max-w-[540px] font-body text-lg leading-relaxed text-Elementa-muted md:text-xl"
               >
-                <motion.div
-                  animate={{
-                    y: [0, -20, 0],
-                    rotate: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="relative h-full w-full max-w-[320px] sm:max-w-[400px]"
-                >
-                  <Image
-                    src={phoneMockup}
-                    alt="Elementa Wallet App"
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
+                Get Elementa Wallet: Your Gateway to a Vibrant{" "}
+                <br className="hidden sm:block" /> Digital Ecosystem
+              </motion.p>
+
+              <motion.div {...fadeUp(0.2)} className="relative z-20 mt-10">
+                <AppStoreButtons className="justify-start" />
+              </motion.div>
+            </div>
+
+            {/* Figma mock scene — static, single shared anchor */}
+            <div className="relative flex flex-1 items-end justify-center overflow-hidden lg:justify-end">
+              <div className="relative h-[min(440px,82vw)] w-full max-w-[440px] overflow-hidden sm:h-[480px] lg:ml-auto lg:h-[520px]">
+                <div className="absolute bottom-0 left-1/2 h-full w-full max-w-[400px] -translate-x-1/2 overflow-hidden bg-transparent">
+                  {/* Arc + dot grid — centered behind phone */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute bottom-0 left-1/2 z-0 aspect-square w-[min(100%,380px)] -translate-x-1/2 translate-y-[4%]"
+                  >
+                    <div className="absolute bottom-[2%] left-1/2 h-[42%] w-[92%] -translate-x-1/2">
+                      <Image
+                        src={dotGridBg}
+                        alt=""
+                        fill
+                        quality={100}
+                        sizes="250px"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                    <Image
+                      src={ellipseGlow}
+                      alt=""
+                      fill
+                      quality={100}
+                      sizes="380px"
+                      className="object-contain object-bottom mix-blend-screen"
+                    />
+                  </div>
+
+                  {/* Static phone — mobile: 15% lower; desktop layout unchanged */}
+                  <div
+                    className="absolute bottom-0 left-[55%] z-10 w-[68%] max-w-[270px] bg-transparent max-lg:left-1/2 [--mock-translate-y:30%] max-lg:[--mock-translate-y:45%]"
+                    style={{
+                      transform:
+                        "translateX(-50%) translateY(var(--mock-translate-y)) rotate(-5deg)",
+                      transformOrigin: "50% 92%",
+                    }}
+                  >
+                    <div className="relative aspect-[9/19.5] w-full overflow-hidden">
+                      <Image
+                        src={phoneMockup}
+                        alt="Elementa Wallet App"
+                        fill
+                        priority
+                        quality={100}
+                        sizes="(max-width: 640px) 260px, 270px"
+                        className="object-contain object-top "
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom fade — blends mock into page bg (#15202F → transparent) */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[34%]"
+                    style={{
+                      background:
+                        "linear-gradient(to top, #15202F 0%, #15202F00 100%)",
+                    }}
                   />
-                </motion.div>
-
-                {/* Visual Polish - Subtle Bottom Fade */}
-                </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
-
-      {/* Barcode Modals */}
-      <AnimatePresence>
-        {activeModal && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveModal(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 16 }}
-              className="relative w-full max-w-sm rounded-[16px] border border-white/10 bg-[#0a0f1d]/95 p-12 text-left shadow-[0_40px_100px_rgba(0,0,0,0.8)] backdrop-blur-2xl overflow-hidden"
-            >
-              <button
-                onClick={() => setActiveModal(null)}
-                className="absolute right-8 top-8 text-white hover:text-white transition-colors"
-              >
-                <X className="h-6 w-6" />
-              </button>
-
-              <div className="mb-8 flex justify-start">
-                <div className="relative">
-                  <div className="relative rounded-[16px] bg-white p-6 shadow-2xl">
-                    <div className="h-44 w-44 bg-black flex items-center justify-center rounded-[16px]">
-                      <QrCode className="h-36 w-36 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-start gap-3">
-                  {activeModal === "apple" ? (
-                    <Apple className="h-5 w-5 text-[#24BACE]" />
-                  ) : (
-                    <Play
-                      className="h-5 w-5 text-[#24BACE]"
-                      fill="currentColor"
-                    />
-                  )}
-                  <h3 className="font-display text-2xl font-bold text-white tracking-tight">
-                    {activeModal === "apple" ? "App Store" : "Google Play"}
-                  </h3>
-                </div>
-
-                <p className="font-body text-sm leading-relaxed text-[#ffffff] pr-4">
-                  Scan this code with your{" "}
-                  {activeModal === "apple" ? "iPhone" : "Android device"} to
-                  download Elementa instantly.
-                </p>
-              </div>
-
-              <div className="mt-10 pt-10 border-t border-white/5 flex items-center justify-start">
-                <Image
-                  src={activeModal === "apple" ? appleBadge : googleBadge}
-                  alt={activeModal === "apple" ? "App Store" : "Google Play"}
-                  className="h-[50px] w-auto object-contain opacity-60"
-                />
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

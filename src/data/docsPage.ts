@@ -29,7 +29,6 @@ export const docsNav = [
     ],
   },
 ] as const;
-
 export const docsToc = [
   { id: "introduction", label: "Introduction" },
   { id: "vision-and-purpose", label: "Vision & purpose" },
@@ -44,3 +43,4 @@ export const docsToc = [
   { id: "roadmap", label: "Roadmap" },
   { id: "conclusion", label: "Conclusion" },
 ] as const;
+

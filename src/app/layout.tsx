@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import { FooterControlProvider } from "@/components/providers/FooterControl";
+import { ComingSoonProvider } from "@/components/providers/ComingSoonProvider";
 import { RootChrome } from "@/components/providers/RootChrome";
 import "./globals.css";
 
@@ -83,7 +84,9 @@ export default function RootLayout({
     >
       <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <FooterControlProvider>
-          <RootChrome>{children}</RootChrome>
+          <ComingSoonProvider>
+            <RootChrome>{children}</RootChrome>
+          </ComingSoonProvider>
         </FooterControlProvider>
       </body>
     </html>

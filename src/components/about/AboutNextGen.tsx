@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-const ElementaChain = '/assets/generation-of-web3.svg';
+import image5Img from "@/assets/image 5.png";
 
 const AboutNextGen = () => {
   return (
@@ -47,7 +47,7 @@ const AboutNextGen = () => {
               <div className="w-full max-w-[500px] mx-auto lg:ml-auto">
                 <div className="relative z-10 flex items-center justify-center overflow-hidden rounded-[16px] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(rgba(36,186,206,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(36,186,206,0.1)_1px,transparent_1px)] after:bg-[size:40px_40px] after:opacity-30">
                   <Image
-                    src={ElementaChain}
+                    src={image5Img}
                     alt="Elementa Next Gen"
                     width={500}
                     height={500}

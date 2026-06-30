@@ -24,7 +24,7 @@ export function Introduction() {
           <h3>How the stack comes together</h3>
           <p>
             The ecosystem is structured to grow into a full <strong>Web3 stack</strong> over time. The
-            first live product is <strong>Elementa Wallet</strong> — the primary place users hold keys,
+            first live product is <strong>Elementa Wallet</strong>, the primary place users hold keys,
             sign transactions, and access ecosystem features. On the horizon, <strong>Elementa Blockchain</strong>{" "}
             provides dedicated execution and settlement infrastructure, while <strong>Elementa DEX</strong>{" "}
             focuses on trading and liquidity with deep wallet integration (routing, approvals, and
@@ -68,7 +68,7 @@ export function VisionAndPurpose() {
             The core vision of Elementa Protocol is to <strong>simplify and unify</strong> decentralized
             technologies into a structured, accessible, and scalable ecosystem. In practice, that means
             fewer one-off flows, fewer opaque trust assumptions, and a user experience that feels
-            intentional end-to-end — from first download to advanced trading or chain operations.
+            intentional end-to-end, from first download to advanced trading or chain operations.
           </p>
           <p>
             Today&apos;s environment still forces people through <strong>fragmented stacks</strong>:
@@ -87,7 +87,7 @@ export function VisionAndPurpose() {
           <h3>What success looks like</h3>
           <p>
             Success is not only “more features.” It is measured by whether users can predict what will
-            happen when they tap Send, Swap, or Connect — because <strong>the same mental model</strong>{" "}
+            happen when they tap Send, Swap, or Connect, because <strong>the same mental model</strong>{" "}
             carries across surfaces. Elementa is designed to participate in Web3 while pushing toward a
             clearer, more coherent definition of how decentralized systems should feel at scale.
           </p>
@@ -130,7 +130,7 @@ export function EcosystemHierarchy() {
           <h3>3.2 Elementa Wallet (first product layer)</h3>
           <p>
             Elementa Wallet is the first <strong>production implementation</strong> of the vision. It is
-            the primary access point for keys, balances, and approvals — and the natural home for
+            the primary access point for keys, balances, and approvals, and the natural home for
             ecosystem modules as they appear (e.g. deeper chain controls or trading surfaces that reuse
             the same approval flows users already trust).
           </p>
@@ -163,7 +163,7 @@ export function EcosystemHierarchy() {
           <h4 className="mt-6">Elementa DEX (in development)</h4>
           <p>
             Trading infrastructure that treats the wallet as the <strong>control plane</strong> for
-            approvals, limits, and safety messaging — reducing the historical gap between “where you
+            approvals, limits, and safety messaging, reducing the historical gap between “where you
             hold assets” and “where you trade.”
           </p>
           <ul>
@@ -188,7 +188,7 @@ export function ElementaWalletOverview() {
           <p>
             Elementa Wallet is a <strong>self-custody</strong> digital asset system for both newcomers
             and power users. You keep control of keys and recovery material; the software&apos;s job is
-            to make that responsibility understandable — with clear confirmations, readable transaction
+            to make that responsibility understandable, with clear confirmations, readable transaction
             summaries, and consistent navigation.
           </p>
           <p>
@@ -213,9 +213,9 @@ export function ElementaWalletOverview() {
             and density adapt, but navigation patterns and safety language remain aligned.
           </p>
           <ul>
-            <li>Desktop — richer dashboards and multi-step workflows.</li>
-            <li>Android — mobile-first usage with hardware-backed options where available.</li>
-            <li>iOS — platform-native patterns with the same core custody model.</li>
+            <li>Desktop, richer dashboards and multi-step workflows.</li>
+            <li>Android, mobile-first usage with hardware-backed options where available.</li>
+            <li>iOS, platform-native patterns with the same core custody model.</li>
           </ul>
           <h3>Experience principles in the UI</h3>
           <p>
@@ -240,7 +240,7 @@ export function ProductPhilosophy() {
           <p>
             Elementa Wallet is organized around <strong>three pillars</strong> that remain stable even as
             individual features ship or pivot: security, simplicity, and ecosystem integration. Shipping
-            decisions are weighed against all three — not only velocity or short-term engagement.
+            decisions are weighed against all three, not only velocity or short-term engagement.
           </p>
           <h3>5.1 Security first</h3>
           <p>
@@ -273,13 +273,13 @@ export function ProductPhilosophy() {
             <li>Defaults that protect users who will never open “advanced” panels.</li>
           </ul>
           <p>
-            Simplicity here is not “dumbing down” risk — it is <strong>making risk legible</strong> so
+            Simplicity here is not “dumbing down” risk, it is <strong>making risk legible</strong> so
             users can consent with understanding.
           </p>
           <h3>5.3 Ecosystem integration</h3>
           <p>
             The wallet is the natural surface where users approve capabilities that belong to the broader
-            stack — chain operations, trading, governance, and eventually developer-facing tooling.
+            stack, chain operations, trading, governance, and eventually developer-facing tooling.
             Integration is approached so that new modules feel like <strong>extensions of the same
             product</strong>, not random external sites with separate accounts and contradictory prompts.
           </p>
@@ -345,7 +345,7 @@ export function MarketPositioning() {
         <>
           <p>
             Elementa Protocol competes for attention in a crowded space of wallets, chains, and
-            exchanges — but it is not positioning as only one of those categories. The narrative is
+            exchanges, but it is not positioning as only one of those categories. The narrative is
             intentionally <strong>multi-layer</strong>: a coherent stack where each layer reinforces the
             others.
           </p>
@@ -415,11 +415,11 @@ export function SecurityArchitecture() {
           <p>
             Security is treated as a <strong>requirement traceable through architecture</strong>, not a
             checkbox after UI polish. The wallet&apos;s threat model assumes motivated attackers, confused
-            users, and hostile integrations attempting to abuse approvals — so defenses are layered.
+            users, and hostile integrations attempting to abuse approvals, so defenses are layered.
           </p>
           <h3>Security model includes</h3>
           <ul>
-            <li>Non-custodial design — we do not hold user funds or seed phrases.</li>
+            <li>Non-custodial design, we do not hold user funds or seed phrases.</li>
             <li>Encrypted local storage appropriate to each client platform.</li>
             <li>Recovery phrase workflow that reinforces user responsibility.</li>
             <li>Transaction verification surfaces that resist rushed approvals.</li>
@@ -427,7 +427,7 @@ export function SecurityArchitecture() {
           </ul>
           <p>
             Users maintain <strong>ownership and responsibility</strong> consistent with self-custody.
-            No external party — including Elementa — should be able to unilaterally access user funds
+            No external party, including Elementa, should be able to unilaterally access user funds
             through the product&apos;s intended trust boundaries.
           </p>
           <h3>Operational discipline</h3>
@@ -451,13 +451,13 @@ export function CurrentStatus() {
         <>
           <p>
             Elementa Protocol is in <strong>active development</strong>. The ecosystem is real, but not
-            every layer is live simultaneously — transparency about status helps users and partners align
+            every layer is live simultaneously, transparency about status helps users and partners align
             expectations with what is shipping today versus what is being built next.
           </p>
           <h3>Live product</h3>
           <ul>
             <li>
-              <strong>Elementa Wallet</strong> (operational) — product detail and download context live on
+              <strong>Elementa Wallet</strong> (operational), product detail and download context live on
               the{" "}
               <Link href="/wallet" className="text-[#24bace] hover:underline">
                 Wallet
@@ -468,11 +468,11 @@ export function CurrentStatus() {
           <h3>In development</h3>
           <ul>
             <li>
-              <strong>Elementa Blockchain</strong> — infrastructure and integration milestones tracked
+              <strong>Elementa Blockchain</strong>, infrastructure and integration milestones tracked
               against protocol goals above.
             </li>
             <li>
-              <strong>Elementa DEX</strong> — trading experiences designed around wallet-native approvals.
+              <strong>Elementa DEX</strong>, trading experiences designed around wallet-native approvals.
             </li>
           </ul>
           <p>
@@ -495,8 +495,8 @@ export function Roadmap() {
         <>
           <p>
             Roadmapping here is <strong>directional</strong>: sequencing matters more than fixed dates in a
-            fast-moving space. The intent is to show how initiatives compound — wallet depth, chain
-            launch, DEX expansion, then governance and developer surfaces — rather than a disconnected
+            fast-moving space. The intent is to show how initiatives compound, wallet depth, chain
+            launch, DEX expansion, then governance and developer surfaces, rather than a disconnected
             checklist.
           </p>
           <h3>Planned development stages</h3>
@@ -506,7 +506,7 @@ export function Roadmap() {
             <li>Launch of Elementa DEX capabilities with deep wallet integration.</li>
             <li>Introduction of governance mechanisms appropriate to decentralization goals.</li>
             <li>Developer SDK and tooling for ecosystem builders.</li>
-            <li>Full ecosystem interoperability layer — fewer seams between modules for end users.</li>
+            <li>Full ecosystem interoperability layer, fewer seams between modules for end users.</li>
           </ul>
           <p>
             Each stage is meant to <strong>strengthen the whole</strong>. A DEX launch is materially easier
@@ -529,7 +529,7 @@ export function Conclusion() {
           <p>
             Elementa Protocol is a long-term effort to reshape how decentralized systems are structured,
             accessed, and scaled. It starts from a live wallet product because that is where custody and
-            trust are proven daily — then extends into chain and trading layers that inherit the same
+            trust are proven daily, then extends into chain and trading layers that inherit the same
             clarity and discipline.
           </p>
           <p>
@@ -544,7 +544,7 @@ export function Conclusion() {
           </p>
           <div className="mt-8 rounded-[16px] border border-white/10 bg-white/[0.04] px-5 py-6 text-center sm:px-8">
             <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/70 md:text-base">
-              Elementa Protocol — building unified decentralized infrastructure for the next era of digital
+              Elementa Protocol, building unified decentralized infrastructure for the next era of digital
               systems.
             </p>
           </div>
@@ -619,7 +619,7 @@ function DocSection({
       id={id}
       className="scroll-mt-28 border-b border-white/[0.06] pb-14 last:border-0 last:pb-0 md:pb-16"
     >
-      <h2 className="mb-4 font-display text-lg font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-xl md:text-2xl md:leading-tight">
+      <h2 className="mb-4 font-display text-xl font-semibold tracking-normal text-[var(--btn-primary-bg)] md:text-2xl md:leading-tight">
         {title.replace(/^\d+\.\s*/, "")}
       </h2>
       <div className="flex flex-col gap-4">{body}</div>

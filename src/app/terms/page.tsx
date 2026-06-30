@@ -1,26 +1,12 @@
-import React from "react";
-import Link from "next/link";
-import { DocReaderLayout } from "@/components/docs/DocReaderLayout";
+import { ContactEmailLink } from "@/components/ui/ContactEmailLink";
+import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
 import { LegalSection } from "@/components/legal/LegalSection";
-import { termsToc } from "@/data/legalToc";
-import { sectionAnchorFromTitle } from "@/utils/sectionAnchor";
 
 export const metadata = {
   title: "Terms and Conditions | Elementa Protocol",
   description:
     "Terms of use for Elementa Wallet, on-chain activity, third-party protocols, and the Elementa website.",
 };
-
-const termsNavGroups = [
-  {
-    group: "Terms & conditions",
-    items: termsToc.map((t) => ({
-      id: t.id,
-      label: t.label,
-      href: `#${t.id}`,
-    })),
-  },
-] as const;
 
 export default function TermsPage() {
   const sections = [
@@ -33,7 +19,7 @@ export default function TermsPage() {
         If you use the Services on behalf of an organization, you represent that you have authority to bind that organization, and &quot;you&quot; includes that entity.
       </p>
       <p className="mt-4">
-        The Services may include downloadable or browser-based wallet software that interacts with public blockchain networks. Your relationship with validators, miners, bridges, decentralized exchanges, lending protocols, or other on-chain systems is governed by those networks&apos; rules and smart contracts—not by Elementa as operator of those protocols.
+        The Services may include downloadable or browser-based wallet software that interacts with public blockchain networks. Your relationship with validators, miners, bridges, decentralized exchanges, lending protocols, or other on-chain systems is governed by those networks&apos; rules and smart contracts, not by Elementa as operator of those protocols.
       </p>
       <p>
         We may update these Terms from time to time; see Section 12. Continued use after changes become effective constitutes acceptance of the revised Terms, except where prohibited by law.
@@ -52,11 +38,11 @@ export default function TermsPage() {
       </p>
     </LegalSection>,
     <LegalSection key="3" title="3. Self-Custody Wallet Responsibility">
-      <p>Elementa Wallet is a non-custodial (self-custody) wallet interface. You—not Elementa—control the cryptographic keys that authorize movement of assets.</p>
+      <p>Elementa Wallet is a non-custodial (self-custody) wallet interface. You, not Elementa, control the cryptographic keys that authorize movement of assets.</p>
       <ul className="list-disc pl-6 flex flex-col gap-2 mt-3">
         <li>You are solely responsible for your device password, PIN, biometrics, private keys, and Secret Recovery Phrase.</li>
         <li>Elementa does not receive or store your recovery phrase or private keys in a form that allows us to recover your wallet on your behalf.</li>
-        <li>If you lose your phrase or keys, or they are stolen, funds may be permanently unrecoverable or stolen—with no recourse through Elementa.</li>
+        <li>If you lose your phrase or keys, or they are stolen, funds may be permanently unrecoverable or stolen, with no recourse through Elementa.</li>
         <li>You must never share your Secret Recovery Phrase or private keys with anyone, including anyone claiming to be Elementa support.</li>
         <li>You should maintain offline, redundant backups of your recovery phrase in a secure location; digital screenshots and cloud sync increase leak risk.</li>
       </ul>
@@ -75,7 +61,7 @@ export default function TermsPage() {
         <li>Asset type (native coin vs ERC-20 / SPL / other standards)</li>
         <li>Amounts, decimals, slippage limits, and deadline parameters on swaps</li>
         <li>Gas or priority fees and likely confirmation time</li>
-        <li>Token allowances (approvals) you grant to contracts—persistent approvals can drain wallets if misused</li>
+        <li>Token allowances (approvals) you grant to contracts, persistent approvals can drain wallets if misused</li>
       </ul>
       <p className="mt-4">
         Bridges, wrapped tokens, liquidity pools, and lending protocols carry additional risks (smart-contract exploit, rug pulls, depeg, liquidity withdrawal). Elementa does not audit third-party code you choose to use through the wallet.
@@ -122,13 +108,11 @@ export default function TermsPage() {
     </LegalSection>,
     <LegalSection key="8" title="8. Contact">
       <p>
-        For general questions about these Terms, licensing, or partnerships, email us using the contact channel below. Do not send Secret Recovery Phrases, private keys, or screenshots of seed backups—support staff will never request them.
+        For general questions about these Terms, licensing, or partnerships, email us using the contact channel below. Do not send Secret Recovery Phrases, private keys, or screenshots of seed backups, support staff will never request them.
       </p>
       <p>
         <strong>Email:</strong>{" "}
-        <Link href="/contact" className="text-[#24bace] hover:underline transition-colors">
-          info@elementaprotocol.com
-        </Link>
+        <ContactEmailLink />
       </p>
       <p className="mt-4">
         Response times depend on volume and complexity. Urgent security issues affecting Elementa-operated infrastructure should be labeled clearly in the subject line; we cannot intervene in third-party protocol exploits or recover funds lost on-chain.
@@ -144,7 +128,7 @@ export default function TermsPage() {
           <strong className="text-white/90">Infrastructure dependence:</strong> RPC endpoints, indexers, block explorers, fiat ramps, and swap aggregators may charge fees, suffer outages, deprecate APIs, or return stale prices; Elementa does not guarantee availability or accuracy of third-party data feeds.
         </li>
         <li>
-          <strong className="text-white/90">Smart-contract evolution:</strong> upgradeable proxies, multisigs, timelocks, or governance votes may alter withdrawal rules, fees, or collateral factors after your first deposit—monitor announcements from each protocol.
+          <strong className="text-white/90">Smart-contract evolution:</strong> upgradeable proxies, multisigs, timelocks, or governance votes may alter withdrawal rules, fees, or collateral factors after your first deposit, monitor announcements from each protocol.
         </li>
         <li>
           <strong className="text-white/90">Bridges and wrapped assets:</strong> custodial bridges, liquidity networks, and canonical wrappers introduce timing, peg, censorship, and smart-contract risks; exploits may isolate funds on destination chains.
@@ -154,7 +138,7 @@ export default function TermsPage() {
         </li>
       </ul>
       <p className="mt-4">
-        Elementa does not endorse any token, NFT collection, yield farm, or airdrop. Labels such as &quot;verified&quot; or curated lists are convenience features only—they are not investment advice, audits, or guarantees that code is bug-free or founders are trustworthy.
+        Elementa does not endorse any token, NFT collection, yield farm, or airdrop. Labels such as &quot;verified&quot; or curated lists are convenience features only, they are not investment advice, audits, or guarantees that code is bug-free or founders are trustworthy.
       </p>
     </LegalSection>,
     <LegalSection key="10" title="10. Taxes, Reporting, and Regulatory Compliance">
@@ -166,7 +150,7 @@ export default function TermsPage() {
       </p>
       <ul className="list-disc pl-6 flex flex-col gap-3 mt-4">
         <li>The wallet does not automatically compute cost basis, unrealized P&amp;L, or localized tax forms unless we explicitly ship such a feature and you opt in.</li>
-        <li>Airdrops, forks, and governance distributions may be taxable upon receipt in some jurisdictions—consult a tax advisor.</li>
+        <li>Airdrops, forks, and governance distributions may be taxable upon receipt in some jurisdictions, consult a tax advisor.</li>
         <li>Privacy-enhancing transfers or mixers may themselves be regulated or prohibited where you live.</li>
       </ul>
       <p className="mt-4">
@@ -196,33 +180,24 @@ export default function TermsPage() {
         We may modify these Terms by posting an updated version on this page and revising the &quot;Last Updated&quot; date. Archived copies may be retained internally for compliance but are not guaranteed publicly unless required by law.
       </p>
       <p className="mt-4">
-        For material changes—especially those affecting dispute resolution, liability limits, or acceptable use—we may provide additional notice through the website banner, release notes, or in-app modal where technically feasible and legally required.
+        For material changes, especially those affecting dispute resolution, liability limits, or acceptable use, we may provide additional notice through the website banner, release notes, or in-app modal where technically feasible and legally required.
       </p>
       <ul className="list-disc pl-6 flex flex-col gap-3 mt-4">
         <li>Continued use of the Services after the stated effective date constitutes acceptance of the revised Terms if your jurisdiction permits browse-wrap or similar mechanisms.</li>
         <li>If you reject updated Terms, you must cease access immediately; uninstall wallet clients only after exporting addresses or records you need and securing your recovery phrase offline.</li>
-        <li>Some jurisdictions grant consumers non-waivable rights—nothing here limits those mandatory protections.</li>
+        <li>Some jurisdictions grant consumers non-waivable rights, nothing here limits those mandatory protections.</li>
       </ul>
     </LegalSection>,
   ];
 
-  const contentMap = Object.fromEntries(
-    sections.filter(React.isValidElement).map((section) => {
-      const t = (section.props as { title: string }).title;
-      return [sectionAnchorFromTitle(t), section] as const;
-    }),
-  );
-
   return (
-    <DocReaderLayout
-      title="Terms and Conditions"
+    <LegalPageLayout
+      title="Terms &"
+      titleAccent="Conditions"
       subtitle="Rules that govern your use of Elementa websites, wallet, and related services."
       lastUpdated="May 2026"
-      breadcrumb={[{ label: "Home", href: "/" }]}
-      navGroups={termsNavGroups}
-      tocItems={termsToc}
-      contentMap={contentMap}
-      enableNavSearch={false}
-    />
+    >
+      {sections}
+    </LegalPageLayout>
   );
 }

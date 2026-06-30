@@ -55,7 +55,7 @@ const CommunitySection = lazy(() =>
 
 function SectionFallback() {
   return (
-    <div className="flex min-h-[12rem] items-center justify-center border-t border-white/5 py-16">
+    <div className="flex min-h-48 items-center justify-center border-t border-white/5 py-16">
       <div className="h-8 w-8 animate-spin rounded-full border-2 border-Elementa-accent border-t-transparent" />
     </div>
   );

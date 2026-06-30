@@ -178,7 +178,7 @@ export const joinWalletData = {
   title: 'Join Elementa Protocol and experience the future of decentralized liquidity today.',
   description: 'We prioritize true ownership, transparency, and interoperability. With the Elementa Wallet, you can navigate the entire Web3 ecosystem with absolute confidence and unparalleled speed.',
   primaryCta: 'Download App',
-  secondaryCta: 'Read the Documentation'
+  secondaryCta: 'Know More'
 }
 
 export type JoinWalletData = typeof joinWalletData

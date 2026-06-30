@@ -15,9 +15,9 @@ export function LegalSection({
   return (
     <section
       id={anchor}
-      className="scroll-mt-28 border-b border-white/[0.06] pb-14 last:border-b-0 last:pb-0 md:pb-16"
+      className="scroll-mt-28 pb-7 text-left last:pb-0 md:pb-8"
     >
-      <h2 className="mb-4 font-display text-lg font-semibold tracking-tight text-[var(--btn-primary-bg)] sm:text-xl md:text-2xl md:leading-tight">
+      <h2 className="mb-4 font-display text-xl font-semibold tracking-normal text-[var(--btn-primary-bg)] md:text-2xl md:leading-tight">
         {title}
       </h2>
       <div className="prose-docs">{children}</div>

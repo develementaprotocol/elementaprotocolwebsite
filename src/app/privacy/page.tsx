@@ -1,26 +1,12 @@
-import React from "react";
-import Link from "next/link";
-import { DocReaderLayout } from "@/components/docs/DocReaderLayout";
+import { ContactEmailLink } from "@/components/ui/ContactEmailLink";
+import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
 import { LegalSection } from "@/components/legal/LegalSection";
-import { privacyToc } from "@/data/legalToc";
-import { sectionAnchorFromTitle } from "@/utils/sectionAnchor";
 
 export const metadata = {
   title: "Privacy Policy | Elementa Protocol",
   description:
     "How Elementa handles data for Elementa Wallet, self-custody keys, blockchain activity, dApp connections, and the website.",
 };
-
-const privacyNavGroups = [
-  {
-    group: "Privacy policy",
-    items: privacyToc.map((t) => ({
-      id: t.id,
-      label: t.label,
-      href: `#${t.id}`,
-    })),
-  },
-] as const;
 
 export default function PrivacyPage() {
   const sections = [
@@ -29,7 +15,7 @@ export default function PrivacyPage() {
         This Privacy Policy explains how Elementa Protocol (&quot;Elementa,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects, uses, stores, and protects information when you use our website, Elementa Wallet (including mobile or browser-based interfaces), and any related products or services (collectively, the &quot;Services&quot;).
       </p>
       <p>
-        Elementa Wallet is built around self-custody: cryptographic keys that control your assets are generated and stored under your control—typically on your device—and are not sent to Elementa in a recoverable form. That design affects what data we have access to and what remains solely with you or on public networks.
+        Elementa Wallet is built around self-custody: cryptographic keys that control your assets are generated and stored under your control, typically on your device, and are not sent to Elementa in a recoverable form. That design affects what data we have access to and what remains solely with you or on public networks.
       </p>
       <p>
         Elementa provides decentralized ecosystem infrastructure so users can view balances, prepare transactions, connect to networks, and interact with smart contracts and decentralized applications (&quot;dApps&quot;). Using crypto assets involves public blockchain activity; this policy describes both typical web/app analytics and data flows that are unique to wallets (such as chain queries and transaction broadcasting).
@@ -41,7 +27,7 @@ export default function PrivacyPage() {
       <p>
         We develop and operate client software and interfaces (such as Elementa Wallet) that let you generate wallets, sign transactions and messages, and interact with third-party blockchains and protocols. We are not the operator of those underlying networks and do not custody user funds on your behalf when you use the wallet in self-custody mode.
       </p>
-      <p><strong>Contact Email:</strong> <Link href="/contact" className="text-[#24bace] hover:underline transition-colors">info@elementaprotocol.com</Link></p>
+      <p><strong>Contact Email:</strong> <ContactEmailLink /></p>
     </LegalSection>,
     <LegalSection key="3" title="Self-Custody Wallet Model">
       <p>Elementa Wallet is a self-custody wallet. This means:</p>
@@ -50,13 +36,13 @@ export default function PrivacyPage() {
         <li>We do not store, access, or recover your recovery phrase or private keys in ordinary operation.</li>
         <li>We cannot reset or restore lost wallet credentials if you lose your backup.</li>
         <li>You are solely responsible for securing your wallet, device, backups, and any hardware or extension you use.</li>
-        <li>Never share your Secret Recovery Phrase or private keys with anyone, including Elementa representatives—legitimate support will never ask for them.</li>
+        <li>Never share your Secret Recovery Phrase or private keys with anyone, including Elementa representatives, legitimate support will never ask for them.</li>
         <li>
           Signing transactions or messages authorizes movements of assets or permissions on-chain (for example token approvals). Those actions are irreversible once confirmed on a blockchain; Elementa cannot undo them.
         </li>
       </ul>
       <p className="mt-4">
-        Where the wallet offers connections to dApps (for example via deep links, browser extensions, or WalletConnect-style flows), you choose which sites or apps to trust. Elementa does not control third-party front ends and is not responsible for how they request signatures or process data—review connection prompts and contract details carefully.
+        Where the wallet offers connections to dApps (for example via deep links, browser extensions, or WalletConnect-style flows), you choose which sites or apps to trust. Elementa does not control third-party front ends and is not responsible for how they request signatures or process data, review connection prompts and contract details carefully.
       </p>
     </LegalSection>,
     <LegalSection key="4" title="Information We Collect">
@@ -70,7 +56,7 @@ export default function PrivacyPage() {
         <p>You may provide information such as:</p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
           <li>
-            <strong className="text-white/90">Contact and support:</strong> email address, name or handle if you include them, and the contents of messages when you contact us, report a bug, or request help. Keep wallet secrets out of email—support will not ask for seed phrases.
+            <strong className="text-white/90">Contact and support:</strong> email address, name or handle if you include them, and the contents of messages when you contact us, report a bug, or request help. Keep wallet secrets out of email, support will not ask for seed phrases.
           </li>
           <li>
             <strong className="text-white/90">Newsletter or waitlists:</strong> if offered, an email address or communication preferences you submit through forms on our website.
@@ -79,7 +65,7 @@ export default function PrivacyPage() {
             <strong className="text-white/90">Surveys and feedback:</strong> optional responses about product experience; may include coarse demographics if you choose to provide them.
           </li>
           <li>
-            <strong className="text-white/90">Fiat or regulated flows:</strong> if you use an integrated on-ramp or partner that performs KYC, that partner—not Elementa—typically collects identity documents under its own policy; we may receive limited confirmation or reference IDs needed to complete the flow.
+            <strong className="text-white/90">Fiat or regulated flows:</strong> if you use an integrated on-ramp or partner that performs KYC, that partner, not Elementa, typically collects identity documents under its own policy; we may receive limited confirmation or reference IDs needed to complete the flow.
           </li>
         </ul>
       </div>
@@ -93,12 +79,12 @@ export default function PrivacyPage() {
         <ul className="list-disc pl-6 flex flex-col gap-1">
           <li>Public wallet addresses you add or generate in the app</li>
           <li>Public transaction hashes, block references, and chain identifiers</li>
-          <li>Token, contract, and asset metadata returned by networks or third-party APIs (names, symbols, icons—subject to availability)</li>
+          <li>Token, contract, and asset metadata returned by networks or third-party APIs (names, symbols, icons, subject to availability)</li>
           <li>Fee estimates, nonce information, and confirmation status needed to construct or track transactions</li>
           <li>Logs or diagnostics related to failed broadcasts or connectivity (which may include partial technical detail but not your private keys)</li>
         </ul>
         <p className="text-sm italic opacity-80 mt-1">
-          Blockchain data is inherently public and generally cannot be deleted or altered once confirmed on-chain. Analytics providers or third parties may also correlate public addresses across applications—this is outside Elementa&apos;s control.
+          Blockchain data is inherently public and generally cannot be deleted or altered once confirmed on-chain. Analytics providers or third parties may also correlate public addresses across applications, this is outside Elementa&apos;s control.
         </p>
       </div>
 
@@ -113,10 +99,10 @@ export default function PrivacyPage() {
             <strong className="text-white/90">Device and client identifiers:</strong> device type, operating system version, app build version, browser user-agent, language, and screen characteristics where useful for layout and compatibility.
           </li>
           <li>
-            <strong className="text-white/90">Network identifiers:</strong> IP address, request timestamps, and coarse geolocation inferred from IP (e.g. country or region level)—used for abuse prevention, rate limiting, and aggregated analytics.
+            <strong className="text-white/90">Network identifiers:</strong> IP address, request timestamps, and coarse geolocation inferred from IP (e.g. country or region level), used for abuse prevention, rate limiting, and aggregated analytics.
           </li>
           <li>
-            <strong className="text-white/90">Usage events:</strong> pages or screens viewed, button interactions at an aggregated level, session duration, and referral URLs—used to improve UX and funnel health.
+            <strong className="text-white/90">Usage events:</strong> pages or screens viewed, button interactions at an aggregated level, session duration, and referral URLs, used to improve UX and funnel health.
           </li>
           <li>
             <strong className="text-white/90">Diagnostics:</strong> crash logs, stack traces, and performance traces that may be tied to a pseudonymous installation ID rather than your name.
@@ -127,7 +113,7 @@ export default function PrivacyPage() {
       <div className="mt-4 flex flex-col gap-2">
         <h3>Third-Party Information</h3>
         <p>
-          When you connect optional integrations—such as portfolio trackers, identity checks, or swap APIs—those providers may send us tokens or identifiers needed to complete the integration (for example a session token or attestation result).
+          When you connect optional integrations, such as portfolio trackers, identity checks, or swap APIs, those providers may send us tokens or identifiers needed to complete the integration (for example a session token or attestation result).
         </p>
         <p>We may receive limited data from third-party services you choose to connect, such as:</p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
@@ -153,7 +139,7 @@ export default function PrivacyPage() {
         <li>Develop and improve ecosystem features and documentation</li>
       </ul>
       <p>
-        We do not use your private keys or Secret Recovery Phrase for marketing or profiling, because those secrets should remain only on your devices or in your physical backup—never transmitted to Elementa in recoverable form as part of normal self-custody operation.
+        We do not use your private keys or Secret Recovery Phrase for marketing or profiling, because those secrets should remain only on your devices or in your physical backup, never transmitted to Elementa in recoverable form as part of normal self-custody operation.
       </p>
     </LegalSection>,
     <LegalSection key="6" title="Cookies and Tracking Technologies">
@@ -169,7 +155,7 @@ export default function PrivacyPage() {
           <strong className="text-white/90">Functional:</strong> remembered language, theme, or dismissed announcements.
         </li>
         <li>
-          <strong className="text-white/90">Analytics or performance:</strong> aggregated statistics on which documentation pages are read or where users drop off—usually configured to minimize personal data.
+          <strong className="text-white/90">Analytics or performance:</strong> aggregated statistics on which documentation pages are read or where users drop off, usually configured to minimize personal data.
         </li>
         <li>
           <strong className="text-white/90">Security:</strong> detecting repeated failed requests or bot traffic.
@@ -181,7 +167,7 @@ export default function PrivacyPage() {
     </LegalSection>,
     <LegalSection key="7" title="Analytics">
       <p>
-        We may use first-party or third-party analytics to understand aggregate usage—for example which wallet features load slowly or which documentation sections are most viewed. Where feasible we configure tools to use pseudonymous identifiers rather than real names, and we avoid sending recovery phrases or private keys to analytics endpoints by design.
+        We may use first-party or third-party analytics to understand aggregate usage, for example which wallet features load slowly or which documentation sections are most viewed. Where feasible we configure tools to use pseudonymous identifiers rather than real names, and we avoid sending recovery phrases or private keys to analytics endpoints by design.
       </p>
       <p>This helps us improve:</p>
       <ul className="list-disc pl-6 flex flex-col gap-3">
@@ -204,7 +190,7 @@ export default function PrivacyPage() {
           <strong className="text-white/90">Infrastructure and hosting:</strong> cloud or CDN vendors that host website assets, API gateways, or logging pipelines under contractual confidentiality terms.
         </li>
         <li>
-          <strong className="text-white/90">Blockchain networks:</strong> when you broadcast a signed transaction, nodes and validators receive it by design—this is public dissemination required for settlement, not a discretionary “sale” of personal data.
+          <strong className="text-white/90">Blockchain networks:</strong> when you broadcast a signed transaction, nodes and validators receive it by design, this is public dissemination required for settlement, not a discretionary “sale” of personal data.
         </li>
         <li>
           <strong className="text-white/90">Analytics and security vendors:</strong> subprocessors that process pseudonymous event streams or scan for malware/phishing patterns.
@@ -240,7 +226,7 @@ export default function PrivacyPage() {
         <li>Technical telemetry necessary to complete signing or relay operations (without exposing your seed phrase)</li>
       </ul>
       <p>
-        Signed payloads are broadcast to supported networks according to your instructions. Neither Elementa nor any wallet can guarantee the behavior of smart contracts you interact with—only the terms encoded on-chain and the signatures you provide apply.
+        Signed payloads are broadcast to supported networks according to your instructions. Neither Elementa nor any wallet can guarantee the behavior of smart contracts you interact with, only the terms encoded on-chain and the signatures you provide apply.
       </p>
     </LegalSection>,
     <LegalSection key="10" title="Data Retention">
@@ -286,7 +272,7 @@ export default function PrivacyPage() {
         <li>Object to certain processing</li>
         <li>Withdraw consent where applicable</li>
       </ul>
-      <p>To exercise any rights, contact us at <Link href="/contact" className="text-[#24bace] hover:underline transition-colors">info@elementaprotocol.com</Link>.</p>
+      <p>To exercise any rights, contact us at <ContactEmailLink />.</p>
       <p>We may require verification before fulfilling requests.</p>
       <p className="text-sm italic opacity-80 mt-1">Note: We cannot delete or alter blockchain transactions.</p>
     </LegalSection>,
@@ -303,7 +289,7 @@ export default function PrivacyPage() {
     </LegalSection>,
     <LegalSection key="14" title="Children's Privacy">
       <p>
-        The Services—including self-custody wallet software—are not directed at children under 13 (U.S.) or under the digital-consent age defined in your jurisdiction (often 16 for GDPR-related activities).
+        The Services, including self-custody wallet software, are not directed at children under 13 (U.S.) or under the digital-consent age defined in your jurisdiction (often 16 for GDPR-related activities).
       </p>
       <p>
         We do not knowingly collect personal information from children for marketing purposes. If you believe a minor has provided us personal data (for example via a support email), contact us and we will delete or anonymize it where required by law, unless we must retain a minimal record for legal reasons.
@@ -341,39 +327,28 @@ export default function PrivacyPage() {
       </p>
     </LegalSection>,
     <LegalSection key="17" title="Contact Us">
-      <p>For privacy-related requests—including questions about this policy, data access or deletion (where applicable), or complaints—contact:</p>
+      <p>For privacy-related requests, including questions about this policy, data access or deletion (where applicable), or complaints, contact:</p>
       <p>
         <strong>Email:</strong>{" "}
-        <Link href="/contact" className="text-[#24bace] hover:underline transition-colors">
-          info@elementaprotocol.com
-        </Link>
+        <ContactEmailLink />
       </p>
       <p className="mt-4">
         Please include enough detail for us to verify your request without asking for sensitive wallet secrets. We may ask for additional information to confirm identity and prevent unauthorized disclosure.
       </p>
       <p>
-        If you reside in the EEA, UK, or certain U.S. states, you may also have the right to lodge a complaint with your local data protection authority—however we encourage you to reach out to us first so we can resolve issues promptly.
+        If you reside in the EEA, UK, or certain U.S. states, you may also have the right to lodge a complaint with your local data protection authority, however we encourage you to reach out to us first so we can resolve issues promptly.
       </p>
     </LegalSection>
   ];
 
-  const contentMap = Object.fromEntries(
-    sections.filter(React.isValidElement).map((section) => {
-      const t = (section.props as { title: string }).title;
-      return [sectionAnchorFromTitle(t), section] as const;
-    }),
-  );
-
   return (
-    <DocReaderLayout
-      title="Privacy Policy"
+    <LegalPageLayout
+      title="Privacy"
+      titleAccent="Policy"
       subtitle="How Elementa collects, uses, and protects your information when you use our services."
       lastUpdated="May 2026"
-      breadcrumb={[{ label: "Home", href: "/" }]}
-      navGroups={privacyNavGroups}
-      tocItems={privacyToc}
-      contentMap={contentMap}
-      enableNavSearch={false}
-    />
+    >
+      {sections}
+    </LegalPageLayout>
   );
 }

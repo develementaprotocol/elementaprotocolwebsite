@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight} from "lucide-react";
+import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
 const headline = "Blockchain";
 const phrase = "Coming Soon";
 
@@ -85,6 +86,7 @@ export function BlockchainComingSoonContent() {
               "radial-gradient(ellipse 70% 55% at 50% 42%, black, transparent)",
           }}
         />
+        <HeroBlurOverlay />
       </div>
 
       <section className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-16 sm:py-20" aria-label="Blockchain coming soon">

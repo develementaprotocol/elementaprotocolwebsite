@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, MessageSquare, Tag, Send, CheckCircle2, AlertCircle, X } from "lucide-react";
 import topReflect from "@/assets/top-reflect.png";
 import { formInputClass } from "@/components/ui/formInputClass";
+import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -143,6 +144,7 @@ export function ContactPage() {
             <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
             <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
           </div>
+          <HeroBlurOverlay />
         </div>
 
         <div className="container-standard relative z-10 w-full min-w-0 py-4 sm:py-6">

@@ -76,10 +76,14 @@ export function CoreCapabilitiesSection() {
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative flex h-full w-full min-h-[300px] flex-col justify-end overflow-hidden rounded-[16px] border border-white/[0.06] bg-[var(--color-Elementa-bg)] p-10 opacity-100 shadow-[0_24px_48px_rgba(0,0,0,0.3)] md:min-h-[350px] md:h-full md:col-span-2 xl:col-span-8 xl:h-[300px] xl:min-h-[300px] xl:p-12"
+              className="relative flex h-full w-full min-h-[300px] flex-col justify-between gap-8 overflow-hidden rounded-[16px] border border-white/[0.06] p-10 opacity-100 shadow-[0_24px_48px_rgba(0,0,0,0.3)] md:min-h-[350px] md:h-full md:col-span-2 xl:col-span-8 xl:h-[300px] xl:min-h-[300px] xl:gap-0 xl:p-12"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(21,111,122, 0.92) 0%, rgba(21, 32, 47, 0.96) 50%, rgba(21,111,122, 0.92) 100%)",
+              }}
             >
               {/* Asset image + ::after theme tint (see after:* utilities) */}
-              <div
+              {/* <div
                 className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[16px] after:pointer-events-none after:absolute after:inset-0 after:z-[1] after:rounded-[16px] after:content-[''] after:bg-[linear-gradient(135deg,color-mix(in_srgb,var(--btn-primary-bg)_42%,transparent)_0%,color-mix(in_srgb,var(--color-Elementa-bg)_55%,transparent)_45%,color-mix(in_srgb,var(--btn-primary-bg)_28%,transparent)_100%)]"
               >
                 <Image
@@ -89,10 +93,10 @@ export function CoreCapabilitiesSection() {
                   className="object-cover object-center"
                   sizes="(max-width: 1440px) 100vw, 1200px"
                 />
-              </div>
+              </div> */}
 
-              <div className="absolute left-1/2 top-8 z-20 -translate-x-1/2 md:left-auto md:right-12 md:top-12 md:translate-x-0">
-                <CardLogo src={walletAssets[large.iconAsset]} alt="" frameless />
+              <div className="relative z-[2] flex justify-center md:block md:justify-start">
+                <CardLogo src={walletAssets[large.iconAsset]} alt="" />
               </div>
 
               <div className="relative z-[2] flex max-w-[640px] flex-col gap-4">
