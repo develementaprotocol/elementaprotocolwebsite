@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { animate, useInView } from "framer-motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import topReflect from "@/assets/top-reflect.png";
 
 import type { HeroContent, StatMetric } from "@/data/homepage";
-import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
+import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
 
 function StatCounter({
   stat,
@@ -62,28 +60,10 @@ export function HeroSection({
     <>
       <section
         id="hero-section"
-        className="hero-parallax-wrap relative flex h-screen flex-col overflow-hidden bg-transparent"
+        className="hero-parallax-wrap relative flex min-h-[100svh] flex-col overflow-hidden bg-transparent"
         aria-labelledby="hero-heading"
       >
-        {/* Background Layer (Managed globally by RootChrome) */}
-        <div className="absolute inset-0 z-[-1]" />
-
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={topReflect}
-              alt=""
-              fill
-              priority
-              className="object-cover opacity-60"
-            />
-
-          {/* Theme Atmospheric Gradient */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
-            <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
-          </div>
-          <HeroBlurOverlay />
-        </div>
+        <PageHeroBackground />
 
         <div className="container-standard relative z-10 flex flex-1 flex-col items-center justify-center px-2 sm:px-0">
           <div className="section-inner flex w-full max-w-4xl flex-col items-center gap-8 text-center">

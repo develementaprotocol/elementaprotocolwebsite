@@ -7,7 +7,7 @@ import { useRef, useEffect } from "react";
 import { walletAssets } from "@/data/walletAssets";
 import type { WalletHeroContent } from "@/data/walletPage";
 import { DownloadAppButton } from "@/components/ui/DownloadAppButton";
-import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
+import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
 
 function Counter({
   end,
@@ -55,11 +55,7 @@ export function WalletHeroSection({ hero }: { hero: WalletHeroContent }) {
         <div className="absolute inset-0 z-[-1]" />
 
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
-            <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
-          </div>
-          <HeroBlurOverlay />
+          <PageHeroBackground />
 
           <div className="container-standard relative z-[2] h-full w-full">
             <div className="pointer-events-none absolute z-[5] hidden xl:block xl:bottom-[-18%] xl:left-[4%] xl:h-[62%] xl:w-[30%] 2xl:bottom-[-20%] 2xl:left-[8%] 2xl:h-[70%] 2xl:w-[32%]">

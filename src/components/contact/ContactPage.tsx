@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, MessageSquare, Tag, Send, CheckCircle2, AlertCircle, X } from "lucide-react";
-import topReflect from "@/assets/top-reflect.png";
 import { formInputClass } from "@/components/ui/formInputClass";
-import { HeroBlurOverlay } from "@/components/ui/HeroBlurOverlay";
+import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -129,23 +127,9 @@ export function ContactPage() {
   }
 
   return (
-    <main className="relative min-h-dvh w-full min-w-0 overflow-x-hidden text-left bg-black">
+    <main className="relative min-h-dvh w-full min-w-0 overflow-x-hidden bg-transparent text-left">
       <section className="relative flex min-h-dvh flex-col items-center justify-start px-4 pb-12 pt-24 sm:px-5 sm:pt-28 md:pb-16 md:pt-32 lg:pt-36">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={topReflect}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover opacity-60"
-          />
-
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-[-10%] left-[-10%] h-[120%] w-[120%] atmosphere-blob-tl" />
-            <div className="absolute bottom-[-20%] right-[-10%] h-[80%] w-[80%] atmosphere-blob-br" />
-          </div>
-          <HeroBlurOverlay />
-        </div>
+        <PageHeroBackground />
 
         <div className="container-standard relative z-10 w-full min-w-0 py-4 sm:py-6">
           <div className="w-full flex items-center justify-center">
