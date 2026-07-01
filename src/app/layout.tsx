@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "Elementa Protocol",
     description: "Multi-chain liquidity and DeFi infrastructure.",
   },
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.ico" },
 };
 
 export const viewport: Viewport = {
