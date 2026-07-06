@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { HomePage } from "@/components/home/HomePage";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { HomePageClient } from "@/components/home/HomePageClient";
+import { hero } from "@/data/homepage";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -8,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomePage />;
+  return (
+    <>
+      <HeroSection hero={hero} />
+      <HomePageClient />
+    </>
+  );
 }

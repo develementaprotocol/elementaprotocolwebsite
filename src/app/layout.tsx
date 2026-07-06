@@ -9,26 +9,26 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
+  display: "optional",
+  preload: true,
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
-  display: "swap",
+  weight: ["600", "700"],
+  display: "optional",
+  preload: true,
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
-  display: "swap",
+  weight: ["500", "600"],
+  display: "optional",
+  preload: false,
 });
 
-/**
- * `new URL()` throws on invalid values — a bad NEXT_PUBLIC_SITE_URL in .env
- * will crash every page with a 500. Always fall back to localhost.
- */
 function getMetadataBase(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (!raw) {
@@ -82,6 +82,22 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${manrope.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link
+          rel="preload"
+          href="/_next/static/media/e4af272ccee01ff0-s.p.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/_next/static/media/36966cca54120369-s.p.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <FooterControlProvider>
           <ComingSoonProvider>

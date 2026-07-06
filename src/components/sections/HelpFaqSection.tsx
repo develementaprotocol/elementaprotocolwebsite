@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { formInputClass } from "@/components/ui/formInputClass";
 import { cn } from "@/utils/cn";
@@ -32,22 +31,19 @@ export function HelpFaqSection({ help, faq }) {
       <div className="container-standard relative">
         <div className="section-inner flex flex-col items-center gap-8 xl:gap-12">
           {/* Header + search — Figma: gap-[80px] column; title 56px / 60px lh, -3px tracking */}
-          <div className="flex w-full max-w-3xl flex-col items-center gap-10">
-            <div className="section-heading-gap flex w-full flex-col items-center gap-6 px-1">
-              <h2 className="w-full text-center font-display text-[clamp(1.75rem,6.5vw,3rem)] font-bold leading-[1.15] tracking-[-0.04em] text-Elementa-primary sm:tracking-[-2.4px]">
-                <span>{help.titleLead}</span>
-                <span>{help.titleAccent}</span>
-                <span>{help.titleTrail}</span>
+          <div className="section-heading-gap flex w-full max-w-3xl flex-col items-center gap-10 px-1 text-center">
+              <h2 className="w-full font-display text-[clamp(1.75rem,6.5vw,3rem)] font-bold leading-[1.15] tracking-[-0.04em] text-Elementa-primary sm:tracking-[-2.4px]">
+                {help.titleLead}
+                {help.titleAccent}
+                {help.titleTrail}
               </h2>
-              <p className="mx-auto mt-4 max-w-[672px] px-1 text-center text-[clamp(1rem,2.5vw,1.125rem)] leading-relaxed text-white">
+              <p className="mx-auto mt-4 max-w-[672px] px-1 text-[clamp(1rem,2.5vw,1.125rem)] leading-relaxed text-white">
                 {help.subtitleBeforeBreak}
                 {help.subtitleAfterBreak}
               </p>
-            </div>
 
-            <div className="relative w-full max-w-[600px] mx-auto">
-              <div className="relative group">
-                <Search
+            <div className="group relative mx-auto w-full max-w-[600px]">
+              <Search
                   className="pointer-events-none absolute left-4 top-1/2 z-[1] h-5 w-5 -translate-y-1/2 text-white/35 transition-colors group-focus-within:text-Elementa-primary"
                   strokeWidth={2}
                   aria-hidden
@@ -61,12 +57,10 @@ export function HelpFaqSection({ help, faq }) {
                   aria-label="Search help"
                 />
               </div>
-            </div>
           </div>
 
           {/* FAQ list — height follows open items so the section grows naturally */}
-          <div className="mx-auto w-full md:w-[90%] xl:w-[75%]">
-            <div className="flex flex-col gap-6 overflow-x-hidden px-4 py-6">
+            <div className="mx-auto flex w-full flex-col gap-6 overflow-x-hidden px-4 py-6 md:w-[90%] xl:w-[75%]">
               <div className="flex w-full items-center gap-4">
                 <span className="shrink-0 whitespace-nowrap font-display text-base font-normal uppercase leading-6 tracking-widest">
                   {faq.sectionLabel}
@@ -85,15 +79,9 @@ export function HelpFaqSection({ help, faq }) {
                       <button
                         type="button"
                         onClick={() => setOpenId(open ? null : item.id)}
-                        className="flex w-full min-w-0 items-center gap-3 p-3 text-left md:p-6"
+                        className="grid w-full min-w-0 grid-cols-[1fr_auto] items-center gap-3 p-3 text-left font-display text-[18px] font-bold leading-7 text-black md:p-6"
                       >
-                        <span
-                          className={cn(
-                            "min-w-0 flex-1 font-display text-[18px] font-bold leading-7 text-black",
-                          )}
-                        >
-                          {item.question}
-                        </span>
+                        {item.question}
                         <ChevronDown
                           className={cn(
                             "h-4 w-4 shrink-0 text-black/50 transition-transform duration-200",
@@ -102,21 +90,16 @@ export function HelpFaqSection({ help, faq }) {
                           strokeWidth={2}
                         />
                       </button>
-                      <AnimatePresence initial={false}>
-                        {open && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                            className="overflow-hidden"
-                          >
-                            <p className="px-3 pb-3 font-manrope text-sm font-normal leading-6 text-black/70 md:px-6 md:pb-6">
-                              {item.answer}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      <div
+                        className="grid transition-[grid-template-rows] duration-200 ease-out"
+                        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+                      >
+                        <div className="overflow-hidden">
+                          <p className="px-3 pb-3 font-manrope text-sm font-normal leading-6 text-black/70 md:px-6 md:pb-6 text-left">
+                            {item.answer}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
@@ -128,7 +111,6 @@ export function HelpFaqSection({ help, faq }) {
                 </p>
               )}
             </div>
-          </div>
         </div>
       </div>
     </section>

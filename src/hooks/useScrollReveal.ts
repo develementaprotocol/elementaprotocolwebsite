@@ -1,47 +1,34 @@
-import { useLayoutEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
+import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
-gsap.registerPlugin(ScrollTrigger)
-
+/** Lightweight scroll reveal — IntersectionObserver + CSS (no GSAP). */
 export function useScrollReveal() {
-  const ref = useRef(null)
-  const reduced = usePrefersReducedMotion()
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = usePrefersReducedMotion();
+  const [visible, setVisible] = useState(reduced);
 
-  useLayoutEffect(() => {
-    const el = ref.current
-    if (!el || reduced) return undefined
+  useEffect(() => {
+    if (reduced) {
+      setVisible(true);
+      return;
+    }
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-            onEnter: () => {
-              // Ensure we reach full opacity if it gets stuck
-              gsap.to(el, { opacity: 1, duration: 0.2 })
-            }
-          },
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
         }
-      )
-    }, el)
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+    );
 
-    // Ensure GSAP knows the correct positions after mount
-    setTimeout(() => {
-      ScrollTrigger.refresh()
-    }, 100)
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [reduced]);
 
-    return () => ctx.revert()
-  }, [reduced])
-
-  return ref
+  return { ref, visible };
 }

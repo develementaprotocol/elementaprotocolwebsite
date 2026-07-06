@@ -60,6 +60,15 @@
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
     tab-size: 4;
+    --site-header-pt: 0.75rem;
+    --site-nav-bar-height: 4rem;
+    --site-nav-offset: calc(var(--site-header-pt) + var(--site-nav-bar-height));
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --site-nav-bar-height: 5rem;
+    }
   }
 
   body {
@@ -285,6 +294,42 @@
   animation-play-state: paused;
 }
 
+
+
+
+@keyframes navDrawerBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes navDrawerPanelIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes navDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-drawer-backdrop {
+  animation: navDrawerBackdropIn 0.3s ease-out;
+}
+
+.nav-drawer-panel {
+  animation: navDrawerPanelIn 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.nav-dropdown-enter {
+  animation: navDropdownIn 0.2s ease-out;
+}
+
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -414,10 +459,51 @@
   }
 
   .section-heading-gap h2 {
-    color: var(--color-Elementa-primary);
     background: none;
     -webkit-text-fill-color: unset;
     background-clip: unset;
+  }
+
+  /** Hero headings — clears fixed nav; scales for long multi-line H1 on small screens */
+  .hero-heading {
+    font-size: clamp(1.625rem, 4.25vw + 0.4rem, 6rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  @media (min-width: 480px) {
+    .hero-heading {
+      font-size: clamp(1.875rem, 4.8vw + 0.35rem, 5.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-heading {
+      font-size: clamp(2.25rem, 5.5vw, 6rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-heading {
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+  }
+
+  .hero-subheading {
+    font-size: clamp(0.9375rem, 2.8vw, 1.25rem);
+    line-height: 1.55;
+  }
+
+  @media (min-width: 640px) {
+    .hero-subheading {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      line-height: 1.6;
+    }
   }
 
   /**
@@ -576,11 +662,93 @@
   animation: pageRouteEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/** Wallet route — clean hero layering (see WalletBodyClass). */
+/** Wallet route — clean hero layering. */
 body.wallet-landing {
   background-color: var(--color-Elementa-bg);
 }
 
 body.wallet-landing .wallet-page .wallet-hero-section {
   isolation: isolate;
+}
+
+@keyframes comingSoonBackdropEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes comingSoonPanelEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.coming-soon-backdrop-enter {
+  animation: comingSoonBackdropEnter 0.2s ease-out forwards;
+}
+
+.coming-soon-panel-enter {
+  animation: comingSoonPanelEnter 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes errorPageGlowEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes errorPageContentEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorPageActionsEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorPageIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes notFoundIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.error-page-glow-enter {
+  animation: errorPageGlowEnter 0.5s ease-out forwards;
+}
+
+.error-page-content-enter {
+  animation: errorPageContentEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.error-page-actions-enter {
+  animation: errorPageActionsEnter 0.45s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.error-page-icon-pulse {
+  animation: errorPageIconPulse 2.8s ease-in-out infinite;
+}
+
+.not-found-icon-float {
+  animation: notFoundIconFloat 4s ease-in-out infinite;
 }

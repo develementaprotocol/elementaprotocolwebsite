@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { FadeInView } from "@/components/ui/FadeInView";
 import iconBlockchain from "@/assets/blockchain.svg";
 import iconMultichain from "@/assets/multichain-power.svg";
 import iconSecurity from "@/assets/security.svg";
@@ -27,16 +27,14 @@ function CardIcon({ iconKey }: { iconKey: string }) {
   const src = iconUrlByKey[iconKey];
   const size = ICON_SIZE[iconKey as keyof typeof ICON_SIZE] ?? "h-9 w-9";
   return (
-    <div
-      className={`flex w-full shrink-0 items-center justify-center md:inline-flex md:w-auto md:justify-start ${size}`}
-    >
-      <img
-        src={src?.src || src}
-        alt=""
-        className="h-full w-full object-contain"
-        loading="lazy"
-      />
-    </div>
+    <img
+      src={src?.src || src}
+      alt=""
+      width={36}
+      height={36}
+      className={`mx-auto block shrink-0 object-contain md:mx-0 ${size}`}
+      loading="lazy"
+    />
   );
 }
 
@@ -47,18 +45,16 @@ export function BlockchainSection({ cards }: { cards: BlockchainCard[] }) {
       className="site-section relative w-full min-w-0 overflow-hidden"
     >
       <div className="container-standard relative z-10 w-full min-w-0">
+        <h2 className="sr-only">Blockchain infrastructure</h2>
         <div className={threeCardGridClass("section-inner gap-6 lg:gap-8 grid-three-cards")}>
           {cards.map((card, i) => (
-            <motion.div
+            <FadeInView
               key={card.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              delayMs={i * 100}
              className={cn(
-               "relative flex min-h-[240px] w-full min-w-0 flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#18474d]/95 px-6 py-8 shadow-xl backdrop-blur-[12px] sm:min-h-[272px] sm:px-[41px] sm:py-[43px] xl:h-[272px]",
+               "relative flex min-h-[240px] w-full min-w-0 flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#18474d]/95 px-6 py-8 max-md:shadow-none max-md:backdrop-blur-none md:shadow-xl md:backdrop-blur-[12px] sm:min-h-[272px] sm:px-[41px] sm:py-[43px] xl:h-[272px]",
                threeCardItemClass(i, cards.length),
-               "max-xl:[&>div:first-child]:flex max-xl:[&>div:first-child]:w-full max-xl:[&>div:first-child]:justify-center",
+               "max-xl:mx-auto max-xl:block",
              )}
             >
               <CardIcon iconKey={card.iconKey} />
@@ -70,7 +66,7 @@ export function BlockchainSection({ cards }: { cards: BlockchainCard[] }) {
               <p className="mt-[16px] font-body text-base font-normal leading-relaxed text-[#F5F5F5]">
                 {card.body}
               </p>
-            </motion.div>
+            </FadeInView>
           ))}
         </div>
       </div>

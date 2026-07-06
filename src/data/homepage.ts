@@ -42,15 +42,17 @@ export const navigation = {
 
 export const hero = {
   headlineParts: [
-    { text: 'Unify Your ', highlight: false },
-    { text: 'Liquidity', highlight: true },
-    { text: ' Across All Chains', highlight: false },
+    { text: 'Cross Chain ', highlight: false },
+    { text: 'Liquidity Protocol', highlight: true },
+    { text: ' for Seamless DeFi Transfers', highlight: false },
   ],
   subheadline:
-    'Experience seamless asset transfers, deep cross-chain liquidity, and institutional-grade security. Elementa Protocol empowers the next generation of DeFi builders and users.',
+    'Elementa Protocol is a cross chain liquidity protocol that enables instant asset transfers, zero slippage swaps, omnichain liquidity access, and institutional-grade security across multiple blockchain networks.',
   primaryCta: { label: 'Launch Wallet', href: '/wallet' },
   secondaryCta: { label: 'Read Documentation', href: '/docs' },
 }
+
+export const statsHeading = 'Trusted Cross Chain Liquidity Infrastructure'
 
 export const stats = [
   { id: 'volume', end: 12.4, suffix: 'B+', decimals: 1, label: 'TOTAL VOLUME (USD)' },
@@ -63,32 +65,33 @@ export const blockchainCards = [
   {
     id: 'bc1',
     title: 'Omnichain Liquidity',
-    body: 'Access deep, fragmented liquidity pools natively across any connected blockchain without friction.',
+    body: 'Access deep cross chain liquidity across leading blockchain ecosystems with optimized routing and efficient asset movement.',
     iconKey: 'what-is-blockchain',
   },
   {
     id: 'bc2',
-    title: 'Zero-Slippage Swaps',
-    body: 'Our advanced routing algorithms ensure optimal execution paths, giving you the best possible rates.',
+    title: 'Zero Slippage Swaps',
+    body: 'Execute cross chain swaps with minimal latency and zero slippage through intelligent liquidity aggregation.',
     iconKey: 'multichain',
   },
   {
     id: 'bc3',
     title: 'Institutional Security',
-    body: 'Audited by top-tier security firms, backed by multi-signature protocols and robust cryptographic proofs.',
+    body: 'Enterprise-grade security architecture designed for institutional DeFi applications and large-scale liquidity operations.',
     iconKey: 'security',
   },
 ]
 
 export const bento = {
-  sectionTitle: 'Engineered for Scale',
+  sectionTitle: 'Scalable Cross Chain Infrastructure for DeFi',
   tiles: [
     {
       id: 'swap',
       colSpan: 2,
       rowSpan: 2,
       title: 'Universal Routing Engine',
-      description: 'Elementa aggregates liquidity from over 100+ DEXs to guarantee the most capital-efficient trades across the entire ecosystem.',
+      description:
+        'Our advanced routing engine discovers the fastest and most efficient path for cross chain transactions across multiple blockchain networks.',
       metric: { value: '15ms', label: 'LATENCY' },
       variant: 'large',
     },
@@ -96,7 +99,8 @@ export const bento = {
       id: 'wallet',
       colSpan: 2,
       title: 'Smart Contract Abstraction',
-      description: 'Interact with any dApp from any chain seamlessly.',
+      description:
+        'Simplify blockchain interoperability through smart contract abstraction that enables seamless multi-chain interactions.',
       icon: 'wallet',
     },
     {
@@ -115,15 +119,30 @@ export const bento = {
 }
 
 export const featuredGuide = {
-  kicker: 'Developer Documentation',
-  title: 'Integrating Elementa Routing',
+  kicker: 'NEW FEATURE GUIDE',
+  title: 'Cross Chain Liquidity Guide for DeFi Builders',
   description:
-    'Learn how to implement our omnichain routing widget into your dApp. Enable your users to deposit any token from any chain in minutes.',
-  cta: { label: 'Read the docs', href: '/docs' },
+    'Learn how to leverage omnichain liquidity, optimize cross chain swaps, and build scalable DeFi applications using Elementa Protocol.',
+  cta: { label: 'Read the Guide', href: '/docs' },
+}
+
+export const seoSection = {
+  blocks: [
+    {
+      id: 'what-is',
+      title: 'What is Cross Chain Liquidity?',
+      body: 'Cross chain liquidity allows users and decentralized applications to move assets seamlessly between multiple blockchain networks. Elementa Protocol provides a secure and scalable cross chain liquidity infrastructure that enables instant transfers, liquidity aggregation, and efficient cross chain swaps across the DeFi ecosystem.',
+    },
+    {
+      id: 'why-elementa',
+      title: 'Why Choose Elementa Protocol?',
+      body: 'Elementa Protocol combines omnichain liquidity, intelligent routing, zero-slippage execution, and institutional-grade security to create a powerful cross chain infrastructure for traders, developers, and enterprises.',
+    },
+  ],
 }
 
 export const socialProof = {
-  title: 'Backed by Industry Leaders',
+  title: 'Trusted Cross Chain Liquidity Network',
   subtitle: 'Secured and verified by top infrastructure providers',
   partners: [
     { id: 'p1', name: 'A16Z CRYPTO' },
@@ -272,15 +291,17 @@ export const community = {
   },
 }
 export const ecosystem = {
-  sectionTitle: 'The Ecosystem',
+  sectionTitle: 'Cross Chain DeFi Ecosystem',
   wallet: {
     title: 'Elementa Wallet',
-    description: 'The core interface. Buy, Sell, Swap, and Store your assets with a UI designed for clarity.',
+    description:
+      'Securely manage assets and access cross chain liquidity from a single unified interface.',
     tags: ['Buy', 'Sell', 'Swap'],
   },
   chain: {
     title: 'Elementa Chain',
-    description: 'The future of high-throughput L2 networks. Zero fees, zero carbon, zero friction.',
+    description:
+      'A blockchain interoperability layer designed for fast, secure, and scalable cross chain communication.',
     status: 'COMING SOON',
   },
 }
@@ -309,6 +330,7 @@ export type StatMetric = (typeof stats)[number]
 export type BlockchainCard = (typeof blockchainCards)[number]
 export type BentoContent = typeof bento
 export type FeaturedGuide = typeof featuredGuide
+export type SeoSectionContent = typeof seoSection
 export type SocialProof = typeof socialProof
 export type CommunityContent = typeof community
 export type EcosystemContent = typeof ecosystem

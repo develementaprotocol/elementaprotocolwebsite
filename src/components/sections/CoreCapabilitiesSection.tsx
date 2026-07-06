@@ -66,7 +66,7 @@ export function CoreCapabilitiesSection() {
               transition={{ delay: 0.1 }}
               className="mt-6 w-full max-w-4xl mx-auto text-center"
             >
-              Everything you need to Web3
+              {coreCapabilities.title}
             </motion.h2>
           </div>
 

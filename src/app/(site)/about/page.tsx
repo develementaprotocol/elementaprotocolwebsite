@@ -5,7 +5,6 @@ import AboutWhatDrivesUs from "@/components/about/AboutWhatDrivesUs";
 import AboutVisionMission from "@/components/about/AboutVisionMission";
 import AboutTrustedEcosystem from "@/components/about/AboutTrustedEcosystem";
 import AboutMoreThanWallet from "@/components/about/AboutMoreThanWallet";
-// import AboutTeam from "@/components/about/AboutTeam";
 import { CommunitySection } from "@/components/sections/CommunitySection";
 import { community } from "@/data/homepage";
 
@@ -23,8 +22,6 @@ const AboutPage = () => {
       <AboutVisionMission />
       <AboutTrustedEcosystem />
       <AboutMoreThanWallet />
-      {/* <AboutTeam /> */}
-      
       <CommunitySection community={community} />
     </div>
   );

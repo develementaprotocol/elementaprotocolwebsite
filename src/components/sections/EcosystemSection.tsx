@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import phoneL from "@/assets/wallet-hero-left.png";
 import phoneR from "@/assets/right-phone-hero.png";
@@ -10,6 +9,11 @@ import chainLock from "@/assets/lock.svg";
 import ElementaChainBg from "@/assets/Elementa-chain.png";
 import type { EcosystemContent } from "@/data/homepage";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useIsMdUp } from "@/hooks/useMediaQuery";
+import {
+  ResponsiveMotionDiv,
+  ResponsiveMotionSpan,
+} from "@/components/ui/ResponsiveMotion";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -18,11 +22,11 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.55, delay, ease: "easeOut" as const },
 });
 
-/** Sequential dot elementa — suggests “loading / chain incoming” */
 function ComingSoonDots({ className = "" }) {
   const reduceMotion = usePrefersReducedMotion();
+  const isMdUp = useIsMdUp();
 
-  if (reduceMotion) {
+  if (reduceMotion || !isMdUp) {
     return <span className={className}>...</span>;
   }
 
@@ -32,78 +36,83 @@ function ComingSoonDots({ className = "" }) {
       aria-hidden
     >
       {[0, 1, 2].map((i) => (
-        <motion.span
+        <ResponsiveMotionSpan
           key={i}
           className="inline-block w-[0.35em] text-center font-bold"
-          animate={{
-            opacity: [0.25, 1, 0.25],
-            y: [0, -3, 0],
-          }}
-          transition={{
-            duration: 1.15,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.22,
+          motionProps={{
+            animate: { opacity: [0.25, 1, 0.25], y: [0, -3, 0] },
+            transition: {
+              duration: 1.15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.22,
+            },
           }}
         >
           .
-        </motion.span>
+        </ResponsiveMotionSpan>
       ))}
     </span>
   );
 }
 
 function SectionHeading({ title }) {
-  return (
-    <h2 className="section-heading text-white">
-      {title}
-    </h2>
-  );
+  return <h2 className="section-heading text-white">{title}</h2>;
 }
 
-/** Phones: one-time rise from below when scrolled into view (no looping motion) */
 function PhoneShowcase() {
   const reduceMotion = usePrefersReducedMotion();
+  const isMdUp = useIsMdUp();
 
-  const phoneMotion = reduceMotion
-    ? {
-        initial: { opacity: 1, y: 0 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-        transition: { duration: 0 },
-      }
-    : {
-        initial: { opacity: 0, y: 80 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.1 },
-        transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] as const },
-      };
+  if (!isMdUp || reduceMotion) {
+    return (
+      <div className="relative flex h-full min-h-[220px] w-full items-start justify-center overflow-hidden px-4 pt-6 sm:min-h-[256px] sm:pt-8 sm:px-6">
+        <div className="relative flex w-full max-w-[538px] items-start justify-center max-md:mx-auto md:mx-0">
+          <div className="relative z-[1] -mr-[28%] w-[78%] sm:-mr-[149px] sm:w-[422px] mt-[4.5%] sm:mt-[25px]">
+            <Image
+              src={phoneL}
+              alt="Ecosystem Dashboard"
+              className="w-full h-auto select-none drop-shadow-[0_12px_40px_rgba(0,0,0,0.45)]"
+              draggable={false}
+              sizes="(max-width: 640px) 78vw, 422px"
+            />
+          </div>
+          <div className="relative z-[2] w-[49%] sm:w-[265px]">
+            <Image
+              src={phoneR}
+              alt="Ecosystem Integrations"
+              className="w-full h-auto select-none drop-shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+              draggable={false}
+              sizes="(max-width: 640px) 49vw, 265px"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  const floatTransition = reduceMotion
-    ? undefined
-    : { duration: 6, repeat: Infinity, ease: "easeInOut" as const };
-
-  const floatTransitionRight = reduceMotion
-    ? undefined
-    : {
-        duration: 7,
-        repeat: Infinity,
-        ease: "easeInOut" as const,
-        delay: 1,
-      };
+  const phoneMotion = {
+    initial: { opacity: 0, y: 80 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.1 },
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] as const },
+  };
 
   return (
     <div className="relative flex h-full min-h-[220px] w-full items-start justify-center overflow-hidden px-4 pt-6 sm:min-h-[256px] sm:pt-8 sm:px-6">
       <div className="relative flex w-full max-w-[538px] items-start justify-center max-md:mx-auto md:mx-0">
-        {/* Left Phone (Dashboard) */}
-        <motion.div
-          {...phoneMotion}
-          transition={{ ...phoneMotion.transition, delay: 0.06 }}
+        <ResponsiveMotionDiv
+          motionProps={{
+            ...phoneMotion,
+            transition: { ...phoneMotion.transition, delay: 0.06 },
+          }}
           className="relative z-[1] -mr-[28%] w-[78%] sm:-mr-[149px] sm:w-[422px] mt-[4.5%] sm:mt-[25px]"
         >
-          <motion.div
-            animate={reduceMotion ? undefined : { y: [0, -6, 0] }}
-            transition={floatTransition}
+          <ResponsiveMotionDiv
+            motionProps={{
+              animate: { y: [0, -6, 0] },
+              transition: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            }}
             className="relative w-full"
           >
             <Image
@@ -113,18 +122,26 @@ function PhoneShowcase() {
               draggable={false}
               sizes="(max-width: 640px) 78vw, 422px"
             />
-          </motion.div>
-        </motion.div>
+          </ResponsiveMotionDiv>
+        </ResponsiveMotionDiv>
 
-        {/* Right Phone (App View) */}
-        <motion.div
-          {...phoneMotion}
-          transition={{ ...phoneMotion.transition, delay: 0.14 }}
+        <ResponsiveMotionDiv
+          motionProps={{
+            ...phoneMotion,
+            transition: { ...phoneMotion.transition, delay: 0.14 },
+          }}
           className="relative z-[2] w-[49%] sm:w-[265px]"
         >
-          <motion.div
-            animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-            transition={floatTransitionRight}
+          <ResponsiveMotionDiv
+            motionProps={{
+              animate: { y: [0, -8, 0] },
+              transition: {
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              },
+            }}
             className="relative w-full"
           >
             <Image
@@ -134,8 +151,8 @@ function PhoneShowcase() {
               draggable={false}
               sizes="(max-width: 640px) 49vw, 265px"
             />
-          </motion.div>
-        </motion.div>
+          </ResponsiveMotionDiv>
+        </ResponsiveMotionDiv>
       </div>
     </div>
   );
@@ -155,15 +172,21 @@ export function EcosystemSection({
     >
       <div className="container-standard relative z-10">
         <div className="section-inner flex flex-col">
-          <motion.div {...fadeUp(0)} className="section-heading-gap text-center">
+          <ResponsiveMotionDiv
+            motionProps={fadeUp(0)}
+            className="section-heading-gap text-center"
+          >
             <SectionHeading title={ecosystem.sectionTitle} />
-          </motion.div>
+          </ResponsiveMotionDiv>
 
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-12 xl:gap-6">
-            <motion.div
-              {...fadeUp(0.06)}
+            <ResponsiveMotionDiv
+              motionProps={fadeUp(0.06)}
               className="flex min-h-[480px] flex-col-reverse overflow-hidden rounded-[16px] border border-[rgba(65,71,91,0.15)] shadow-none backdrop-blur-[24px] xl:col-span-8 xl:flex-col xl:min-h-0 xl:h-[518px]"
-              style={{ background: "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)" }}
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)",
+              }}
             >
               <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-12 py-8 text-center xl:items-start xl:text-left">
                 <h3 className="font-display text-[30px] font-bold leading-[36px] text-white">
@@ -197,12 +220,15 @@ export function EcosystemSection({
                 </div>
                 <PhoneShowcase />
               </div>
-            </motion.div>
+            </ResponsiveMotionDiv>
 
-            <motion.div
-              {...fadeUp(0.12)}
+            <ResponsiveMotionDiv
+              motionProps={fadeUp(0.12)}
               className="flex min-h-[420px] flex-col-reverse overflow-hidden rounded-[16px] border border-[rgba(65,71,91,0.15)] shadow-none backdrop-blur-[14px] xl:col-span-4 xl:flex-col xl:min-h-0 xl:h-[518px]"
-              style={{ background: "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)" }}
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)",
+              }}
             >
               <div className="flex shrink-0 flex-col items-center gap-[19px] px-8 pb-4 pt-10 text-center sm:px-10 sm:pt-10 xl:items-start xl:text-left">
                 <h3 className="font-display text-[30px] font-bold leading-9 text-white sm:text-[32px] sm:leading-[38px]">
@@ -252,7 +278,7 @@ export function EcosystemSection({
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </ResponsiveMotionDiv>
           </div>
         </div>
       </div>

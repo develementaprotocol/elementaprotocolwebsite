@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import joinWalletPhone from "@/assets/1 (1).png";
 import grayDots from "@/assets/gray-dots.png (1).png";
 import { joinWalletData } from "../../data/walletPage";
 import { DownloadAppButton } from "@/components/ui/DownloadAppButton";
@@ -27,9 +26,13 @@ export function JoinWalletSection() {
                 aria-hidden
                 className="pointer-events-none absolute -right-3 -top-3 z-0 h-[72px] w-[72px] select-none object-contain opacity-45 sm:-right-4 sm:-top-4 sm:h-[88px] sm:w-[88px] md:-right-5 md:-top-5 md:h-[104px] md:w-[104px] lg:h-[120px] lg:w-[120px]"
               />
-              <img
-                src={joinWalletPhone.src}
+              <Image
+                src="/assets/join-wallet-phone.webp"
                 alt="Elementa Wallet App"
+                width={574}
+                height={1358}
+                unoptimized
+                sizes="(max-width: 640px) 140px, (max-width: 1024px) 220px, 287px"
                 className="relative z-10 h-auto w-full select-none drop-shadow-[0_48px_80px_rgba(0,0,0,0.6)]"
               />
             </div>
