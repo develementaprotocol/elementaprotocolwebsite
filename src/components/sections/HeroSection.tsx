@@ -16,7 +16,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
       </div>
 
       <div className="container-standard relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center px-3 py-6 sm:px-0 sm:py-8 md:py-10">
-        <div className="section-inner flex w-full max-w-4xl flex-col items-center gap-5 text-center sm:gap-6 md:gap-8">
+        <div className="section-inner flex w-full max-w-4xl flex-col items-center gap-7 text-center sm:gap-6 md:gap-8">
           <h1
             id="hero-heading"
             className="hero-heading text-balance w-full max-w-[1000px] text-center font-display font-bold text-Elementa-primary max-md:drop-shadow-none md:drop-shadow-[0_4px_48px_rgba(0,0,0,0.45)]"

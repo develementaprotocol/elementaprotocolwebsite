@@ -42,12 +42,12 @@ export const navigation = {
 
 export const hero = {
   headlineParts: [
-    { text: 'Cross Chain ', highlight: false },
+    { text: 'The Leading Cross Chain ', highlight: false },
     { text: 'Liquidity Protocol', highlight: true },
-    { text: ' for Seamless DeFi Transfers', highlight: false },
+    { text: ' for DeFi', highlight: false },
   ],
   subheadline:
-    'Elementa Protocol is a cross chain liquidity protocol that enables instant asset transfers, zero slippage swaps, omnichain liquidity access, and institutional-grade security across multiple blockchain networks.',
+    'Elementa Protocol is a cross chain liquidity protocol delivering instant asset transfers, zero slippage swaps, omnichain liquidity access, and institutional-grade security',
   primaryCta: { label: 'Launch Wallet', href: '/wallet' },
   secondaryCta: { label: 'Read Documentation', href: '/docs' },
 }

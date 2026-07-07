@@ -16,12 +16,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        href="/assets/wallet-hero-left-mobile.webp"
-        fetchPriority="high"
-      />
       <WalletHeroSection hero={walletHero} />
       <WalletPageClient />
     </>

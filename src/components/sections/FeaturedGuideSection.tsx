@@ -26,7 +26,7 @@ export function FeaturedGuideSection({ guide }: { guide: FeaturedGuide }) {
               <span className="text-[14px] font-black uppercase tracking-[0.2em] text-[#24bace]">
                 NEW FEATURE GUIDE
               </span>
-              <h2 className="section-heading mt-6 text-white mb-4 text-[2.75rem] font-bold leading-none tracking-tight md:text-left">
+              <h2 className="section-heading mt-6 text-white mb-4 text-[2.65rem] font-bold leading-none tracking-tight md:text-left">
                 {guide.title}
               </h2>
               <p className="text-base text-white/90 leading-relaxed md:text-left">

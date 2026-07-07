@@ -25,11 +25,10 @@ export function RootChrome({ children }: { children: ReactNode }) {
   const footerSuppressed = useFooterSuppressed();
   const hideFooter = footerSuppressed || pathHidesFooter(pathname);
   const isHome = pathname === "/";
-  const isWallet = pathname === "/wallet";
 
   return (
     <>
-      {!isWallet ? <LazySpaceBackground /> : null}
+      <LazySpaceBackground />
 
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 h-screen z-0 overflow-hidden"
@@ -46,7 +45,7 @@ export function RootChrome({ children }: { children: ReactNode }) {
         />
         <DesktopHeroReflect
           opacityClass="opacity-90"
-          priorityLoad={isHome && !isWallet}
+          priorityLoad={isHome}
         />
       </div>
 

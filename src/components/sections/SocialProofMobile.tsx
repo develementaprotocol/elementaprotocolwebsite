@@ -97,10 +97,10 @@ export function SocialProofMobile({
       style={{ backgroundColor: "#24bace" }}
     >
       <div className="container-standard section-inner section-heading-gap relative z-10 mx-auto max-w-2xl rounded-2xl px-6 py-5 text-center">
-          <h2 className="w-full text-center mx-auto text-[#2C2F30]">
+          <h2 className="w-full text-center mx-auto text-white">
             {socialProof.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-[#1a3a42]">
+          <p className="mx-auto mt-6 max-w-2xl text-white">
             Global partners securing the Elementa network
           </p>
       </div>

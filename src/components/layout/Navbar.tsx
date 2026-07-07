@@ -288,8 +288,8 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
           />
         </Link>
 
-        {/* Center — Nav Links (Visible from XL) */}
-        <div className="hidden xl:flex flex-1 justify-center">
+        {/* Center — Nav Links (visible from lg / laptop+) */}
+        <div className="hidden lg:flex flex-1 justify-center">
           <div className="flex items-center gap-10 text-[#F5F5F5]">
             {navigation.links
               .filter((l) => l.id !== "contact")
@@ -299,6 +299,7 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                     key={link.id}
                     ref={activeDropdown === link.id ? dropdownRef : null}
                     className="relative"
+                    onMouseEnter={() => setActiveDropdown(link.id)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
@@ -307,13 +308,7 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                       aria-haspopup="menu"
                       id={`trigger-${link.id}`}
                       className="group inline-flex items-center gap-1.5 font-display text-[16px] font-medium leading-6 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#24bace]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-md"
-                      onMouseEnter={() => setActiveDropdown(link.id)}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveDropdown((prev) =>
-                          prev === link.id ? null : link.id,
-                        );
-                      }}
+                      onFocus={() => setActiveDropdown(link.id)}
                     >
                       <NavLinkText
                         text={link.label}
@@ -335,7 +330,8 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
                     </button>
 
                     {activeDropdown === link.id && (
-                      <div className="absolute left-1/2 top-full z-50 w-[340px] -translate-x-1/2 pt-3">
+                      <div className="absolute left-1/2 top-full z-50 w-[340px] -translate-x-1/2">
+                        <div className="h-3" aria-hidden />
                         <div
                           id={`menu-${link.id}`}
                           role="menu"
@@ -378,8 +374,8 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
           </div>
         </div>
 
-        {/* Right — Icons + CTA (Visible from XL) */}
-        <div className="hidden items-center gap-7 xl:flex">
+        {/* Right — Icons + CTA (visible from lg / laptop+) */}
+        <div className="hidden items-center gap-7 lg:flex">
           <div className="flex items-center gap-5">
             {navigation.iconActions.map((action) => {
               if (action.id === 'telegram') {
@@ -424,11 +420,11 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
           )}
         </div>
 
-        {/* Mobile hamburger */}
-        <div className="flex xl:hidden">
+        {/* Mobile / tablet hamburger */}
+        <div className="flex lg:hidden">
           <button
             type="button"
-            className="rounded-lg border border-white/10 p-2 text-[#F5F5F5] active:scale-90 transition-transform"
+            className="rounded-lg p-2 text-[#F5F5F5] active:scale-90 transition-transform"
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
             aria-label="Toggle menu"
@@ -445,12 +441,12 @@ export function Navbar({ navigation }: { navigation: NavigationContent }) {
       {mobileOpen && (
         <>
           <div
-            className="nav-drawer-backdrop fixed inset-0 z-[60] bg-black/80 backdrop-blur-md xl:hidden"
+            className="nav-drawer-backdrop fixed inset-0 z-[60] bg-black/80 backdrop-blur-md lg:hidden"
             onClick={() => setMobileOpen(false)}
           />
 
           <aside
-            className="nav-drawer-panel fixed left-0 top-0 z-[70] flex h-full w-[min(100vw-1rem,380px)] flex-col border-r border-white/10 bg-[#15202f]/97 backdrop-blur-2xl shadow-[0_0_80px_rgba(0,0,0,0.55)] xl:hidden"
+            className="nav-drawer-panel fixed left-0 top-0 z-[70] flex h-full w-[min(100vw-1rem,380px)] flex-col border-r border-white/10 bg-[#15202f]/97 backdrop-blur-2xl shadow-[0_0_80px_rgba(0,0,0,0.55)] lg:hidden"
             style={{ paddingTop: "env(safe-area-inset-top)" }}
           >
             <div className="relative flex h-full flex-col overflow-hidden">

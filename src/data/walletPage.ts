@@ -4,12 +4,11 @@
  */
 export const walletHero = {
   headlineParts: [
-    { text: 'The Ultimate ', highlight: false },
     { text: 'Web3 Wallet', highlight: true },
-    { text: ' & Cross-Chain Liquidity Protocol', highlight: false },
+    { text: ' & Cross-Chain Liquidity', highlight: false },
   ],
   subheadline:
-    'Manage digital assets securely with the Elementa Web3 Wallet. Access cross-chain liquidity, decentralized finance (DeFi), Bitcoin Ordinals, Solana, and over 50 blockchain networks through one secure omnichain platform.',
+    'Elementa Web3 Wallet provides secure access to cross-chain liquidity, DeFi, Bitcoin Ordinals, Solana, and 50+ blockchain networks in one omnichain platform.',
   primaryCta: { label: 'Download Wallet', href: '#' },
   secondaryCta: { label: 'View Documentation', href: '/docs' },
 }

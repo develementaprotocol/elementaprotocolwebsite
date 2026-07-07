@@ -268,12 +268,12 @@ export function SocialProofDesktop({ socialProof }: { socialProof: SocialProof }
           <div className="section-heading-gap w-full flex flex-col items-center justify-center text-center">
             <div className=" mx-auto max-w-2xl rounded-2xl px-6 py-5">
               <FadeInView>
-                <h2 className="w-full text-center mx-auto text-[#2C2F30] ">
+                <h2 className="w-full text-center mx-auto text-white ">
                   {socialProof.title}
                 </h2>
               </FadeInView>
               <FadeInView delayMs={100}>
-                <p className="mx-auto mt-6 max-w-2xl text-[#1a3a42]">
+                <p className="mx-auto mt-6 max-w-2xl text-white">
                   Global partners securing the Elementa network
                 </p>
               </FadeInView>

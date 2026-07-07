@@ -74,7 +74,7 @@ export function HeroStatsBar({
     <section className="site-section relative z-10 w-full border-y border-white/5 bg-slate-900/40 max-md:backdrop-blur-none md:backdrop-blur-md">
       <div className="container-standard">
         {heading ? (
-          <h2 className="section-heading pt-8 text-center text-white md:pt-10">
+          <h2 className="section-heading my-8 text-center text-white md:my-10">
             {heading}
           </h2>
         ) : null}
