@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/utils/cn";
 
 const variants = {
@@ -10,7 +7,7 @@ const variants = {
   ghost: "text-Elementa-muted hover:text-white active:opacity-90",
 };
 
-interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof variants;
   href?: string;
 }
@@ -30,22 +27,17 @@ export function Button({
   );
 
   if (href) {
-    // Separate rest props for anchor
-    const { 
-      type: _type, 
-      ...anchorRest 
-    } = rest as any;
-    
+    const { type: _type, ...anchorRest } = rest;
     return (
-      <motion.a href={href} className={cls} {...anchorRest}>
+      <a href={href} className={cls} {...anchorRest}>
         {children}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.button type={type} className={cls} {...rest}>
+    <button type={type} className={cls} {...rest}>
       {children}
-    </motion.button>
+    </button>
   );
 }

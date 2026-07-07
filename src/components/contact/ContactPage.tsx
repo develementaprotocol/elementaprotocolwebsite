@@ -4,15 +4,17 @@ import { useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, MessageSquare, Tag, Send, CheckCircle2, AlertCircle, X } from "lucide-react";
 import { formInputClass } from "@/components/ui/formInputClass";
-import { PageHeroBackground } from "@/components/ui/PageHeroBackground";
+import {
+  isAllowedEmail,
+  isValidEmailFormat,
+  DISALLOWED_EMAIL_MESSAGE,
+  INVALID_EMAIL_MESSAGE,
+} from "@/lib/emailValidation";
+import { PageHeroBackground } from "../ui/PageHeroBackground";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
 type FieldKey = "name" | "email" | "subject" | "message";
-
-function isValidEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-}
 
 export function ContactPage() {
   const [name, setName] = useState("");
@@ -39,8 +41,10 @@ export function ContactPage() {
     }
     if (!email.trim()) {
       e.email = "This field is required.";
-    } else if (!isValidEmail(email)) {
-      e.email = "Please enter a valid email address.";
+    } else if (!isAllowedEmail(email)) {
+      e.email = isValidEmailFormat(email.trim())
+        ? DISALLOWED_EMAIL_MESSAGE
+        : INVALID_EMAIL_MESSAGE;
     }
     if (!subject.trim()) {
       e.subject = "This field is required.";
@@ -363,10 +367,10 @@ export function ContactPage() {
             
             {/* Progress Bar */}
             <motion.div
-              initial={{ width: "100%" }}
-              animate={{ width: "0%" }}
+              initial={{ scaleX: 1 }}
+              animate={{ scaleX: 0 }}
               transition={{ duration: 5.2, ease: "linear" }}
-              className={`absolute bottom-0 left-0 h-[3px] ${
+              className={`absolute bottom-0 left-0 h-[3px] w-full origin-left ${
                 toast.type === "success" ? "bg-emerald-500" : "bg-red-500"
               }`}
             />

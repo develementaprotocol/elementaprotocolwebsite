@@ -12,6 +12,17 @@ lerna-debug.log*
 out/
 build/
 
+# Dev / perf audit outputs (not shipped to production)
+perf-screenshots/
+lighthouse-*.json
+lcp-trace.json
+perf-trace.json
+public/lighthouse-*-proof.jpg
+
+# Local perf/dev scripts (keep test-email for npm run test:email)
+scripts/*
+!scripts/test-email.mjs
+
 # Production
 node_modules
 dist

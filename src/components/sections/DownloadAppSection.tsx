@@ -86,8 +86,7 @@ export function DownloadAppSection() {
                         src={phoneMockup}
                         alt="Elementa Wallet App"
                         fill
-                        priority
-                        quality={100}
+                        quality={85}
                         sizes="(max-width: 640px) 260px, 270px"
                         className="object-contain object-top "
                       />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, Suspense } from 'react'
+import { useEffect, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 function scrollWindowToTop() {
@@ -40,14 +40,9 @@ function ScrollToTopInner() {
     return () => window.removeEventListener('pageshow', onPageShow)
   }, [])
 
-  useLayoutEffect(() => {
-    scrollWindowToTop()
-  }, [pathname, searchParams])
-
   useEffect(() => {
     const id = window.requestAnimationFrame(() => {
       scrollWindowToTop()
-      window.requestAnimationFrame(scrollWindowToTop)
     })
     return () => window.cancelAnimationFrame(id)
   }, [pathname, searchParams])

@@ -4,11 +4,11 @@
  */
 export const walletHero = {
   headlineParts: [
-    { text: 'The Ultimate Gateway to ', highlight: false },
-    { text: 'Web3', highlight: true },
-    { text: ' Liquidity', highlight: false },
+    { text: 'Web3 Wallet', highlight: true },
+    { text: ' & Cross-Chain Liquidity', highlight: false },
   ],
-  subheadline: 'Your unified access point to decentralized finance, omnichain assets, and institutional-grade security.',
+  subheadline:
+    'Elementa Web3 Wallet provides secure access to cross-chain liquidity, DeFi, Bitcoin Ordinals, Solana, and 50+ blockchain networks in one omnichain platform.',
   primaryCta: { label: 'Download Wallet', href: '#' },
   secondaryCta: { label: 'View Documentation', href: '/docs' },
 }
@@ -101,13 +101,13 @@ export const walletFaq = {
 }
 
 export const coreCapabilities = {
-  title: 'Master the Elementa Ecosystem',
+  title: 'Everything You Need to Manage Your Web3 Assets',
   items: [
     {
       id: 'cc1',
       title: 'Swap Instantly',
       description:
-        'Access deep liquidity pools across 200+ DEXs for the best prices on every trade.',
+        'Swap crypto across multiple blockchain networks using optimized liquidity routing for the best exchange rates with minimal slippage.',
       type: 'large',
       iconAsset: 'coreLogo',
     },
@@ -115,7 +115,7 @@ export const coreCapabilities = {
       id: 'cc2',
       title: '50+ Blockchains',
       description:
-        'One wallet, infinite possibilities. Seamless cross-chain transfers.',
+        'Access Ethereum, Solana, Bitcoin, BNB Chain, Polygon, Avalanche, Base and more from one Web3 wallet.',
       type: 'small',
       iconAsset: 'blockchainLogo',
     },
@@ -123,7 +123,7 @@ export const coreCapabilities = {
       id: 'cc3',
       title: 'EVM Pro',
       description:
-        'Secure EVM account management with native L2 support and transaction flows.',
+        'Secure management of Ethereum-compatible assets with native Layer-2 support and advanced transaction controls.',
       tags: ['ETH', 'EVM'],
       type: 'bottom',
       iconAsset: 'evmLogo',
@@ -132,7 +132,7 @@ export const coreCapabilities = {
       id: 'cc4',
       title: 'Bitcoin Ordinals',
       description:
-        'Secure UTXO management and inscription gallery. Taproot-ready architecture.',
+        'Safely store, manage and transfer Bitcoin Ordinals, BRC-20 assets and BTC NFTs.',
       tags: ['BTC', 'ORDI'],
       type: 'bottom',
       iconAsset: 'bitcoinLogo',
@@ -141,7 +141,7 @@ export const coreCapabilities = {
       id: 'cc5',
       title: 'Solana Native',
       description:
-        'High-frequency trading interface with sub-second finality. Direct RPC integration.',
+        'Fast and secure Solana wallet with staking, token management and DeFi integrations.',
       tags: ['SOL', 'JUP'],
       type: 'bottom',
       iconAsset: 'solanaLogo',
@@ -150,35 +150,38 @@ export const coreCapabilities = {
 }
 
 export const powerWalletData = {
-  title: 'Elevate Your ',
-  titleHighlight: 'Web3 Experience',
+  sectionTitle: 'Why Choose Elementa Wallet?',
   items: [
     {
       id: 'pw1',
       title: 'Omnichain Accessibility',
-      description: 'Connect to any decentralized application across any network without manually switching RPCs.',
+      description:
+        'Connect to 50+ blockchain networks from a single decentralized wallet.',
       iconKey: 'multiChainIcon',
     },
     {
       id: 'pw2',
       title: 'Institutional Security',
-      description: 'Audited smart contracts, biometric locks, and decentralized key recovery mechanisms.',
+      description:
+        'Enterprise-grade encryption, smart contract audits and non-custodial key management.',
       iconKey: 'secureInfraIcon',
     },
     {
       id: 'pw3',
       title: 'JIT Liquidity Routing',
-      description: 'Our proprietary engine guarantees your swaps execute at the absolute best market rate.',
+      description:
+        'Smart liquidity routing automatically finds the best cross-chain trading path.',
       iconKey: 'fastTransactionsIcon',
     },
   ],
 }
 
 export const joinWalletData = {
-  title: 'Join Elementa Protocol and experience the future of decentralized liquidity today.',
-  description: 'We prioritize true ownership, transparency, and interoperability. With the Elementa Wallet, you can navigate the entire Web3 ecosystem with absolute confidence and unparalleled speed.',
+  title: 'Experience the Future of Web3 Wallets',
+  description:
+    'Take complete control of your digital assets with a secure, decentralized wallet designed for cross-chain liquidity, institutional security and seamless DeFi access.',
   primaryCta: 'Download App',
-  secondaryCta: 'Know More'
+  secondaryCta: 'Know More',
 }
 
 export type JoinWalletData = typeof joinWalletData

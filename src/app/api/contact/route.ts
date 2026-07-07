@@ -6,13 +6,15 @@ import {
   getSmtpConfig,
   smtpErrorHint,
 } from "@/lib/smtp";
+import {
+  isAllowedEmail,
+  isValidEmailFormat,
+  DISALLOWED_EMAIL_MESSAGE,
+  INVALID_EMAIL_MESSAGE,
+} from "@/lib/emailValidation";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-}
 
 export async function POST(request: Request) {
   try {
@@ -25,9 +27,13 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!isValidEmail(email)) {
+    if (!isAllowedEmail(email)) {
       return NextResponse.json(
-        { error: "Please enter a valid email address" },
+        {
+          error: isValidEmailFormat(email.trim())
+            ? DISALLOWED_EMAIL_MESSAGE
+            : INVALID_EMAIL_MESSAGE,
+        },
         { status: 400 },
       );
     }

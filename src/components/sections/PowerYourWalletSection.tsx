@@ -19,7 +19,7 @@ export function PowerYourWalletSection() {
               transition={{ delay: 0.1 }}
               className="w-full text-center mx-auto"
             >
-              Empower Your Digital Economy
+              {powerWalletData.sectionTitle}
             </motion.h2>
           </div>
 

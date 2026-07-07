@@ -6,8 +6,12 @@ import { cn } from "@/utils/cn";
 const legalPageVars =
   "[--legal-reader-top:6rem] [--legal-reader-bottom:100px] md:[--legal-reader-top:9rem] xl:[--legal-reader-top:9.5rem]";
 
-/** Fixed 500px scroll container height. */
-const legalShellHeightClass = "h-[1000px] max-h-[1100px]";
+/** 80% of navbar max width (1440px) — 20% narrower than the nav container. */
+const legalContainerClass = "mx-auto w-full max-w-[min(100%,1152px)] min-w-0";
+
+/** Responsive scroll area — fills viewport below hero without a fixed desktop height. */
+const legalShellHeightClass =
+  "h-[min(1000px,calc(100dvh-var(--legal-reader-top)-var(--legal-reader-bottom)-8rem))] min-h-[min(420px,60dvh)] sm:min-h-[min(480px,65dvh)]";
 
 const mainShellClass =
   "flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[20px] border border-white/[0.08] bg-[#1b3144]/80 px-5 py-8 backdrop-blur-xl md:px-6";
@@ -37,7 +41,7 @@ export function LegalPageLayout({
       <PageHeroBackground />
 
       <div className="container-standard relative z-10 w-full min-w-0">
-        <article className="w-[80%] mx-auto min-w-0 text-center">
+        <article className={cn(legalContainerClass, "text-center")}>
             <header className="shrink-0 pb-6 text-center md:pb-8">
               <h1 className="mx-auto max-w-3xl font-display text-[clamp(2.4rem,5vw,4rem)] font-bold leading-tight tracking-normal text-white">
                 {title}

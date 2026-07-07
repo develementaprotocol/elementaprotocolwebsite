@@ -1,5 +1,4 @@
 import React from "react";
-import footerElementaLogo from "@/assets/footer-Elementa-logo.png";
 import logoSrc from "@/assets/footer-logo.svg";
 
 import twitterIcon from "@/assets/twitter.svg";
@@ -8,19 +7,13 @@ import { ArrowUpRight, Send, Disc } from "lucide-react";
 import Link from "next/link";
 import type { FooterContent } from "@/data/homepage";
 import { cn } from "@/utils/cn";
+import { FooterNavLinks } from "@/components/layout/FooterNavLinks";
 
 const socialIcons = {
   twitter: twitterIcon,
   discord: Disc,
   telegram: Send,
 };
-
-const footerNavLinkClass =
-  "font-display text-[12px] font-bold uppercase leading-none text-[#FFFFFF] transition hover:text-[#24bace] tracking-[0.2em] opacity-60 hover:opacity-100";
-
-function isInternalAppPath(href: string) {
-  return href.startsWith("/") && !href.startsWith("//");
-}
 
 export function SiteFooter({
   footer,
@@ -46,11 +39,13 @@ export function SiteFooter({
           <div className="order-2 flex flex-col items-center gap-10 xl:flex-row xl:justify-between xl:items-center w-full px-2">
             {/* Brand & Copyright */}
             <div className="flex flex-col items-center xl:items-start gap-2">
-              <Link href="/" className="group">
+              <Link href="/" aria-label="Elementa home" className="group">
                 <img
                   src={logoSrc.src}
                   alt=""
-                  className="h-[18px] object-contain"
+                  width={168}
+                  height={14}
+                  className="h-[18px] w-auto object-contain"
                 />
               </Link>
               <p className="font-display text-[10px] font-medium uppercase leading-relaxed tracking-[2px] text-[#FFFFFF] text-center xl:text-left opacity-70">
@@ -59,28 +54,7 @@ export function SiteFooter({
             </div>
 
             {/* Navigation Links */}
-            <nav className="flex flex-wrap justify-center gap-x-12 gap-y-6">
-              {footer.links.map((l) =>
-                isInternalAppPath(l.href) ? (
-                  <Link
-                    key={l.label}
-                    href={l.href}
-                    prefetch
-                    className={footerNavLinkClass}
-                  >
-                    {l.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    className={footerNavLinkClass}
-                  >
-                    {l.label}
-                  </a>
-                ),
-              )}
-            </nav>
+            <FooterNavLinks links={footer.links} />
             {/* Social Icons */}
             <div className="flex gap-4 justify-center xl:justify-end">
               {(footer.social ?? []).map((s) => {
@@ -136,19 +110,41 @@ export function SiteFooter({
             </div>
           </div>
           {/* Bottom Row: Large Wordmark Logo + Get in Touch */}
-          <div className="order-3 relative w-full mt-12 md:mt-20">
-            <div className="flex flex-col items-center xl:items-end w-full">              
-              {/* Large Wordmark Logo with fade mask */}
-              <div className="w-full mt-[-20px] md:mt-[-40px] xl:mt-[-60px]">
-                <img
-                  src={footerElementaLogo.src}
-                  alt="Elementa"
-                  className="w-full h-auto object-contain select-none opacity-90"
-                  style={{
-                    maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)',
-                  }}
-                />
-              </div>
+          <div className="order-3 relative mt-12 flex w-full flex-col items-center md:mt-20 xl:items-end">
+            <div className="mt-[-20px] w-full md:mt-[-40px] xl:mt-[-60px]">
+              <picture>
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet="/assets/footer-wordmark.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/assets/footer-wordmark-mobile.webp"
+                    alt="Elementa"
+                    width={640}
+                    height={104}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto w-full object-contain select-none opacity-90 md:hidden"
+                    style={{
+                      maskImage:
+                        "linear-gradient(to bottom, black 40%, transparent 95%)",
+                    }}
+                  />
+                  <img
+                    src="/assets/footer-wordmark.webp"
+                    alt="Elementa"
+                    width={1280}
+                    height={207}
+                    loading="lazy"
+                    decoding="async"
+                    className="hidden h-auto w-full object-contain select-none opacity-90 md:block"
+                    style={{
+                      maskImage:
+                        "linear-gradient(to bottom, black 40%, transparent 95%)",
+                    }}
+                  />
+                </picture>
             </div>
           </div>
         </div>

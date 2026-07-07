@@ -1,12 +1,10 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import type { BentoContent } from "@/data/homepage";
 import secureWalletImg from "@/assets/secure-wallet.svg";
-const instantSwapBgImg = { src: '/assets/bento-grid-instant-swap.svg' };
-import bentoBgImg from "@/assets/Elementa-walletcard-bottom-background.png";
+import { FadeInView } from "@/components/ui/FadeInView";
 
 const GRADIENT_WALLET =
   "linear-gradient(112.61355053830833deg, #15202f 0.73551%, #1b3144 99.264%)";
@@ -49,7 +47,7 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
   const fees = bento.tiles.find((t) => t.id === "fees")!;
 
   const statCardClass =
-    "rounded-[16px] border border-transparent p-8 shadow-xl backdrop-blur-[12px] xl:p-[40px]";
+    "rounded-[16px] border border-transparent p-8 shadow-xl max-md:backdrop-blur-none md:backdrop-blur-[12px] xl:p-[40px]";
 
   return (
     <section
@@ -65,27 +63,18 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
           {/* Grid: Stack -> 2 col until xl -> 4 col at xl */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:h-[600px] xl:grid-cols-4 xl:grid-rows-2 lg:gap-8">
             {/* Instant Swaps — col 1–2, row 1–2 (texture PNG → SVG pattern → readability overlays) */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative flex min-h-[480px] flex-col overflow-hidden rounded-[16px] border border-white/10 md:col-span-2 xl:row-span-2 xl:min-h-0"
-            >
+            <FadeInView className="relative flex min-h-[480px] flex-col overflow-hidden rounded-[16px] border border-white/10 md:col-span-2 xl:row-span-2 xl:min-h-0">
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-[16px] bg-[#1d304a]"
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[16px] bg-cover bg-center opacity-[0.42]"
-                style={{
-                  backgroundImage: `url(${bentoBgImg.src})`,
-                }}
+                className="pointer-events-none absolute inset-0 rounded-[16px] bg-cover bg-center opacity-[0.42] bg-[url('/assets/walletcard-bg-mobile.webp')] md:bg-[url('/assets/walletcard-bg.webp')]"
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[16px] bg-cover bg-center opacity-[0.38] mix-blend-soft-light"
-                style={{ backgroundImage: `url(${instantSwapBgImg.src})` }}
+                className="pointer-events-none absolute inset-0 rounded-[16px] bg-cover bg-center opacity-[0.38] mix-blend-soft-light bg-[url('/assets/bento-grid-instant-swap-mobile.webp')] md:bg-[url('/assets/bento-grid-instant-swap.webp')]"
               />
               <div
                 aria-hidden
@@ -123,23 +112,18 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </FadeInView>
 
-            {/* Secure Wallet — col 3–4, row 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.06 }}
-              className="relative flex h-full w-full flex-col-reverse sm:flex-row items-center justify-between gap-6 sm:gap-0 overflow-hidden rounded-[32px] border border-white/5 p-8 shadow-[0_24px_48px_rgba(0,0,0,0.3)] sm:px-12 sm:py-10 md:col-span-2 xl:col-start-3 xl:row-start-1"
+            <FadeInView
+              delayMs={60}
+              className="relative flex h-full w-full flex-col-reverse sm:flex-row items-center justify-between gap-6 sm:gap-0 overflow-hidden rounded-[32px] border border-white/5 p-8 max-md:shadow-none md:shadow-[0_24px_48px_rgba(0,0,0,0.3)] sm:px-12 sm:py-10 md:col-span-2 xl:col-start-3 xl:row-start-1"
               style={{
                 backgroundImage:
                   "linear-gradient(135deg, rgba(21,111,122, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(21,111,122, 0.5) 100%)",
               }}
             >
-              {/* Background Glows */}
-              <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-32 h-32 bg-[#24bace]/10 blur-3xl rounded-full" />
-              <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-48 h-48 bg-[#24bace]/5 blur-3xl rounded-full" />
+              <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-32 h-32 bg-[#24bace]/10 max-md:hidden md:blur-3xl rounded-full" />
+              <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-48 h-48 bg-[#24bace]/5 max-md:hidden md:blur-3xl rounded-full" />
 
               <div className="relative z-10 flex flex-col gap-3 text-center sm:text-left items-center sm:items-start">
                 <h3 className="font-display text-[26px] sm:text-[32px] font-bold leading-tight text-white tracking-tight">
@@ -162,14 +146,10 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
                   />
                 </div>
               </div>
-            </motion.div>
+            </FadeInView>
 
-            {/* Multi-Chain — col 3, row 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+            <FadeInView
+              delayMs={100}
               className={`${statCardClass} flex flex-col justify-center md:col-span-1 xl:col-start-3 xl:row-start-2`}
               style={{ backgroundImage: GRADIENT_STAT }}
             >
@@ -186,14 +166,10 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
                   {chains.caption}
                 </p>
               </div>
-            </motion.div>
+            </FadeInView>
 
-            {/* Low Fees — col 4, row 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.14 }}
+            <FadeInView
+              delayMs={140}
               className={`${statCardClass} flex flex-col justify-center md:col-span-1 xl:col-start-4 xl:row-start-2`}
               style={{ backgroundImage: GRADIENT_STAT }}
             >
@@ -210,7 +186,7 @@ export function BentoSection({ bento }: { bento: BentoContent }) {
                   {fees.caption}
                 </p>
               </div>
-            </motion.div>
+            </FadeInView>
           </div>
         </div>
       </div>
