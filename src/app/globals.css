@@ -544,8 +544,9 @@
   .prose-docs a {
     @apply text-Elementa-accent underline-offset-2 transition-colors hover:text-Elementa-muted hover:underline;
   }
-  .prose-docs strong {
-    @apply font-semibold text-white/95;
+  .prose-docs strong,
+  .prose-docs b {
+    @apply font-bold text-white;
   }
 
   /** Docs reader — themed visible scrollbar, scroll chains to page at top/bottom. */
